@@ -1,0 +1,20 @@
+{
+    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces_subset",
+
+    "text_dim": 0,
+    "image_dim": 1,
+    "touch_dim": 2,
+
+    "boundary_width": 1,
+
+    "downscale_dim": [180, 320],
+    "origin_dim": [1440, 2560],
+    "gauss_mu": 0.1,
+
+    "input_region_threshold": 0,
+    "long_touch_threshold": 2,
+    "swipe_threshold": 0.1,
+    "data_augmentation_threshold": 1,
+
+    "output_dir": "/mnt/DATA_volume/lab_data/RICO/training_data"
+}
