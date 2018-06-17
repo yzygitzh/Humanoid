@@ -3,13 +3,23 @@
 
     "text_dim": 0,
     "image_dim": 1,
-    "touch_dim": 2,
+    "interact_dim": 2,
+    "total_dims": 3,
+
+    "interact_touch": 0,
+    "interact_long_touch": 1,
+    "interact_swipe_left": 2,
+    "interact_swipe_right": 3,
+    "interact_swipe_up": 4,
+    "interact_swipe_down": 5,
+    "interact_input_text": 6,
+    "total_interacts": 7,
 
     "boundary_width": 1,
 
     "downscale_dim": [180, 320],
     "origin_dim": [1440, 2560],
-    "gauss_mu": 0.1,
+    "gauss_delta": 20,
 
     "input_region_threshold": 0,
     "long_touch_threshold": 2,

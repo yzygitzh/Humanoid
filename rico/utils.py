@@ -1,5 +1,9 @@
 #coding=utf-8
 
+import numpy as np
+
+from matplotlib import pyplot as plt
+
 def traverse_view_tree(view_tree, call_back):
     if not is_view_valid(view_tree):
         return
@@ -25,3 +29,16 @@ def is_view_valid(view):
         return False
 
     return True
+
+def visualize_data(data, config_json):
+    image_full = np.zeros([data.shape[1], data.shape[0], 3], dtype=float)
+    interact_dim = config_json["interact_dim"]
+
+    for i in range(data.shape[2]):
+        image_full[:, :, i] = data[:, :, i].T
+        if i == interact_dim:
+            max_heat = np.max(image_full[:, :, i])
+            image_full[:, :, i] /= max_heat
+
+    plt.imshow(image_full, interpolation='nearest' )
+    plt.show()
