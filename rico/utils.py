@@ -39,6 +39,8 @@ def visualize_data(data, config_json):
         if i == interact_dim:
             max_heat = np.max(image_full[:, :, i])
             image_full[:, :, i] /= max_heat
+        else:
+            image_full[:, :, i] /= 2.0
 
     plt.imshow(image_full, interpolation='nearest' )
     plt.show()

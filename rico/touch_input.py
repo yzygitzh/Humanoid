@@ -7,6 +7,8 @@ from matplotlib import pyplot as plt
 from scipy.stats import multivariate_normal
 from utils import traverse_view_tree
 
+GAUSS_MAP = None
+
 def gesture_classify(gesture, config_json):
     return config_json["interact_touch"]
 
@@ -15,6 +17,15 @@ def convert_gestures(gestures, config_json):
     interact_dim = config_json["interact_dim"]
     total_dims = config_json["total_dims"]
     gauss_delta = config_json["gauss_delta"]
+
+    # generate GAUSS_MAP cache if not yet
+    global GAUSS_MAP
+    if GAUSS_MAP is None:
+        GAUSS_MAP = np.zeros((downscale_dim[0], downscale_dim[1]), dtype=float)
+        var = multivariate_normal(mean=[0, 0], cov=[[gauss_delta,0],[0,gauss_delta]])
+        for x in range(downscale_dim[0]):
+            for y in range(downscale_dim[1]):
+                GAUSS_MAP[x, y] = var.pdf([x, y])
 
     # image num, x, y, channels (TEXT/IMAGE)
     interact_heatmap_array = []
@@ -33,10 +44,11 @@ def convert_gestures(gestures, config_json):
 
         gesture_pos = [int(gesture[0][0] * downscale_dim[0]),
                        int(gesture[0][1] * downscale_dim[1])]
-        var = multivariate_normal(mean=gesture_pos, cov=[[gauss_delta,0],[0,gauss_delta]])
         for x in range(downscale_dim[0]):
             for y in range(downscale_dim[1]):
-                interact_heatmap[x, y, interact_dim] = var.pdf([x, y])
+                sample_x = abs(x - gesture_pos[0])
+                sample_y = abs(y - gesture_pos[1])
+                interact_heatmap[x, y, interact_dim] = GAUSS_MAP[sample_x, sample_y]
 
         # if True:
         #     visualize_gesture(interact_heatmap, config_json)

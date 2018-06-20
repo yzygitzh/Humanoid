@@ -28,10 +28,10 @@ def process_trace(trace_path, config_json):
 
     # convert view tree to color rects
     view_tree_paths = [os.path.join(view_trees_dir, "%d.json" % x) for x in view_tree_tags]
-    image_array = image.convert_view_trees(view_tree_paths[:10], config_json)
+    image_array = image.convert_view_trees(view_tree_paths, config_json)
 
     # find tap inputs
-    heatmap_array, gesture_array = touch_input.convert_gestures(gestures[:10], config_json)
+    heatmap_array, gesture_array = touch_input.convert_gestures(gestures, config_json)
 
     # find text differences pairs and insert text inputs
     # (heuristically insert them at the end of the pair)
