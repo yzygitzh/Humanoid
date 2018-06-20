@@ -19,11 +19,10 @@
 
     "downscale_dim": [180, 320],
     "origin_dim": [1440, 2560],
-    "gauss_delta": 20,
 
-    "input_region_threshold": 0,
-    "long_touch_threshold": 2,
-    "swipe_threshold": 0.1,
+    "gauss_delta": 20,
+    "long_touch_threshold": 5,
+    "swipe_threshold": 10,
     "data_augmentation_threshold": 1,
 
     "output_dir": "/mnt/DATA_volume/lab_data/RICO/training_data"

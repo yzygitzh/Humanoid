@@ -37,9 +37,10 @@ def process_trace(trace_path, config_json):
     # (heuristically insert them at the end of the pair)
 
     # visualize for debugging
-    for image_data, heatmap_data, gesture_data in \
-        zip(image_array, heatmap_array, gesture_array):
+    for i, (image_data, heatmap_data, gesture_data) in \
+        enumerate(zip(image_array, heatmap_array, gesture_array)):
         print("Gesture: ", gesture_data)
+        print("Path: ", view_tree_paths[i])
         visualize_data(image_data + heatmap_data, config_json)
 
 
@@ -51,7 +52,7 @@ def run(config_path):
 
     apps = next(os.walk(filtered_traces_dir))[1]
     for app in apps:
-        if app != "com.hotVideos.BigoLive":
+        if app != "jp.naver.linecard.android":
             continue
         app_dir = os.path.join(filtered_traces_dir, app)
         app_trace_dirs = [os.path.join(app_dir, x)

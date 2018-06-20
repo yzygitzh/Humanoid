@@ -29,18 +29,18 @@ def convert_view_trees(view_tree_paths, config_json):
             continue
 
         view_root_bounds = view_tree["activity"]["root"]["bounds"]
-        # skip horizon ones
-        if view_root_bounds[2] > view_root_bounds[3]:
+        # skip full-screen horizon ones
+        if view_root_bounds[2] > view_root_bounds[3] and view_root_bounds[2] > origin_dim[0]:
             continue
 
         view_offset = [0, 0]
         # heuristically identify non-full-screen window
-        if view_root_bounds[2] - view_root_bounds[0] < downscale_dim[0] or \
-           view_root_bounds[3] - view_root_bounds[1] < downscale_dim[1]:
+        if view_root_bounds[2] - view_root_bounds[0] < origin_dim[0] and \
+           view_root_bounds[3] - view_root_bounds[1] < origin_dim[1]:
             view_center = [(view_root_bounds[0] + view_root_bounds[2]) / 2,
                         (view_root_bounds[1] + view_root_bounds[3]) / 2]
             view_offset = [int((origin_dim[0] / 2 - view_center[0]) * downscale_ratio),
-                        int((origin_dim[1] / 2 - view_center[1]) * downscale_ratio)]
+                           int((origin_dim[1] / 2 - view_center[1]) * downscale_ratio)]
 
         def view_call_back(view_tree):
             if "children" not in view_tree:

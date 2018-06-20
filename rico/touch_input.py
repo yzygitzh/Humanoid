@@ -10,7 +10,30 @@ from utils import traverse_view_tree
 GAUSS_MAP = None
 
 def gesture_classify(gesture, config_json):
-    return config_json["interact_touch"]
+    downscale_dim = config_json["downscale_dim"]
+
+    assert(len(gesture) > 0)
+    if len(gesture) <= config_json["long_touch_threshold"]:
+        return config_json["interact_touch"]
+
+    delta_x = (gesture[0][0] - gesture[-1][0]) * downscale_dim[0]
+    delta_y = (gesture[0][1] - gesture[-1][1]) * downscale_dim[1]
+
+    dis = int(np.sqrt(delta_x ** 2 + delta_y ** 2))
+    if dis <= config_json["swipe_threshold"]:
+        return config_json["interact_long_touch"]
+
+    # horizon first
+    if abs(delta_x) > abs(delta_y):
+        if delta_x < 0:
+            return config_json["interact_swipe_right"]
+        else:
+            return config_json["interact_swipe_left"]
+    else:
+        if delta_y > 0:
+            return config_json["interact_swipe_down"]
+        else:
+            return config_json["interact_swipe_up"]
 
 def convert_gestures(gestures, config_json):
     downscale_dim = config_json["downscale_dim"]
