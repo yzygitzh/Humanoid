@@ -8,6 +8,7 @@ import numpy as np
 
 import image
 import touch_input
+import text_input
 
 from utils import visualize_data
 
@@ -31,18 +32,21 @@ def process_trace(trace_path, config_json):
     image_array = image.convert_view_trees(view_tree_paths, config_json)
 
     # find tap inputs
-    heatmap_array, gesture_array = touch_input.convert_gestures(gestures, config_json)
+    heatmap_array, interact_array = touch_input.convert_gestures(gestures, config_json)
 
     # find text differences pairs and insert text inputs
     # (heuristically insert them at the end of the pair)
+    view_tree_paths, image_array, heatmap_array, interact_array = \
+    text_input.add_text_inputs(view_tree_paths, image_array,
+                               heatmap_array, interact_array, config_json)
+    # filter empty states
 
     # visualize for debugging
     for i, (image_data, heatmap_data, gesture_data) in \
-        enumerate(zip(image_array, heatmap_array, gesture_array)):
-        print("Gesture: ", gesture_data)
-        print("Path: ", view_tree_paths[i])
+        enumerate(zip(image_array, heatmap_array, interact_array)):
+        print("Interact:", gesture_data)
+        print("Path:", view_tree_paths[i])
         visualize_data(image_data + heatmap_data, config_json)
-
 
 def run(config_path):
     with open(config_path, "r") as config_file:
@@ -52,7 +56,8 @@ def run(config_path):
 
     apps = next(os.walk(filtered_traces_dir))[1]
     for app in apps:
-        if app != "jp.naver.linecard.android":
+        # if app != "org.telegram.messenger":
+        if app != "com.Slack":
             continue
         app_dir = os.path.join(filtered_traces_dir, app)
         app_trace_dirs = [os.path.join(app_dir, x)

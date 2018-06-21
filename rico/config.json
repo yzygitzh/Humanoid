@@ -1,5 +1,5 @@
 {
-    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces_subset",
+    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces",
 
     "text_dim": 0,
     "image_dim": 1,
@@ -19,6 +19,8 @@
 
     "downscale_dim": [180, 320],
     "origin_dim": [1440, 2560],
+    "status_bar_height": 84,
+    "navigation_bar_height": 168,
 
     "gauss_delta": 20,
     "long_touch_threshold": 5,

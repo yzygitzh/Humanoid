@@ -63,7 +63,9 @@ def convert_gestures(gestures, config_json):
             continue
 
         gesture_kind = gesture_classify(gesture, config_json)
-        gesture_array.append(gesture_kind)
+        gesture_array.append({
+            "interact_type": gesture_kind,
+        })
 
         gesture_pos = [int(gesture[0][0] * downscale_dim[0]),
                        int(gesture[0][1] * downscale_dim[1])]

@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 from matplotlib import pyplot as plt
-from utils import traverse_view_tree
+from utils import traverse_view_tree, is_view_hierarchy_valid, compute_view_offset
 
 def convert_view_trees(view_tree_paths, config_json):
     origin_dim = config_json["origin_dim"]
@@ -27,20 +27,10 @@ def convert_view_trees(view_tree_paths, config_json):
 
         if view_tree is None:
             continue
-
-        view_root_bounds = view_tree["activity"]["root"]["bounds"]
-        # skip full-screen horizon ones
-        if view_root_bounds[2] > view_root_bounds[3] and view_root_bounds[2] > origin_dim[0]:
+        if not is_view_hierarchy_valid(view_tree, config_json):
             continue
 
-        view_offset = [0, 0]
-        # heuristically identify non-full-screen window
-        if view_root_bounds[2] - view_root_bounds[0] < origin_dim[0] and \
-           view_root_bounds[3] - view_root_bounds[1] < origin_dim[1]:
-            view_center = [(view_root_bounds[0] + view_root_bounds[2]) / 2,
-                        (view_root_bounds[1] + view_root_bounds[3]) / 2]
-            view_offset = [int((origin_dim[0] / 2 - view_center[0]) * downscale_ratio),
-                           int((origin_dim[1] / 2 - view_center[1]) * downscale_ratio)]
+        view_offset = compute_view_offset(view_tree, config_json)
 
         def view_call_back(view_tree):
             if "children" not in view_tree:
