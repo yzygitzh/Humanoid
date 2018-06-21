@@ -109,7 +109,7 @@ def get_text_view_signature(view):
 
     return signature
 
-def visualize_data(data, config_json):
+def visualize_data(data, config_json, label=""):
     image_full = np.zeros([data.shape[1], data.shape[0], 3], dtype=np.float32)
     interact_dim = config_json["interact_dim"]
 
@@ -121,5 +121,6 @@ def visualize_data(data, config_json):
         else:
             image_full[:, :, i] /= 2.0
 
-    plt.imshow(image_full, interpolation='nearest' )
+    plt.imshow(image_full, interpolation="nearest")
+    plt.xlabel(label)
     plt.show()
