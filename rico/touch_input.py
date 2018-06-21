@@ -5,7 +5,6 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 from scipy.stats import multivariate_normal
-from utils import traverse_view_tree
 
 GAUSS_MAP = None
 
@@ -44,7 +43,7 @@ def convert_gestures(gestures, config_json):
     # generate GAUSS_MAP cache if not yet
     global GAUSS_MAP
     if GAUSS_MAP is None:
-        GAUSS_MAP = np.zeros((downscale_dim[0], downscale_dim[1]), dtype=float)
+        GAUSS_MAP = np.zeros((downscale_dim[0], downscale_dim[1]), dtype=np.float32)
         var = multivariate_normal(mean=[0, 0], cov=[[gauss_delta,0],[0,gauss_delta]])
         for x in range(downscale_dim[0]):
             for y in range(downscale_dim[1]):
@@ -55,7 +54,7 @@ def convert_gestures(gestures, config_json):
     gesture_array = []
 
     for gesture in gestures:
-        interact_heatmap = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=float)
+        interact_heatmap = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=np.float32)
         interact_heatmap_array.append(interact_heatmap)
 
         if not len(gesture):
@@ -67,8 +66,8 @@ def convert_gestures(gestures, config_json):
             "interact_type": gesture_kind,
         })
 
-        gesture_pos = [int(gesture[0][0] * downscale_dim[0]),
-                       int(gesture[0][1] * downscale_dim[1])]
+        gesture_pos = [min(int(gesture[0][0] * downscale_dim[0]), downscale_dim[0] - 1),
+                       min(int(gesture[0][1] * downscale_dim[1]), downscale_dim[1] - 1)]
         for x in range(downscale_dim[0]):
             for y in range(downscale_dim[1]):
                 sample_x = abs(x - gesture_pos[0])
@@ -84,7 +83,7 @@ def visualize_gesture(interact_heatmap, config_json):
     downscale_dim = config_json["downscale_dim"]
     interact_dim = config_json["interact_dim"]
 
-    image_full = np.zeros([downscale_dim[1], downscale_dim[0], 3], dtype=float)
+    image_full = np.zeros([downscale_dim[1], downscale_dim[0], 3], dtype=np.float32)
 
     print(np.sum(interact_heatmap))
     image_full[:, :, interact_dim] = interact_heatmap[:, :, interact_dim].T

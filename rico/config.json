@@ -1,5 +1,5 @@
 {
-    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces",
+    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces_subset",
 
     "text_dim": 0,
     "image_dim": 1,

@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 def traverse_view_tree(view_tree, call_back):
-    if not is_view_valid(view_tree):
+    if view_tree is None or not is_view_valid(view_tree):
         return
     call_back(view_tree)
     if "children" in view_tree:
@@ -62,10 +62,27 @@ def is_view_valid(view):
     return True
 
 def is_text_view(view):
+    if "text" not in view:
+        return False
     for ancestor in view["ancestors"]:
         if "edittext" in ancestor.lower():
             return True
     return "edittext" in view["class"].lower()
+
+def is_valid_data(image, interact, config_json):
+    if interact is None:
+        return False
+
+    text_dim = config_json["text_dim"]
+    image_dim = config_json["image_dim"]
+    interact_dim = config_json["interact_dim"]
+
+    if np.sum(image[:, :, text_dim]) + np.sum(image[:, :, image_dim]) == 0:
+        return False
+    if np.sum(image[:, :, interact_dim]) == 0:
+        return False
+
+    return True
 
 def get_text_view_signature(view):
     signature = ""
@@ -93,7 +110,7 @@ def get_text_view_signature(view):
     return signature
 
 def visualize_data(data, config_json):
-    image_full = np.zeros([data.shape[1], data.shape[0], 3], dtype=float)
+    image_full = np.zeros([data.shape[1], data.shape[0], 3], dtype=np.float32)
     interact_dim = config_json["interact_dim"]
 
     for i in range(data.shape[2]):

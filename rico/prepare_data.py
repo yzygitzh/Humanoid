@@ -1,6 +1,7 @@
 #coding=utf-8
 
 import argparse
+import pickle
 import json
 import os
 
@@ -10,7 +11,7 @@ import image
 import touch_input
 import text_input
 
-from utils import visualize_data
+from utils import visualize_data, is_valid_data
 
 def process_trace(trace_path, config_json):
     gestures_path = os.path.join(trace_path, "gestures.json")
@@ -39,32 +40,46 @@ def process_trace(trace_path, config_json):
     view_tree_paths, image_array, heatmap_array, interact_array = \
     text_input.add_text_inputs(view_tree_paths, image_array,
                                heatmap_array, interact_array, config_json)
+    assert(len(view_tree_paths) == len(image_array) == len(heatmap_array) == len(interact_array))
     # filter empty states
-
-    # visualize for debugging
-    for i, (image_data, heatmap_data, gesture_data) in \
+    filtered_data = []
+    for i, (image_data, heatmap_data, interact_data) in \
         enumerate(zip(image_array, heatmap_array, interact_array)):
-        print("Interact:", gesture_data)
-        print("Path:", view_tree_paths[i])
-        visualize_data(image_data + heatmap_data, config_json)
+        sum_image_data = image_data + heatmap_data
+        if is_valid_data(sum_image_data, interact_data, config_json):
+            # print("Interact:", interact_data)
+            # print("Path:", view_tree_paths[i])
+            # visualize_data(sum_image_data, config_json)
+            filtered_data.append([sum_image_data, interact_data])
+
+    return filtered_data
 
 def run(config_path):
     with open(config_path, "r") as config_file:
         config_json = json.load(config_file)
 
     filtered_traces_dir = config_json["filtered_traces_path"]
+    output_dir = config_json["output_dir"]
 
     apps = next(os.walk(filtered_traces_dir))[1]
     for app in apps:
         # if app != "org.telegram.messenger":
-        if app != "com.Slack":
-            continue
+        # if app != "com.whatsapp":
+        #     continue
         app_dir = os.path.join(filtered_traces_dir, app)
         app_trace_dirs = [os.path.join(app_dir, x)
                           for x in next(os.walk(app_dir))[1]]
+        processed_traces = {}
         for app_trace_dir in app_trace_dirs:
-            process_trace(app_trace_dir, config_json)
-            break
+            processed_trace = process_trace(app_trace_dir, config_json)
+            trace_num = os.path.basename(app_trace_dir)
+            processed_traces[trace_num] = processed_trace
+
+        save_file_name = "%s.pickle" % app
+        with open(os.path.join(output_dir, save_file_name), "wb") as f:
+            pickle.dump(processed_traces, f)
+        # print(sorted(processed_traces))
+        # break
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Prepare RICO dataset for Humanoid")

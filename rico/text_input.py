@@ -5,10 +5,10 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 from scipy.stats import multivariate_normal
-from utils import traverse_view_tree, get_text_view_signature, is_text_view
 
 import touch_input
-from utils import traverse_view_tree, is_view_hierarchy_valid, compute_view_offset
+from utils import traverse_view_tree, get_text_view_signature, is_text_view, \
+                  is_view_hierarchy_valid, compute_view_offset
 
 def add_text_inputs(view_tree_paths, image_array,
                     heatmap_array, interact_array, config_json):
@@ -47,8 +47,8 @@ def add_text_inputs(view_tree_paths, image_array,
                 text_view_id = activity_name + ":" + get_text_view_signature(view_tree)
                 if text_view_id not in text_history:
                     text_history[text_view_id] = {
-                        "pos": [int((bounds[0] + bounds[2]) / 2 * downscale_ratio),
-                                int((bounds[1] + bounds[3]) / 2 * downscale_ratio)],
+                        "pos": [min(int((bounds[0] + bounds[2]) / 2 * downscale_ratio), downscale_dim[0] - 1),
+                                min(int((bounds[1] + bounds[3]) / 2 * downscale_ratio), downscale_dim[1] - 1)],
                         "texts": []
                     }
                 text_history[text_view_id]["texts"].append([i, view_tree["text"]])
@@ -88,7 +88,7 @@ def add_text_inputs(view_tree_paths, image_array,
                 "interact_type": interact_input_text,
                 "text": text_input["text"]
             })
-            text_heatmap = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=float)
+            text_heatmap = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=np.float32)
             new_heatmap_array.append(text_heatmap)
             for x in range(downscale_dim[0]):
                 for y in range(downscale_dim[1]):

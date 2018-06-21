@@ -19,7 +19,7 @@ def convert_view_trees(view_tree_paths, config_json):
     image_array = []
 
     for view_tree_path in view_tree_paths:
-        image_data = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=float)
+        image_data = np.zeros((downscale_dim[0], downscale_dim[1], total_dims), dtype=np.float32)
         image_array.append(image_data)
 
         with open(view_tree_path, "r") as view_tree_file:
@@ -66,7 +66,7 @@ def visualize_view_tree(image_data, config_json):
     text_dim = config_json["text_dim"]
     image_dim = config_json["image_dim"]
 
-    image_full = np.zeros([downscale_dim[1], downscale_dim[0], 3], dtype=float)
+    image_full = np.zeros([downscale_dim[1], downscale_dim[0], 3], dtype=np.float32)
     print(image_full.shape)
 
     image_full[:, :, text_dim] = image_data[:, :, text_dim].T
