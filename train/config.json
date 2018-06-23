@@ -1,0 +1,15 @@
+{
+    "training_data_dir": "/mnt/DATA_volume/lab_data/RICO/training_data",
+
+    "training_dim": 2,
+    "predicting_dim": 1,
+    "total_interacts": 7,
+
+    "boundary_width": 1,
+
+    "downscale_dim": [180, 320],
+    "data_augmentation_threshold": 1,
+
+    "dataset_threads": 10,
+    "batch_num": 24
+}
