@@ -31,10 +31,7 @@ class DebugLoader(Loader):
             input_data = pickle.load(f)
         images = np.stack([x[0][:,:,:self.training_dim]
                            for x in input_data["trace_0"]], axis=0)
-        images = tf.convert_to_tensor(images)
         heatmaps = np.stack([x[0][:,:,-self.predicting_dim:]
                              for x in input_data["trace_0"]], axis=0)
-        heatmaps = tf.convert_to_tensor(heatmaps)
-        labels = tf.one_hot([x[1]["interact_type"] for x in input_data["trace_0"]],
-                             self.total_interacts)
-        return images, heatmaps, labels
+        interacts = np.eye(self.total_interacts)[[x[1]["interact_type"] for x in input_data["trace_0"]]]
+        return images, heatmaps, interacts
