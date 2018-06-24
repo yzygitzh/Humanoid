@@ -17,7 +17,7 @@ def run(input_path, config_path):
     for trace_num in input_data:
         trace_data = input_data[trace_num]
         for i, (image_data, interact_data) in enumerate(trace_data):
-            visualize_data(image_data, config_json, label=json.dumps(interact_data))
+            visualize_data(image_data, label=json.dumps(interact_data))
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Visualize Humanoid training data")

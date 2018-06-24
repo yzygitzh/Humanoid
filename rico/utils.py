@@ -109,17 +109,14 @@ def get_text_view_signature(view):
 
     return signature
 
-def visualize_data(data, config_json, label=""):
+def visualize_data(data, label=""):
     image_full = np.zeros([data.shape[1], data.shape[0], 3], dtype=np.float32)
-    interact_dim = config_json["interact_dim"]
 
     for i in range(data.shape[2]):
         image_full[:, :, i] = data[:, :, i].T
-        if i == interact_dim:
-            max_heat = np.max(image_full[:, :, i])
-            image_full[:, :, i] /= max_heat
-        else:
-            image_full[:, :, i] /= 2.0
+        max_val = np.max(image_full[:, :, i])
+        if max_val > 0:
+            image_full[:, :, i] /= max_val
 
     plt.imshow(image_full, interpolation="nearest")
     plt.xlabel(label)
