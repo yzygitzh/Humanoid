@@ -15,7 +15,6 @@ class Loader():
         self.predicting_dim = config_json["predicting_dim"]
         self.total_interacts = config_json["total_interacts"]
         self.training_data_dir = config_json["training_data_dir"]
-        self.batch_num = config_json["batch_num"]
 
     def next_batch(self):
         pass

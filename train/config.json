@@ -11,5 +11,6 @@
     "data_augmentation_threshold": 1,
 
     "dataset_threads": 10,
-    "batch_num": 24
+    "batch_size": 4,
+    "frame_num": 5
 }
