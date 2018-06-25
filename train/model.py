@@ -13,6 +13,7 @@ class BaseModel():
         self.x_dim, self.y_dim = config_json["downscale_dim"]
         self.training_dim = config_json["training_dim"]
         self.predicting_dim = config_json["predicting_dim"]
+        self.total_channels = self.training_dim + self.predicting_dim
         self.total_interacts = config_json["total_interacts"]
         self.batch_size = config_json["batch_size"]
 
@@ -22,7 +23,6 @@ class BaseModel():
                                              shape=(None, self.total_interacts))
 
         # assign later
-        self.input_images = None
         self.heatmap_out = None
         self.interact_out = None
 
@@ -93,6 +93,27 @@ class BaseModel():
                                              strides=2,
                                              padding="same",
                                              name="pool5")
+        # 6x10
+
+        # generate heats, i.e. single channel output
+        self.pool3_heat = tf.layers.conv2d(inputs=self.pool3,
+                                           filters=1,
+                                           kernel_size=1,
+                                           padding="same",
+                                           activation=tf.nn.relu,
+                                           name="pool3_heat")
+        self.pool4_heat = tf.layers.conv2d(inputs=self.pool4,
+                                           filters=1,
+                                           kernel_size=1,
+                                           padding="same",
+                                           activation=tf.nn.relu,
+                                           name="pool4_heat")
+        self.pool5_heat = tf.layers.conv2d(inputs=self.pool5,
+                                           filters=1,
+                                           kernel_size=1,
+                                           padding="same",
+                                           activation=tf.nn.relu,
+                                           name="pool5_heat")
 
     def build_loss(self):
         # heatmap loss
@@ -103,7 +124,7 @@ class BaseModel():
         self.predict_heatmaps = tf.reshape(tf.nn.softmax(
             tf.reshape(self.heatmap_out, [-1, 180 * 320])), [-1, 180, 320, 1])
         # interact loss
-        self.interact_out_flat = tf.reshape(self.interact_out, [-1, 6 * 10 * 64])
+        self.interact_out_flat = tf.reshape(self.interact_out, [-1, 6 * 10 * 1])
         self.fc = tf.layers.dense(self.interact_out_flat,
                                   self.total_interacts,
                                   activation=tf.nn.relu,
@@ -131,28 +152,8 @@ class SingleScreenModel(BaseModel):
         self.build_cnn()
         self.build_model()
         self.build_loss()
-        print(self.heatmap_loss)
 
     def build_model(self):
-        # generate heats
-        self.pool3_heat = tf.layers.conv2d(inputs=self.pool3,
-                                           filters=1,
-                                           kernel_size=1,
-                                           padding="same",
-                                           activation=tf.nn.relu,
-                                           name="pool3_heat")
-        self.pool4_heat = tf.layers.conv2d(inputs=self.pool4,
-                                           filters=1,
-                                           kernel_size=1,
-                                           padding="same",
-                                           activation=tf.nn.relu,
-                                           name="pool4_heat")
-        self.pool5_heat = tf.layers.conv2d(inputs=self.pool5,
-                                           filters=1,
-                                           kernel_size=1,
-                                           padding="same",
-                                           activation=tf.nn.relu,
-                                           name="pool5_heat")
         # do upsampling
         # 6x10
         self.pool5_up_filters = tf.get_variable("pool5_up_filters", [4, 4, 1, 1])
@@ -178,4 +179,71 @@ class SingleScreenModel(BaseModel):
                                    strides=[1, 8, 8, 1],
                                    name="pool3_up"))
         self.heatmap_out = self.pool3_up
-        self.interact_out = self.pool5
+        self.interact_out = self.pool5_heat
+
+
+class MultipleScreenModel(BaseModel):
+    """Model for processing single screenshot
+       Use conv-pool-de-conv for heatmap
+       Use conv-pool-fc for predicting
+
+       input: batch_num, x_dim, y_dim, channels
+    """
+    def __init__(self, config_json):
+        super().__init__(config_json)
+        self.frame_num = config_json["frame_num"]
+        self.item_num = self.batch_size / self.frame_num
+        self.input_images = tf.placeholder(dtype=tf.float32,
+                                           shape=(None, self.x_dim, self.y_dim,
+                                                  self.training_dim + self.predicting_dim))
+        self.build_cnn()
+        self.build_model()
+        self.build_loss()
+
+    def build_model(self):
+        # generate heats
+        # using three LSTMs at different resolutions
+        # from pool3, pool4 and pool5
+
+        # pool3_heat_in: item_num (how many series), frame_num, x_dim * y_dim
+        self.pool3_heat_in = tf.reshape(self.pool3_heat, [-1, self.frame_num, 23 * 40])
+        self.pool4_heat_in = tf.reshape(self.pool4_heat, [-1, self.frame_num, 12 * 20])
+        self.pool5_heat_in = tf.reshape(self.pool5_heat, [-1, self.frame_num, 6 * 10])
+
+        # pool3_heat_out: item_num (how many series), x_dim, y_dim
+        self.pool3_heat_out = tf.reshape(
+            tf.keras.layers.LSTM(units=23 * 40, dropout=0.5)(self.pool3_heat_in),
+            [-1, 23, 40, 1])
+        self.pool4_heat_out = tf.reshape(
+            tf.keras.layers.LSTM(units=12 * 20, dropout=0.5)(self.pool4_heat_in),
+            [-1, 12, 20, 1])
+        self.pool5_heat_out = tf.reshape(
+            tf.keras.layers.LSTM(units=6 * 10, dropout=0.5)(self.pool5_heat_in),
+            [-1, 6, 10, 1])
+
+        # do upsampling
+        # 6x10
+        self.pool5_up_filters = tf.get_variable("pool5_up_filters", [4, 4, 1, 1])
+        self.pool5_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool5_heat_out,
+                                   filter=self.pool5_up_filters,
+                                   output_shape=[self.batch_size, 12, 20, 1],
+                                   strides=[1, 2, 2, 1],
+                                   name="pool5_up"))
+        # 12x20
+        self.pool4_heat_sum = tf.add(self.pool5_up, self.pool4_heat_out, name="pool4_heat_sum")
+        self.pool4_up_filters = tf.get_variable("pool4_up_filters", [4, 4, 1, 1])
+        self.pool4_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool4_heat_sum,
+                                   filter=self.pool4_up_filters,
+                                   output_shape=[self.batch_size, 23, 40, 1],
+                                   strides=[1, 2, 2, 1],
+                                   name="pool4_up"))
+        # 23x40
+        self.pool3_heat_sum = tf.add(self.pool4_up, self.pool3_heat_out, name="pool3_heat_sum")
+        self.pool3_up_filters = tf.get_variable("pool3_up_filters", [16, 16, 1, 1])
+        self.pool3_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool3_heat_sum,
+                                   filter=self.pool3_up_filters,
+                                   output_shape=[self.batch_size, 180, 320, 1],
+                                   strides=[1, 8, 8, 1],
+                                   name="pool3_up"))
+        self.heatmap_out = self.pool3_up
+        self.interact_out = self.pool5_heat_out

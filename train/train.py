@@ -8,16 +8,21 @@ import os
 import numpy as np
 import tensorflow as tf
 
-from loader import DebugLoader
-from model import SingleScreenModel
+import loader
+from model import SingleScreenModel, MultipleScreenModel
 from utils import visualize_data
 
 def run(config_path):
     with open(config_path, "r") as config_file:
         config_json = json.load(config_file)
 
-    loader = DebugLoader(config_json)
-    model = SingleScreenModel(config_json)
+    log_data_dir = config_json["log_data_dir"]
+    learning_rate = config_json["learning_rate"]
+
+    # data_loader = loader.DebugSingleScreenLoader(config_json)
+    # model = SingleScreenModel(config_json)
+    data_loader = loader.DebugMultipleScreenLoader(config_json)
+    model = MultipleScreenModel(config_json)
 
     tf_config = tf.ConfigProto()
     tf_config.gpu_options.allow_growth = True
@@ -28,15 +33,17 @@ def run(config_path):
     logger.setLevel(logging.INFO)
 
     with tf.Session(config=tf_config) as sess:
+        train_writer = tf.summary.FileWriter(log_data_dir, sess.graph)
+
         optimizer = tf.train.GradientDescentOptimizer(5e-2)
         trainer = optimizer.minimize(model.total_loss)
-        feed_dict = model.get_feed_dict(*loader.next_batch())
+        feed_dict = model.get_feed_dict(*data_loader.next_batch())
 
         sess.run(tf.global_variables_initializer())
         for i in range(10000):
             sess.run(trainer, feed_dict=feed_dict)
 
-            if i % 100 == 0:
+            if i % 1000 == 0:
                 logger.info("heatmap loss: %g" % sess.run(model.heatmap_loss, feed_dict=feed_dict))
                 logger.info("interact loss: %g" % sess.run(model.interact_loss, feed_dict=feed_dict))
                 logger.info("total loss: %g" % sess.run(model.total_loss, feed_dict=feed_dict))
