@@ -79,16 +79,20 @@ class MultipleScreenLoader(Loader):
         self.dataset_threads = config_json["dataset_threads"]
         self.batch_size = config_json["batch_size"]
         self.frame_num = config_json["frame_num"]
-        # self.data_files = next(os.walk(self.training_data_dir)[2])
-        self.data_files = ["jp.naver.linecard.android.pickle"]
+        self.data_files = next(os.walk(self.training_data_dir))[2]
+        # self.data_files = ["jp.naver.linecard.android.pickle"]
         self.data_paths = [os.path.join(self.training_data_dir, x) for x in self.data_files]
         self.data_queue = queue.Queue()
         self.path_queue = queue.Queue()
         self.epochs = -1
 
+    def get_current_epoch(self):
+        return self.epochs
+
     def reload_paths(self):
         self.epochs += 1
         self.logger.info("epoch: %d", self.epochs)
+        random.shuffle(self.data_paths)
         for data_path in self.data_paths:
             self.path_queue.put(data_path)
 
@@ -101,18 +105,23 @@ class MultipleScreenLoader(Loader):
             # do zero padding before the first image
             for trace_key in input_data:
                 image_num = len(input_data[trace_key])
+                if image_num == 0:
+                    continue
                 stacked_images = np.stack([np.zeros_like(input_data[trace_key][0][0], dtype=np.float32)] * (self.frame_num - 1) + \
-                                        [x[0] for x in input_data[trace_key]], axis=0)
+                                          [x[0] for x in input_data[trace_key]], axis=0)
 
-                images = [stacked_images[i:i + self.frame_num] for i in range(image_num)]
+                images = [stacked_images[i:i + self.frame_num].copy() for i in range(image_num)]
 
-                # clear last heatmaps
-                for i in range(image_num):
-                    images[i][self.frame_num - 1, :, :, -self.predicting_dim:] = 0.0
+                # for each image, clear last heatmaps
+                for image in images:
+                    image[self.frame_num - 1, :, :, -self.predicting_dim:] = 0.0
+                    image[:, :, :, :self.training_dim] /= 10
+                    # for i in range(self.frame_num):
+                    #     visualize_data(image[i])
 
-                heatmaps = [x[0][:,:,-self.predicting_dim:] for x in input_data[trace_key]]
+                heatmaps = [x[0][:,:,-self.predicting_dim:].copy() for x in input_data[trace_key]]
                 interacts = np.split(np.eye(self.total_interacts)[[x[1]["interact_type"] for x in input_data[trace_key]]],
-                                    image_num, axis=0)
+                                     image_num, axis=0)
 
                 for data_item in zip(images, heatmaps, interacts):
                     data_item_list.append(data_item)
@@ -132,7 +141,7 @@ class MultipleScreenLoader(Loader):
                     if self.path_queue.empty():
                         self.reload_paths()
                     paths_to_load.append(self.path_queue.get())
-                    self.logger.info("loading: %s", paths_to_load[-1])
+                    # self.logger.info("loading: %s", paths_to_load[-1])
                 self.load_pickles(paths_to_load)
             # now data queue is not empty, get data
             image, heatmap, interact = self.data_queue.get()
