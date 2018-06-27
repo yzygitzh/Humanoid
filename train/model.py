@@ -16,7 +16,9 @@ class BaseModel():
         self.total_channels = self.training_dim + self.predicting_dim
         self.total_interacts = config_json["total_interacts"]
         self.batch_size = config_json["batch_size"]
+        self.frame_num = config_json["frame_num"]
 
+        self.input_images = None
         self.true_heats = tf.placeholder(dtype=tf.float32,
                                          shape=(None, self.x_dim, self.y_dim, self.predicting_dim))
         self.true_interacts = tf.placeholder(dtype=tf.float32,
@@ -117,7 +119,6 @@ class BaseModel():
 
     def build_loss(self):
         # heatmap loss
-        print(self.heatmap_out)
         self.heatmap_loss = tf.losses.softmax_cross_entropy(
             tf.reshape(self.true_heats, [-1, 180 * 320]),
             tf.reshape(self.heatmap_out, [-1, 180 * 320]))
@@ -132,11 +133,12 @@ class BaseModel():
         self.fc_dropout = tf.layers.dropout(self.fc, name="fc_dropout")
         self.interact_loss = tf.losses.softmax_cross_entropy(self.true_interacts,
                                                              self.fc_dropout)
+                                                             # self.fc)
         self.predict_interacts = tf.nn.softmax(self.fc)
 
         # total loss
         self.total_loss = tf.add(self.heatmap_loss, self.interact_loss, name="total_loss")
-
+        # self.total_loss = self.heatmap_loss
 
 class SingleScreenModel(BaseModel):
     """Model for processing single screenshot
@@ -199,6 +201,7 @@ class MultipleScreenModel(BaseModel):
         self.build_cnn()
         self.build_model()
         self.build_loss()
+        self.build_summary()
 
     def build_model(self):
         # generate heats
@@ -213,12 +216,15 @@ class MultipleScreenModel(BaseModel):
         # pool3_heat_out: item_num (how many series), x_dim, y_dim
         self.pool3_heat_out = tf.reshape(
             tf.keras.layers.LSTM(units=23 * 40, dropout=0.5)(self.pool3_heat_in),
+            # tf.keras.layers.LSTM(units=23 * 40)(self.pool3_heat_in),
             [-1, 23, 40, 1])
         self.pool4_heat_out = tf.reshape(
             tf.keras.layers.LSTM(units=12 * 20, dropout=0.5)(self.pool4_heat_in),
+            # tf.keras.layers.LSTM(units=12 * 20)(self.pool4_heat_in),
             [-1, 12, 20, 1])
         self.pool5_heat_out = tf.reshape(
             tf.keras.layers.LSTM(units=6 * 10, dropout=0.5)(self.pool5_heat_in),
+            # tf.keras.layers.LSTM(units=6 * 10)(self.pool5_heat_in),
             [-1, 6, 10, 1])
 
         # do upsampling
@@ -247,3 +253,48 @@ class MultipleScreenModel(BaseModel):
                                    name="pool3_up"))
         self.heatmap_out = self.pool3_up
         self.interact_out = self.pool5_heat_out
+
+    def build_summary(self):
+        # summary
+        tf.summary.scalar("heatmap_loss", self.heatmap_loss)
+        tf.summary.scalar("interact_loss", self.interact_loss)
+        tf.summary.scalar("total_loss", self.total_loss)
+        tf.summary.image("input_images",
+                         self.input_images,
+                         max_outputs=self.batch_size*self.frame_num)
+        tf.summary.image("sample_heatmaps",
+                         self.input_images[:,:,:,-self.predicting_dim:],
+                         max_outputs=self.batch_size*self.frame_num)
+        tf.summary.image("true_heatmaps",
+                         self.true_heats,
+                         max_outputs=self.batch_size)
+        tf.summary.image("predict_heatmaps",
+                         self.predict_heatmaps,
+                         max_outputs=self.batch_size)
+        tf.summary.histogram("true_interacts", self.true_interacts)
+        tf.summary.histogram("predict_interacts", self.predict_interacts)
+
+        tf.summary.histogram("conv1_activation", self.conv1)
+        tf.summary.histogram("conv2_activation", self.conv2)
+        tf.summary.histogram("conv3_activation", self.conv3)
+        tf.summary.histogram("conv4_activation", self.conv4)
+        tf.summary.histogram("conv5_activation", self.conv5)
+        tf.summary.histogram("conv1_gradient", tf.gradients(self.total_loss, self.conv1))
+        tf.summary.histogram("conv2_gradient", tf.gradients(self.total_loss, self.conv2))
+        tf.summary.histogram("conv3_gradient", tf.gradients(self.total_loss, self.conv3))
+        tf.summary.histogram("conv4_gradient", tf.gradients(self.total_loss, self.conv4))
+        tf.summary.histogram("conv5_gradient", tf.gradients(self.total_loss, self.conv5))
+
+        tf.summary.histogram("pool3_heat_out_activation", self.pool3_heat_out)
+        tf.summary.histogram("pool4_heat_out_activation", self.pool4_heat_out)
+        tf.summary.histogram("pool5_heat_out_activation", self.pool5_heat_out)
+        tf.summary.histogram("pool3_heat_out_gradient", tf.gradients(self.total_loss, self.pool3_heat_out))
+        tf.summary.histogram("pool4_heat_out_gradient", tf.gradients(self.total_loss, self.pool4_heat_out))
+        tf.summary.histogram("pool5_heat_out_gradient", tf.gradients(self.total_loss, self.pool5_heat_out))
+
+        tf.summary.histogram("pool3_up_filters_data", self.pool3_up_filters)
+        tf.summary.histogram("pool4_up_filters_data", self.pool4_up_filters)
+        tf.summary.histogram("pool5_up_filters_data", self.pool5_up_filters)
+        tf.summary.histogram("pool3_up_filters_gradient", tf.gradients(self.total_loss, self.pool3_up_filters))
+        tf.summary.histogram("pool4_up_filters_gradient", tf.gradients(self.total_loss, self.pool4_up_filters))
+        tf.summary.histogram("pool5_up_filters_gradient", tf.gradients(self.total_loss, self.pool5_up_filters))
