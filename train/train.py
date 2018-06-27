@@ -3,6 +3,7 @@
 import argparse
 import json
 import logging
+logging.basicConfig(format="%(asctime)-15s %(message)s")
 import os
 
 import numpy as np
@@ -18,29 +19,29 @@ def run(config_path):
 
     log_data_dir = config_json["log_data_dir"]
     learning_rate = config_json["learning_rate"]
+    max_iter = config_json["max_iter"]
 
     # data_loader = loader.DebugSingleScreenLoader(config_json)
     # model = SingleScreenModel(config_json)
-    data_loader = loader.DebugMultipleScreenLoader(config_json)
+    # data_loader = loader.DebugMultipleScreenLoader(config_json)
+    data_loader = loader.MultipleScreenLoader(config_json)
     model = MultipleScreenModel(config_json)
 
     tf_config = tf.ConfigProto()
     tf_config.gpu_options.allow_growth = True
 
-    logger = logging.getLogger()
-    logging.basicConfig(format="%(asctime)-15s %(message)s")
     logger = logging.getLogger("train")
     logger.setLevel(logging.INFO)
 
     with tf.Session(config=tf_config) as sess:
         train_writer = tf.summary.FileWriter(log_data_dir, sess.graph)
 
-        optimizer = tf.train.GradientDescentOptimizer(5e-2)
+        optimizer = tf.train.GradientDescentOptimizer(learning_rate)
         trainer = optimizer.minimize(model.total_loss)
-        feed_dict = model.get_feed_dict(*data_loader.next_batch())
 
         sess.run(tf.global_variables_initializer())
-        for i in range(10000):
+        for i in range(max_iter):
+            feed_dict = model.get_feed_dict(*data_loader.next_batch())
             sess.run(trainer, feed_dict=feed_dict)
 
             if i % 1000 == 0:

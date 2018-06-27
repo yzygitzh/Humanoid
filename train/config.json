@@ -15,5 +15,6 @@
     "batch_size": 4,
     "frame_num": 5,
 
-    "learning_rate": 0.05
+    "learning_rate": 0.1,
+    "max_iter": 10000
 }
