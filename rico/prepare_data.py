@@ -25,6 +25,8 @@ def process_trace(trace_path, config_json):
 
     with open(gestures_path, "r") as gestures_file:
         gestures = json.load(gestures_file)
+        if "" in gestures:
+            gestures.pop("")
         gestures = [gestures[x] for x in sorted(gestures, key=lambda x: int(x))]
     assert(len(gestures) == len(view_tree_tags))
 
@@ -65,9 +67,13 @@ def run(config_path):
     for app in apps:
         # if app != "org.telegram.messenger":
         # if app != "com.whatsapp":
-        # if app != "com.surveysampling.mobile.quickthoughts":
+        # if app != "com.dev.newbie.comicstand":
         #     continue
         print(app)
+        save_file_path = os.path.join(output_dir, "%s.pickle" % app)
+        if os.path.isfile(save_file_path):
+            continue
+
         app_dir = os.path.join(filtered_traces_dir, app)
         app_trace_dirs = [os.path.join(app_dir, x)
                           for x in next(os.walk(app_dir))[1]]
@@ -77,8 +83,7 @@ def run(config_path):
             trace_num = os.path.basename(app_trace_dir)
             processed_traces[trace_num] = processed_trace
 
-        save_file_name = "%s.pickle" % app
-        with open(os.path.join(output_dir, save_file_name), "wb") as f:
+        with open(save_file_path, "wb") as f:
             pickle.dump(processed_traces, f)
         # print(sorted(processed_traces))
         # break
