@@ -115,7 +115,7 @@ class MultipleScreenLoader(Loader):
                 # for each image, clear last heatmaps
                 for image in images:
                     image[self.frame_num - 1, :, :, -self.predicting_dim:] = 0.0
-                    image[:, :, :, :self.training_dim] /= 10
+                    image -= 0.5
                     # for i in range(self.frame_num):
                     #     visualize_data(image[i])
 

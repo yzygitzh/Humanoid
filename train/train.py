@@ -25,6 +25,7 @@ def run(config_path):
     learning_rate = config_json["learning_rate"]
     max_iter = config_json["max_iter"]
     log_step = config_json["log_step"]
+    snapshot_step = config_json["snapshot_step"]
 
     # data_loader = loader.DebugSingleScreenLoader(config_json)
     # model = SingleScreenModel(config_json)
@@ -39,29 +40,45 @@ def run(config_path):
     logger = logging.getLogger("train")
     logger.setLevel(logging.INFO)
 
+    saver = tf.train.Saver()
+
     with tf.Session(config=tf_config) as sess:
         train_writer = tf.summary.FileWriter(log_data_dir, sess.graph)
 
-        optimizer = tf.train.GradientDescentOptimizer(learning_rate)
-        # optimizer = tf.train.AdamOptimizer(learning_rate)
-        trainer = optimizer.minimize(model.total_loss)
+        fast_optimizer = tf.train.GradientDescentOptimizer(learning_rate * 100)
+        mid_optimizer = tf.train.GradientDescentOptimizer(learning_rate * 10)
+        final_optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+
+        fast_trainer = fast_optimizer.minimize(model.total_loss)
+        mid_trainer = mid_optimizer.minimize(model.total_loss)
+        final_trainer = final_optimizer.minimize(model.total_loss)
 
         sess.run(tf.global_variables_initializer())
         for i in range(max_iter):
             feed_dict = model.get_feed_dict(*data_loader.next_batch())
-            sess.run(trainer, feed_dict=feed_dict)
+            if data_loader.get_current_epoch() < 40:
+                sess.run(fast_trainer, feed_dict=feed_dict)
+            elif data_loader.get_current_epoch() < 200:
+                sess.run(mid_trainer, feed_dict=feed_dict)
+            else:
+                sess.run(final_trainer, feed_dict=feed_dict)
+
+            if i % snapshot_step == 0:
+                saved_path = saver.save(sess, os.path.join(log_data_dir, "model_%d.ckpt" % i))
+                logger.info("model saved in path: %s" % saved_path)
+
             if i % log_step == 0:
                 summary = sess.run(merged_summary, feed_dict=feed_dict)
                 train_writer.add_summary(summary, i)
                 train_writer.flush()
 
+                """
                 gr = tf.get_default_graph()
-                conv1_kernel_val = gr.get_tensor_by_name("conv1_1/kernel:0").eval()
+                conv1_kernel_val = gr.get_tensor_by_name("conv1/kernel:0").eval()
                 print(conv1_kernel_val[:, :, :, 0])
-                conv1_bias_val = gr.get_tensor_by_name("conv1_1/bias:0").eval()
+                conv1_bias_val = gr.get_tensor_by_name("conv1/bias:0").eval()
                 print(conv1_bias_val)
 
-                """
                 logger.info("heatmap loss: %g" % sess.run(model.heatmap_loss, feed_dict=feed_dict))
                 logger.info("interact loss: %g" % sess.run(model.interact_loss, feed_dict=feed_dict))
                 logger.info("total loss: %g" % sess.run(model.total_loss, feed_dict=feed_dict))

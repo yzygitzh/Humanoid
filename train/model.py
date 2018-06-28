@@ -262,9 +262,11 @@ class MultipleScreenModel(BaseModel):
         tf.summary.image("input_images",
                          self.input_images,
                          max_outputs=self.batch_size*self.frame_num)
+        """
         tf.summary.image("sample_heatmaps",
                          self.input_images[:,:,:,-self.predicting_dim:],
                          max_outputs=self.batch_size*self.frame_num)
+        """
         tf.summary.image("true_heatmaps",
                          self.true_heats,
                          max_outputs=self.batch_size)
