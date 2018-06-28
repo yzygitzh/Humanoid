@@ -65,7 +65,9 @@ def run(config_path):
     for app in apps:
         # if app != "org.telegram.messenger":
         # if app != "com.whatsapp":
+        # if app != "com.surveysampling.mobile.quickthoughts":
         #     continue
+        print(app)
         app_dir = os.path.join(filtered_traces_dir, app)
         app_trace_dirs = [os.path.join(app_dir, x)
                           for x in next(os.walk(app_dir))[1]]

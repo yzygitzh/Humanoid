@@ -36,10 +36,13 @@ def convert_view_trees(view_tree_paths, config_json):
             if "children" not in view_tree:
                 bounds = view_tree["bounds"]
 
-                x_min = max(0, int(bounds[0] * downscale_ratio)) + view_offset[0]
-                y_min = max(0, int(bounds[1] * downscale_ratio)) + view_offset[1]
-                x_max = min(downscale_dim[0], int(bounds[2] * downscale_ratio)) + view_offset[0]
-                y_max = min(downscale_dim[1], int(bounds[3] * downscale_ratio)) + view_offset[1]
+                x_min = max(0, int(bounds[0] * downscale_ratio) + view_offset[0])
+                y_min = max(0, int(bounds[1] * downscale_ratio) + view_offset[1])
+                x_max = min(downscale_dim[0], int(bounds[2] * downscale_ratio) + view_offset[0])
+                y_max = min(downscale_dim[1], int(bounds[3] * downscale_ratio) + view_offset[1])
+
+                if x_min > x_max or y_min > y_max:
+                    return
 
                 draw_dim = text_dim if "text" in view_tree else image_dim
                 image_data[x_min:x_max, y_min:y_max, draw_dim] = 1.0

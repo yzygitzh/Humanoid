@@ -48,6 +48,9 @@ def is_view_valid(view):
     if not visible_to_user:
         return False
 
+    if "bounds" not in view or "rel-bounds" not in view:
+        return False
+
     bounds = view["bounds"]
     rel_bounds = view["rel-bounds"]
 

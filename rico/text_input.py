@@ -31,24 +31,29 @@ def add_text_inputs(view_tree_paths, image_array,
             continue
         if not is_view_hierarchy_valid(view_tree, config_json):
             continue
+        activity_name = view_tree["activity_name"]
+        if activity_name is None:
+            continue
 
         view_offset = compute_view_offset(view_tree, config_json)
-        activity_name = view_tree["activity_name"]
 
         def view_call_back(view_tree):
             if is_text_view(view_tree):
                 bounds = view_tree["bounds"]
 
-                x_min = max(0, int(bounds[0] * downscale_ratio)) + view_offset[0]
-                y_min = max(0, int(bounds[1] * downscale_ratio)) + view_offset[1]
-                x_max = min(downscale_dim[0], int(bounds[2] * downscale_ratio)) + view_offset[0]
-                y_max = min(downscale_dim[1], int(bounds[3] * downscale_ratio)) + view_offset[1]
+                x_min = max(0, int(bounds[0] * downscale_ratio) + view_offset[0])
+                y_min = max(0, int(bounds[1] * downscale_ratio) + view_offset[1])
+                x_max = min(downscale_dim[0], int(bounds[2] * downscale_ratio) + view_offset[0])
+                y_max = min(downscale_dim[1], int(bounds[3] * downscale_ratio) + view_offset[1])
+
+                if x_min > x_max or y_min > y_max:
+                    return
 
                 text_view_id = activity_name + ":" + get_text_view_signature(view_tree)
                 if text_view_id not in text_history:
                     text_history[text_view_id] = {
-                        "pos": [min(int((bounds[0] + bounds[2]) / 2 * downscale_ratio), downscale_dim[0] - 1),
-                                min(int((bounds[1] + bounds[3]) / 2 * downscale_ratio), downscale_dim[1] - 1)],
+                        "pos": [min(int((x_min + x_max) / 2), downscale_dim[0] - 1),
+                                min(int((y_min + y_max) / 2), downscale_dim[1] - 1)],
                         "texts": []
                     }
                 text_history[text_view_id]["texts"].append([i, view_tree["text"]])
