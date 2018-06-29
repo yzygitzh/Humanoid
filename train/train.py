@@ -45,23 +45,26 @@ def run(config_path):
     with tf.Session(config=tf_config) as sess:
         train_writer = tf.summary.FileWriter(log_data_dir, sess.graph)
 
-        fast_optimizer = tf.train.GradientDescentOptimizer(learning_rate * 100)
-        mid_optimizer = tf.train.GradientDescentOptimizer(learning_rate * 10)
-        final_optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+        # fast_optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+        # fast_optimizer = tf.train.GradientDescentOptimizer(learning_rate * 1000)
+        # mid_optimizer = tf.train.MomentumOptimizer(learning_rate, 0.9)
+        final_optimizer = tf.train.MomentumOptimizer(learning_rate, 0.9)
 
-        fast_trainer = fast_optimizer.minimize(model.total_loss)
-        mid_trainer = mid_optimizer.minimize(model.total_loss)
+        # fast_trainer = fast_optimizer.minimize(model.total_loss)
+        # mid_trainer = mid_optimizer.minimize(model.total_loss)
         final_trainer = final_optimizer.minimize(model.total_loss)
 
         sess.run(tf.global_variables_initializer())
         for i in range(max_iter):
             feed_dict = model.get_feed_dict(*data_loader.next_batch())
-            if data_loader.get_current_epoch() < 40:
-                sess.run(fast_trainer, feed_dict=feed_dict)
-            elif data_loader.get_current_epoch() < 200:
-                sess.run(mid_trainer, feed_dict=feed_dict)
-            else:
-                sess.run(final_trainer, feed_dict=feed_dict)
+            # if data_loader.get_current_epoch() < 40:
+            # if i < 3000:
+            #     sess.run(fast_trainer, feed_dict=feed_dict)
+            # elif data_loader.get_current_epoch() < 100:
+            # if i < 10000:
+            #     sess.run(mid_trainer, feed_dict=feed_dict)
+            # else:
+            sess.run(final_trainer, feed_dict=feed_dict)
 
             if i % snapshot_step == 0:
                 saved_path = saver.save(sess, os.path.join(log_data_dir, "model_%d.ckpt" % i))
