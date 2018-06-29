@@ -214,18 +214,25 @@ class MultipleScreenModel(BaseModel):
         self.pool5_heat_in = tf.reshape(self.pool5_heat, [-1, self.frame_num, 6 * 10])
 
         # pool3_heat_out: item_num (how many series), x_dim, y_dim
-        self.pool3_heat_out = tf.reshape(
+        self.pool3_heat_out = tf.add(
+            tf.reshape(
             tf.keras.layers.LSTM(units=23 * 40, dropout=0.5)(self.pool3_heat_in),
             # tf.keras.layers.LSTM(units=23 * 40)(self.pool3_heat_in),
-            [-1, 23, 40, 1])
-        self.pool4_heat_out = tf.reshape(
+            [-1, 23, 40, 1]),
+            tf.reshape(self.pool3_heat,
+            [self.batch_size, self.frame_num, 23, 40, 1])[:, self.frame_num - 1, :,:,:])
+        self.pool4_heat_out = tf.add(tf.reshape(
             tf.keras.layers.LSTM(units=12 * 20, dropout=0.5)(self.pool4_heat_in),
             # tf.keras.layers.LSTM(units=12 * 20)(self.pool4_heat_in),
-            [-1, 12, 20, 1])
-        self.pool5_heat_out = tf.reshape(
+            [-1, 12, 20, 1]),
+            tf.reshape(self.pool4_heat,
+            [self.batch_size, self.frame_num, 12, 20, 1])[:, self.frame_num - 1, :,:,:])
+        self.pool5_heat_out = tf.add(tf.reshape(
             tf.keras.layers.LSTM(units=6 * 10, dropout=0.5)(self.pool5_heat_in),
             # tf.keras.layers.LSTM(units=6 * 10)(self.pool5_heat_in),
-            [-1, 6, 10, 1])
+            [-1, 6, 10, 1]),
+            tf.reshape(self.pool5_heat,
+            [self.batch_size, self.frame_num, 6, 10, 1])[:, self.frame_num - 1, :,:,:])
 
         # do upsampling
         # 6x10
