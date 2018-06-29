@@ -6,6 +6,7 @@ import os
 import pickle
 import queue
 import random
+import threading
 
 import numpy as np
 import tensorflow as tf
@@ -80,11 +81,15 @@ class MultipleScreenLoader(Loader):
         self.batch_size = config_json["batch_size"]
         self.frame_num = config_json["frame_num"]
         self.data_files = next(os.walk(self.training_data_dir))[2]
-        # self.data_files = ["jp.naver.linecard.android.pickle"]
+        # self.data_files = ["jp.naver.linecard.android.pickle",
+        #                    "co.brainly.pickle"]
         self.data_paths = [os.path.join(self.training_data_dir, x) for x in self.data_files]
         self.data_queue = queue.Queue()
         self.path_queue = queue.Queue()
         self.epochs = -1
+        self.loading_thread = None
+        self.loading_thread_result = None
+        self.loading_thread_out = None
 
     def get_current_epoch(self):
         return self.epochs
@@ -130,7 +135,7 @@ class MultipleScreenLoader(Loader):
         for i in rand_idx:
             self.data_queue.put(data_item_list[i])
 
-    def next_batch(self):
+    def next_batch_async(self):
         batch_image_list = []
         batch_heatmap_list = []
         batch_interact_list = []
@@ -148,6 +153,20 @@ class MultipleScreenLoader(Loader):
             batch_image_list.append(image)
             batch_heatmap_list.append(heatmap)
             batch_interact_list.append(interact)
-        return np.concatenate(batch_image_list, axis=0), \
-               np.stack(batch_heatmap_list, axis=0), \
-               np.concatenate(batch_interact_list, axis=0)
+        self.loading_thread_result = \
+               (np.concatenate(batch_image_list, axis=0), \
+                np.stack(batch_heatmap_list, axis=0), \
+                np.concatenate(batch_interact_list, axis=0))
+
+    def next_batch(self):
+        if self.loading_thread is None:
+            self.loading_thread = threading.Thread(target=self.next_batch_async)
+            self.loading_thread.start()
+        # print("start waiting")
+        self.loading_thread.join()
+        # print("stop waiting")
+        self.loading_thread_out, self.loading_thread_result = \
+        self.loading_thread_result, self.loading_thread_out
+        self.loading_thread = threading.Thread(target=self.next_batch_async)
+        self.loading_thread.start()
+        return self.loading_thread_out
