@@ -1,0 +1,10 @@
+{
+    "model_path": "/mnt/DATA_volume/lab_data/RICO/training_log/model_11500.ckpt",
+
+    "training_dim": 2,
+    "predicting_dim": 1,
+    "total_interacts": 7,
+
+    "downscale_dim": [180, 320],
+    "frame_num": 4
+}
