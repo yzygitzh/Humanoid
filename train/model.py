@@ -15,6 +15,8 @@ class BaseModel():
         self.predicting_dim = config_json["predicting_dim"]
         self.total_channels = self.training_dim + self.predicting_dim
         self.total_interacts = config_json["total_interacts"]
+        self.weight_decay = config_json["weight_decay"]
+        self.regularizer = tf.contrib.layers.l2_regularizer(scale=self.weight_decay)
         if training:
             self.batch_size = config_json["batch_size"]
         else:
@@ -45,6 +47,8 @@ class BaseModel():
                                       kernel_size=3,
                                       padding="same",
                                       activation=tf.nn.relu,
+                                      kernel_regularizer=self.regularizer,
+                                      bias_regularizer=self.regularizer,
                                       name="conv1")
         self.pool1 = tf.layers.max_pooling2d(inputs=self.conv1,
                                              pool_size=2,
@@ -56,6 +60,8 @@ class BaseModel():
                                       kernel_size=3,
                                       padding="same",
                                       activation=tf.nn.relu,
+                                      kernel_regularizer=self.regularizer,
+                                      bias_regularizer=self.regularizer,
                                       name="conv2")
         self.pool2 = tf.layers.max_pooling2d(inputs=self.conv2,
                                              pool_size=2,
@@ -67,6 +73,8 @@ class BaseModel():
                                       kernel_size=3,
                                       padding="same",
                                       activation=tf.nn.relu,
+                                      kernel_regularizer=self.regularizer,
+                                      bias_regularizer=self.regularizer,
                                       name="conv3")
         self.pool3 = tf.layers.max_pooling2d(inputs=self.conv3,
                                              pool_size=2,
@@ -79,6 +87,8 @@ class BaseModel():
                                       kernel_size=3,
                                       padding="same",
                                       activation=tf.nn.relu,
+                                      kernel_regularizer=self.regularizer,
+                                      bias_regularizer=self.regularizer,
                                       name="conv4")
         self.pool4 = tf.layers.max_pooling2d(inputs=self.conv4,
                                              pool_size=2,
@@ -91,6 +101,8 @@ class BaseModel():
                                       kernel_size=3,
                                       padding="same",
                                       activation=tf.nn.relu,
+                                      kernel_regularizer=self.regularizer,
+                                      bias_regularizer=self.regularizer,
                                       name="conv5")
         self.pool5 = tf.layers.max_pooling2d(inputs=self.conv5,
                                              pool_size=2,
@@ -105,18 +117,24 @@ class BaseModel():
                                            kernel_size=1,
                                            padding="same",
                                            activation=tf.nn.relu,
+                                           kernel_regularizer=self.regularizer,
+                                           bias_regularizer=self.regularizer,
                                            name="pool3_heat")
         self.pool4_heat = tf.layers.conv2d(inputs=self.pool4,
                                            filters=1,
                                            kernel_size=1,
                                            padding="same",
                                            activation=tf.nn.relu,
+                                           kernel_regularizer=self.regularizer,
+                                           bias_regularizer=self.regularizer,
                                            name="pool4_heat")
         self.pool5_heat = tf.layers.conv2d(inputs=self.pool5,
                                            filters=1,
                                            kernel_size=1,
                                            padding="same",
                                            activation=tf.nn.relu,
+                                           kernel_regularizer=self.regularizer,
+                                           bias_regularizer=self.regularizer,
                                            name="pool5_heat")
 
     def build_loss(self):
@@ -131,16 +149,19 @@ class BaseModel():
         self.fc = tf.layers.dense(self.interact_out_flat,
                                   self.total_interacts,
                                   activation=tf.nn.relu,
+                                  kernel_regularizer=self.regularizer,
+                                  bias_regularizer=self.regularizer,
                                   name="fc")
-        self.fc_dropout = tf.layers.dropout(self.fc, name="fc_dropout")
+        # self.fc_dropout = tf.layers.dropout(self.fc, name="fc_dropout")
         self.interact_loss = tf.losses.softmax_cross_entropy(self.true_interacts,
-                                                             self.fc_dropout)
-                                                             # self.fc)
+                                                             self.fc)
+                                                             # self.fc_dropout)
         self.predict_interacts = tf.nn.softmax(self.fc)
 
         # total loss
-        self.total_loss = tf.add(self.heatmap_loss, self.interact_loss, name="total_loss")
+        # self.total_loss = tf.add(self.heatmap_loss, self.interact_loss, name="total_loss")
         # self.total_loss = self.heatmap_loss
+        self.total_loss = tf.losses.get_total_loss()
 
 class SingleScreenModel(BaseModel):
     """Model for processing single screenshot
@@ -242,7 +263,7 @@ class MultipleScreenModel(BaseModel):
 
         # do upsampling
         # 6x10
-        self.pool5_up_filters = tf.get_variable("pool5_up_filters", [4, 4, 1, 1])
+        self.pool5_up_filters = tf.get_variable("pool5_up_filters", [4, 4, 1, 1], regularizer=self.regularizer)
         self.pool5_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool5_heat_out,
                                    filter=self.pool5_up_filters,
                                    output_shape=[self.batch_size, 12, 20, 1],
@@ -250,7 +271,7 @@ class MultipleScreenModel(BaseModel):
                                    name="pool5_up"))
         # 12x20
         self.pool4_heat_sum = tf.add(self.pool5_up, self.pool4_heat_out, name="pool4_heat_sum")
-        self.pool4_up_filters = tf.get_variable("pool4_up_filters", [4, 4, 1, 1])
+        self.pool4_up_filters = tf.get_variable("pool4_up_filters", [4, 4, 1, 1], regularizer=self.regularizer)
         self.pool4_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool4_heat_sum,
                                    filter=self.pool4_up_filters,
                                    output_shape=[self.batch_size, 23, 40, 1],
@@ -258,7 +279,7 @@ class MultipleScreenModel(BaseModel):
                                    name="pool4_up"))
         # 23x40
         self.pool3_heat_sum = tf.add(self.pool4_up, self.pool3_heat_out, name="pool3_heat_sum")
-        self.pool3_up_filters = tf.get_variable("pool3_up_filters", [16, 16, 1, 1])
+        self.pool3_up_filters = tf.get_variable("pool3_up_filters", [16, 16, 1, 1], regularizer=self.regularizer)
         self.pool3_up = tf.nn.relu(tf.nn.conv2d_transpose(value=self.pool3_heat_sum,
                                    filter=self.pool3_up_filters,
                                    output_shape=[self.batch_size, 180, 320, 1],

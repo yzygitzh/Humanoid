@@ -1,6 +1,6 @@
 {
-    "training_data_dir": "/mnt/DATA_volume/lab_data/RICO/training_data",
-    "log_data_dir": "/mnt/DATA_volume/lab_data/RICO/training_log",
+    "training_data_dir": "/mnt/EXT_volume/yangzy/lab_data/RICO/training_data",
+    "log_data_dir": "/mnt/EXT_volume/yangzy/lab_data/RICO/training_log",
 
     "training_dim": 2,
     "predicting_dim": 1,
@@ -11,12 +11,13 @@
     "downscale_dim": [180, 320],
     "data_augmentation_threshold": 1,
 
-    "dataset_threads": 10,
-    "batch_size": 12,
+    "dataset_threads": 100,
+    "batch_size": 64,
     "frame_num": 4,
 
-    "learning_rate": 0.01,
+    "learning_rate": 0.05,
+    "weight_decay": 0.001,
     "log_step": 50,
-    "snapshot_step": 500,
-    "max_iter": 50000
+    "snapshot_step": 5000,
+    "max_iter": 500000
 }
