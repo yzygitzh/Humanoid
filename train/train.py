@@ -40,7 +40,7 @@ def run(config_path):
     logger = logging.getLogger("train")
     logger.setLevel(logging.INFO)
 
-    saver = tf.train.Saver()
+    saver = tf.train.Saver(max_to_keep=None)
 
     with tf.Session(config=tf_config) as sess:
         train_writer = tf.summary.FileWriter(log_data_dir, sess.graph)
