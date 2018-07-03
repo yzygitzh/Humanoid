@@ -11,11 +11,11 @@
     "downscale_dim": [180, 320],
     "data_augmentation_threshold": 1,
 
-    "dataset_threads": 20,
-    "batch_size": 24,
+    "dataset_threads": 10,
+    "batch_size": 12,
     "frame_num": 4,
 
-    "learning_rate": 0.001,
+    "learning_rate": 0.01,
     "log_step": 50,
     "snapshot_step": 500,
     "max_iter": 50000

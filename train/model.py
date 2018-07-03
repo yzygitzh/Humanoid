@@ -9,14 +9,16 @@ class BaseModel():
     """Base model
        Build CNN and LSTM units
     """
-    def __init__(self, config_json):
+    def __init__(self, config_json, training=True):
         self.x_dim, self.y_dim = config_json["downscale_dim"]
         self.training_dim = config_json["training_dim"]
         self.predicting_dim = config_json["predicting_dim"]
         self.total_channels = self.training_dim + self.predicting_dim
         self.total_interacts = config_json["total_interacts"]
-        self.batch_size = config_json["batch_size"]
-        self.frame_num = config_json["frame_num"]
+        if training:
+            self.batch_size = config_json["batch_size"]
+        else:
+            self.batch_size = 1
 
         self.input_images = None
         self.true_heats = tf.placeholder(dtype=tf.float32,
@@ -191,17 +193,21 @@ class MultipleScreenModel(BaseModel):
 
        input: batch_num, x_dim, y_dim, channels
     """
-    def __init__(self, config_json):
-        super().__init__(config_json)
+    def __init__(self, config_json, training=True):
+        super().__init__(config_json, training)
+        if training:
+            self.keep_prob = 0.5
+        else:
+            self.keep_prob = 1.0
         self.frame_num = config_json["frame_num"]
-        self.item_num = self.batch_size / self.frame_num
         self.input_images = tf.placeholder(dtype=tf.float32,
                                            shape=(None, self.x_dim, self.y_dim,
                                                   self.training_dim + self.predicting_dim))
         self.build_cnn()
         self.build_model()
         self.build_loss()
-        self.build_summary()
+        if training:
+            self.build_summary()
 
     def build_model(self):
         # generate heats
@@ -216,19 +222,19 @@ class MultipleScreenModel(BaseModel):
         # pool3_heat_out: item_num (how many series), x_dim, y_dim
         self.pool3_heat_out = tf.add(
             tf.reshape(
-            tf.keras.layers.LSTM(units=23 * 40, dropout=0.5)(self.pool3_heat_in),
+            tf.keras.layers.LSTM(units=23 * 40, dropout=self.keep_prob)(self.pool3_heat_in),
             # tf.keras.layers.LSTM(units=23 * 40)(self.pool3_heat_in),
             [-1, 23, 40, 1]),
             tf.reshape(self.pool3_heat,
             [self.batch_size, self.frame_num, 23, 40, 1])[:, self.frame_num - 1, :,:,:])
         self.pool4_heat_out = tf.add(tf.reshape(
-            tf.keras.layers.LSTM(units=12 * 20, dropout=0.5)(self.pool4_heat_in),
+            tf.keras.layers.LSTM(units=12 * 20, dropout=self.keep_prob)(self.pool4_heat_in),
             # tf.keras.layers.LSTM(units=12 * 20)(self.pool4_heat_in),
             [-1, 12, 20, 1]),
             tf.reshape(self.pool4_heat,
             [self.batch_size, self.frame_num, 12, 20, 1])[:, self.frame_num - 1, :,:,:])
         self.pool5_heat_out = tf.add(tf.reshape(
-            tf.keras.layers.LSTM(units=6 * 10, dropout=0.5)(self.pool5_heat_in),
+            tf.keras.layers.LSTM(units=6 * 10, dropout=self.keep_prob)(self.pool5_heat_in),
             # tf.keras.layers.LSTM(units=6 * 10)(self.pool5_heat_in),
             [-1, 6, 10, 1]),
             tf.reshape(self.pool5_heat,
