@@ -15,12 +15,15 @@ class BaseModel():
         self.predicting_dim = config_json["predicting_dim"]
         self.total_channels = self.training_dim + self.predicting_dim
         self.total_interacts = config_json["total_interacts"]
-        self.weight_decay = config_json["weight_decay"]
-        self.regularizer = tf.contrib.layers.l2_regularizer(scale=self.weight_decay)
         if training:
+            self.weight_decay = config_json["weight_decay"]
             self.batch_size = config_json["batch_size"]
+            self.keep_prob = 0.5
         else:
+            self.weight_decay = 0.0
             self.batch_size = 1
+            self.keep_prob = 1.0
+        self.regularizer = tf.contrib.layers.l2_regularizer(scale=self.weight_decay)
 
         self.input_images = None
         self.true_heats = tf.placeholder(dtype=tf.float32,
@@ -216,10 +219,6 @@ class MultipleScreenModel(BaseModel):
     """
     def __init__(self, config_json, training=True):
         super().__init__(config_json, training)
-        if training:
-            self.keep_prob = 0.5
-        else:
-            self.keep_prob = 1.0
         self.frame_num = config_json["frame_num"]
         self.input_images = tf.placeholder(dtype=tf.float32,
                                            shape=(None, self.x_dim, self.y_dim,
