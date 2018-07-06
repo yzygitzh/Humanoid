@@ -66,8 +66,8 @@ def convert_gestures(gestures, config_json):
             "interact_type": gesture_kind,
         })
 
-        gesture_pos = [min(int(gesture[0][0] * downscale_dim[0]), downscale_dim[0] - 1),
-                       min(int(gesture[0][1] * downscale_dim[1]), downscale_dim[1] - 1)]
+        gesture_pos = [min(max(int(gesture[0][0] * downscale_dim[0]), 0), downscale_dim[0] - 1),
+                       min(max(int(gesture[0][1] * downscale_dim[1]), 0), downscale_dim[1] - 1)]
         for x in range(downscale_dim[0]):
             for y in range(downscale_dim[1]):
                 sample_x = abs(x - gesture_pos[0])
