@@ -7,6 +7,7 @@ import pickle
 import queue
 import random
 import threading
+import time
 
 import numpy as np
 import tensorflow as tf
@@ -90,6 +91,7 @@ class MultipleScreenLoader(Loader):
         self.loading_thread = None
         self.loading_thread_result = None
         self.loading_thread_out = None
+        self.produce_threshold = 10000
 
     def get_current_epoch(self):
         return self.epochs
@@ -135,12 +137,11 @@ class MultipleScreenLoader(Loader):
         for i in rand_idx:
             self.data_queue.put(data_item_list[i])
 
-    def next_batch_async(self):
-        batch_image_list = []
-        batch_heatmap_list = []
-        batch_interact_list = []
-        for i in range(self.batch_size):
-            if self.data_queue.empty():
+    def next_batch_producer(self):
+        # always try to load data when < threshold
+        # poll check threshold
+        while True:
+            if self.data_queue.qsize() < self.produce_threshold:
                 paths_to_load = []
                 for i in range(min(self.dataset_threads, len(self.data_paths))):
                     if self.path_queue.empty():
@@ -148,25 +149,24 @@ class MultipleScreenLoader(Loader):
                     paths_to_load.append(self.path_queue.get())
                     # self.logger.info("loading: %s", paths_to_load[-1])
                 self.load_pickles(paths_to_load)
-            # now data queue is not empty, get data
+            time.sleep(1)
+
+    def next_batch_consumer(self):
+        # always try to get data
+        batch_image_list = []
+        batch_heatmap_list = []
+        batch_interact_list = []
+        for i in range(self.batch_size):
             image, heatmap, interact = self.data_queue.get()
             batch_image_list.append(image)
             batch_heatmap_list.append(heatmap)
             batch_interact_list.append(interact)
-        self.loading_thread_result = \
-               (np.concatenate(batch_image_list, axis=0), \
+        return (np.concatenate(batch_image_list, axis=0), \
                 np.stack(batch_heatmap_list, axis=0), \
                 np.concatenate(batch_interact_list, axis=0))
 
     def next_batch(self):
         if self.loading_thread is None:
-            self.loading_thread = threading.Thread(target=self.next_batch_async)
+            self.loading_thread = threading.Thread(target=self.next_batch_producer)
             self.loading_thread.start()
-        # print("start waiting")
-        self.loading_thread.join()
-        # print("stop waiting")
-        self.loading_thread_out, self.loading_thread_result = \
-        self.loading_thread_result, self.loading_thread_out
-        self.loading_thread = threading.Thread(target=self.next_batch_async)
-        self.loading_thread.start()
-        return self.loading_thread_out
+        return self.next_batch_consumer()

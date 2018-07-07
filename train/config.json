@@ -1,5 +1,5 @@
 {
-    "training_data_dir": "/mnt/EXT_volume/yangzy/lab_data/RICO/training_data",
+    "training_data_dir": "/mnt/FAST_volume/yangzy/lab_data/RICO/training_data",
     "log_data_dir": "/mnt/EXT_volume/yangzy/lab_data/RICO/training_log",
 
     "training_dim": 2,
@@ -15,9 +15,9 @@
     "batch_size": 64,
     "frame_num": 4,
 
-    "learning_rate": 0.05,
+    "learning_rate": 0.01,
     "weight_decay": 0.001,
-    "log_step": 50,
+    "log_step": 200,
     "snapshot_step": 5000,
     "max_iter": 500000
 }
