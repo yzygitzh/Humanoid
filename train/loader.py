@@ -92,6 +92,7 @@ class MultipleScreenLoader(Loader):
         self.loading_thread_result = None
         self.loading_thread_out = None
         self.produce_threshold = 10000
+        self.stopped = False
 
     def get_current_epoch(self):
         return self.epochs
@@ -140,7 +141,7 @@ class MultipleScreenLoader(Loader):
     def next_batch_producer(self):
         # always try to load data when < threshold
         # poll check threshold
-        while True:
+        while not self.stopped:
             if self.data_queue.qsize() < self.produce_threshold:
                 paths_to_load = []
                 for i in range(min(self.dataset_threads, len(self.data_paths))):
@@ -170,3 +171,6 @@ class MultipleScreenLoader(Loader):
             self.loading_thread = threading.Thread(target=self.next_batch_producer)
             self.loading_thread.start()
         return self.next_batch_consumer()
+
+    def stop(self):
+        self.stopped = True

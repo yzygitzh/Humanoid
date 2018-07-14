@@ -94,6 +94,7 @@ def run(config_path):
                     visualize_image[:, :, 0] = curr_heatmap[:, :, 0]
                     visualize_data(visualize_image)
                 """
+    data_loader.stop()
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Humanoid training script")
