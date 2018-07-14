@@ -76,7 +76,7 @@ class DebugMultipleScreenLoader(Loader):
 class MultipleScreenLoader(Loader):
     """Normal multiple screen data loader, in contrast to debug data loader
     """
-    def __init__(self, config_json):
+    def __init__(self, config_json, load_text=False):
         super().__init__(config_json)
         self.dataset_threads = config_json["dataset_threads"]
         self.batch_size = config_json["batch_size"]
@@ -93,6 +93,7 @@ class MultipleScreenLoader(Loader):
         self.loading_thread_out = None
         self.produce_threshold = 10000
         self.stopped = False
+        self.load_text = load_text
 
     def get_current_epoch(self):
         return self.epochs
@@ -131,7 +132,18 @@ class MultipleScreenLoader(Loader):
                 interacts = np.split(np.eye(self.total_interacts)[[x[1]["interact_type"] for x in input_data[trace_key]]],
                                      image_num, axis=0)
 
-                for data_item in zip(images, heatmaps, interacts):
+                if self.load_text:
+                    input_texts = []
+                    for x in input_data[trace_key]:
+                        if "text" in x[1]:
+                            input_texts.append(x[1]["text"])
+                        else:
+                            input_texts.append(None)
+                    zipped_data = zip(images, heatmaps, interacts, input_texts)
+                else:
+                    zipped_data = zip(images, heatmaps, interacts)
+
+                for data_item in zipped_data:
                     data_item_list.append(data_item)
         rand_idx = list(range(len(data_item_list)))
         random.shuffle(rand_idx)
@@ -157,14 +169,27 @@ class MultipleScreenLoader(Loader):
         batch_image_list = []
         batch_heatmap_list = []
         batch_interact_list = []
+        if self.load_text:
+            batch_input_text_list = []
         for i in range(self.batch_size):
-            image, heatmap, interact = self.data_queue.get()
+            if self.load_text:
+                image, heatmap, interact, input_text = self.data_queue.get()
+            else:
+                image, heatmap, interact = self.data_queue.get()
             batch_image_list.append(image)
             batch_heatmap_list.append(heatmap)
             batch_interact_list.append(interact)
-        return (np.concatenate(batch_image_list, axis=0), \
-                np.stack(batch_heatmap_list, axis=0), \
-                np.concatenate(batch_interact_list, axis=0))
+            if self.load_text:
+                batch_input_text_list.append(input_text)
+        if self.load_text:
+            return (np.concatenate(batch_image_list, axis=0), \
+                    np.stack(batch_heatmap_list, axis=0), \
+                    np.concatenate(batch_interact_list, axis=0), \
+                    batch_input_text_list)
+        else:
+            return (np.concatenate(batch_image_list, axis=0), \
+                    np.stack(batch_heatmap_list, axis=0), \
+                    np.concatenate(batch_interact_list, axis=0))
 
     def next_batch(self):
         if self.loading_thread is None:
