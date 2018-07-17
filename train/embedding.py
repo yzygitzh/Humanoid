@@ -23,7 +23,7 @@ def run(config_path):
     embedding_dir = config_json["embedding_dir"]
     model_name = config_json["embedding_model"]
     model_path = os.path.join(log_data_dir, model_name)
-    log_step = 2500 // config_json["batch_size"]
+    log_step = 327543 // config_json["batch_size"]
 
     model = MultipleScreenModel(config_json)
 

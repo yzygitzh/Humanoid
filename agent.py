@@ -4,11 +4,15 @@ import argparse
 import json
 import os
 import pickle
+import random
 import socket
 from xmlrpc.server import SimpleXMLRPCServer, SimpleXMLRPCRequestHandler
 
 import numpy as np
+from pyflann import *
 import tensorflow as tf
+tf_config = tf.ConfigProto()
+tf_config.gpu_options.allow_growth = True
 from matplotlib import pyplot as plt
 
 import flask
@@ -27,6 +31,27 @@ class RPCHandler(SimpleXMLRPCRequestHandler):
             import traceback
             traceback.print_exc()
             raise
+
+class TextGenerator():
+    def __init__(self, config_json):
+        with open(config_json["embedding_path"], "r") as f:
+            self.embedding = json.load(f)
+
+        self.points = np.array(self.embedding["vectors"], dtype=np.float32)
+        print("load point matrix", self.points.shape)
+        self.texts = self.embedding["texts"]
+
+        self.flann = FLANN()
+        self.flann.build_index(self.points, algorithm="kmeans",
+                               branching=32, iterations=7, checks=16)
+        print("built point index")
+
+    def get_text(self, point):
+        result, _ = self.flann.nn_index(point, 5, algorithm="kmeans",
+                                        branching=32, iterations=7, checks=16)
+        point_indices = result[0]
+        random.shuffle(point_indices)
+        return self.texts[point_indices[0]]
 
 class DroidBotDataProcessor():
     def __init__(self, agent_config_json):
@@ -176,6 +201,7 @@ class HumanoidAgent():
         self.sess = tf.Session()
         self.saver.restore(self.sess, config_json["model_path"])
         self.data_processor = DroidBotDataProcessor(config_json)
+        self.text_generator = TextGenerator(config_json)
 
     def get_random_port(self):
         temp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -188,10 +214,11 @@ class HumanoidAgent():
         query_json = json.loads(query_json_str)
         possible_events = query_json["possible_events"]
         image, heat, interact = self.data_processor.process(query_json)
-        heatmap = self.sess.run(self.model.predict_heatmaps,
-                                feed_dict=self.model.get_feed_dict(image, heat, interact))
-        interact = self.sess.run(self.model.predict_interacts,
-                                 feed_dict=self.model.get_feed_dict(image, heat, interact))
+        heatmap, interact, pool5_heat_out= self.sess.run(
+            [self.model.predict_heatmaps,
+             self.model.predict_interacts,
+             self.model.pool5_heat_out],
+            feed_dict=self.model.get_feed_dict(image, heat, interact))
         """
         visualize_data(stacked_image[0] + 0.5)
         visualize_data(stacked_image[1] + 0.5)
@@ -204,7 +231,12 @@ class HumanoidAgent():
         # print(prob_idx)
         event_probs = self.data_processor.events_to_probs(possible_events, heatmap[0,:,:,0], interact[0])
         prob_idx = sorted(range(len(event_probs)), key=lambda k: event_probs[k], reverse=True)
-        return json.dumps(prob_idx)
+        text = self.text_generator.get_text(pool5_heat_out.reshape([1, -1]))
+        # print(prob_idx, text)
+        return json.dumps({
+            "indices": prob_idx,
+            "text": text
+        })
 
     def run(self):
         self.server.serve_forever()
