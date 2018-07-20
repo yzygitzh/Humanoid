@@ -18,6 +18,7 @@ from matplotlib import pyplot as plt
 import rico
 from rico.image import convert_view_trees
 from rico.touch_input import convert_gestures
+from rico.utils import traverse_view_tree
 from train.model import MultipleScreenModel
 from train.utils import visualize_data
 
@@ -109,6 +110,29 @@ class DroidBotDataProcessor():
         weighted_sum = prob_sum / ((x_max-x_min)*(y_max-y_min))
         return interact[self.rico_config_json[event_type]] * weighted_sum
 
+    def update_origin_dim(self, screen_res):
+        print(screen_res)
+        self.origin_dim = screen_res
+        self.rico_config_json["origin_dim"] = screen_res
+
+    def view_tree_to_image(self, view_tree):
+        self.__clean_view_tree(view_tree)
+        image = convert_view_trees([{
+            "activity": {"root": view_tree}
+        }], self.rico_config_json)[0]
+        # visualize_data(image)
+        return image
+
+    def view_tree_texts(self, view_tree):
+        text_list = []
+        def text_call_back(view_tree):
+            if "text" in view_tree and view_tree["text"] is not None:
+                text_list.append(view_tree["text"])
+        traverse_view_tree(view_tree, text_call_back)
+        text_list.sort()
+        # print(text_list)
+        return text_list
+
     def events_to_probs(self, events, heatmap, interact):
         event_probs = []
         for event in events:
@@ -141,8 +165,6 @@ class DroidBotDataProcessor():
         return event_probs
 
     def process(self, query_json):
-        self.origin_dim = query_json["screen_res"]
-        self.rico_config_json["origin_dim"] = query_json["screen_res"]
         self.downscale_ratio = self.rico_config_json["downscale_dim"][0] / query_json["screen_res"][0]
         self.navigation_back_bounds = self.navigation_back_bounds_options\
                                            ["%dx%d" % (query_json["screen_res"][1],
@@ -182,12 +204,14 @@ class DroidBotDataProcessor():
         return stacked_image, dummy_heat, dummy_interact
 
 class HumanoidAgent():
-    def __init__(self, domain, config_json):
-        self.domain = domain
+    def __init__(self, config_json):
+        self.domain = config_json["domain"]
         self.rpc_port = self.get_random_port()
         print("Serving at %s:%d" % (self.domain, self.rpc_port))
         self.server = SimpleXMLRPCServer((self.domain, self.rpc_port), RPCHandler)
-        self.server.register_function(self.query, "query")
+        self.server.register_function(self.predict, "predict")
+        self.server.register_function(self.render_view_tree, "render_view_tree")
+        self.server.register_function(self.render_content_free_view_tree, "render_content_free_view_tree")
 
         train_config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                         "train", "config.json")
@@ -208,8 +232,9 @@ class HumanoidAgent():
         temp_sock.close()
         return port
 
-    def query(self, query_json_str):
+    def predict(self, query_json_str):
         query_json = json.loads(query_json_str)
+        self.data_processor.update_origin_dim(query_json["screen_res"])
         possible_events = query_json["possible_events"]
         image, heat, interact = self.data_processor.process(query_json)
         heatmap, interact, pool5_heat_out= self.sess.run(
@@ -234,6 +259,26 @@ class HumanoidAgent():
         return json.dumps({
             "indices": prob_idx,
             "text": text
+        })
+
+    def render_view_tree(self, query_json_str):
+        query_json = json.loads(query_json_str)
+        self.data_processor.update_origin_dim(query_json["screen_res"])
+        view_tree = query_json["view_tree"]
+        image = self.data_processor.view_tree_to_image(view_tree)
+        texts = self.data_processor.view_tree_texts(view_tree)
+        return json.dumps({
+            "image": image.astype(int).flatten().tolist(),
+            "texts": texts
+        })
+
+    def render_content_free_view_tree(self, query_json_str):
+        query_json = json.loads(query_json_str)
+        self.data_processor.update_origin_dim(query_json["screen_res"])
+        view_tree = query_json["view_tree"]
+        image = self.data_processor.view_tree_to_image(view_tree)
+        return json.dumps({
+            "image": image.astype(int).flatten().tolist()
         })
 
     def run(self):
@@ -284,7 +329,7 @@ def run(config_path):
     # data_processor = DroidBotDataProcessor(config_json)
     # with open("/mnt/EXT_volume/projects_light/Humanoid/query.json", "r") as f:
     #     data_processor.process(json.load(f))
-    agent = HumanoidAgent("localhost", config_json)
+    agent = HumanoidAgent(config_json)
     agent.run()
 
 def parse_args():
