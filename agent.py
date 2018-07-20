@@ -111,7 +111,7 @@ class DroidBotDataProcessor():
         return interact[self.rico_config_json[event_type]] * weighted_sum
 
     def update_origin_dim(self, screen_res):
-        print(screen_res)
+        # print(screen_res)
         self.origin_dim = screen_res
         self.rico_config_json["origin_dim"] = screen_res
 
