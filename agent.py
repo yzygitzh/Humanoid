@@ -46,7 +46,7 @@ class TextGenerator():
         print("built point index")
 
     def get_text(self, point):
-        result, _ = self.flann.nn_index(point, 5, algorithm="kmeans",
+        result, _ = self.flann.nn_index(point, 2, algorithm="kmeans",
                                         branching=32, iterations=7, checks=16)
         point_indices = result[0]
         random.shuffle(point_indices)
@@ -126,8 +126,14 @@ class DroidBotDataProcessor():
     def view_tree_texts(self, view_tree):
         text_list = []
         def text_call_back(view_tree):
-            if "text" in view_tree and view_tree["text"] is not None:
-                text_list.append(view_tree["text"])
+            if "resource_id" in view_tree and \
+               view_tree["resource_id"] is not None and \
+               len(view_tree["resource_id"]) and \
+               "text" in view_tree and \
+               view_tree["text"] is not None and \
+               len(view_tree["text"]) and \
+               view_tree["visible"]:
+                text_list.append(view_tree["resource_id"])
         traverse_view_tree(view_tree, text_call_back)
         text_list.sort()
         # print(text_list)
