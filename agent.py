@@ -240,52 +240,69 @@ class HumanoidAgent():
 
     def predict(self, query_json_str):
         query_json = json.loads(query_json_str)
-        self.data_processor.update_origin_dim(query_json["screen_res"])
-        possible_events = query_json["possible_events"]
-        image, heat, interact = self.data_processor.process(query_json)
-        heatmap, interact, pool5_heat_out= self.sess.run(
-            [self.model.predict_heatmaps,
-             self.model.predict_interacts,
-             self.model.pool5_heat_out],
-            feed_dict=self.model.get_feed_dict(image, heat, interact))
-        """
-        visualize_data(stacked_image[0] + 0.5)
-        visualize_data(stacked_image[1] + 0.5)
-        visualize_data(stacked_image[2] + 0.5)
-        visualize_data(stacked_image[3] + 0.5)
-        visualize_data(heatmap[0])
-        print(interact[0])
-        """
-        # print(event_probs)
-        # print(prob_idx)
-        event_probs = self.data_processor.events_to_probs(possible_events, heatmap[0,:,:,0], interact[0])
-        prob_idx = sorted(range(len(event_probs)), key=lambda k: event_probs[k], reverse=True)
-        text = self.text_generator.get_text(pool5_heat_out.reshape([1, -1]))
-        # print(prob_idx, text)
-        return json.dumps({
-            "indices": prob_idx,
-            "text": text
-        })
+        try:
+            self.data_processor.update_origin_dim(query_json["screen_res"])
+            possible_events = query_json["possible_events"]
+            image, heat, interact = self.data_processor.process(query_json)
+            heatmap, interact, pool5_heat_out= self.sess.run(
+                [self.model.predict_heatmaps,
+                self.model.predict_interacts,
+                self.model.pool5_heat_out],
+                feed_dict=self.model.get_feed_dict(image, heat, interact))
+            """
+            visualize_data(stacked_image[0] + 0.5)
+            visualize_data(stacked_image[1] + 0.5)
+            visualize_data(stacked_image[2] + 0.5)
+            visualize_data(stacked_image[3] + 0.5)
+            visualize_data(heatmap[0])
+            print(interact[0])
+            """
+            # print(event_probs)
+            # print(prob_idx)
+            event_probs = self.data_processor.events_to_probs(possible_events, heatmap[0,:,:,0], interact[0])
+            prob_idx = sorted(range(len(event_probs)), key=lambda k: event_probs[k], reverse=True)
+            text = self.text_generator.get_text(pool5_heat_out.reshape([1, -1]))
+            # print(prob_idx, text)
+            return json.dumps({
+                "indices": prob_idx,
+                "text": text
+            })
+        except Exception as e:
+            print(e)
+            event_indices = list(range(len(query_json["possible_events"])))
+            random.shuffle(event_indices)
+            return json.dumps({
+                "indices": event_indices,
+                "text": "Humanoid"
+            })
 
     def render_view_tree(self, query_json_str):
-        query_json = json.loads(query_json_str)
-        self.data_processor.update_origin_dim(query_json["screen_res"])
-        view_tree = query_json["view_tree"]
-        image = self.data_processor.view_tree_to_image(view_tree)
-        texts = self.data_processor.view_tree_texts(view_tree)
-        return json.dumps({
-            "image": image.astype(int).flatten().tolist(),
-            "texts": texts
-        })
+        try:
+            query_json = json.loads(query_json_str)
+            self.data_processor.update_origin_dim(query_json["screen_res"])
+            view_tree = query_json["view_tree"]
+            image = self.data_processor.view_tree_to_image(view_tree)
+            texts = self.data_processor.view_tree_texts(view_tree)
+            return json.dumps({
+                "image": image.astype(int).flatten().tolist(),
+                "texts": texts
+            })
+        except Exception as e:
+            print(e)
+            return ""
 
     def render_content_free_view_tree(self, query_json_str):
-        query_json = json.loads(query_json_str)
-        self.data_processor.update_origin_dim(query_json["screen_res"])
-        view_tree = query_json["view_tree"]
-        image = self.data_processor.view_tree_to_image(view_tree)
-        return json.dumps({
-            "image": image.astype(int).flatten().tolist()
-        })
+        try:
+            query_json = json.loads(query_json_str)
+            self.data_processor.update_origin_dim(query_json["screen_res"])
+            view_tree = query_json["view_tree"]
+            image = self.data_processor.view_tree_to_image(view_tree)
+            return json.dumps({
+                "image": image.astype(int).flatten().tolist()
+            })
+        except Exception as e:
+            print(e)
+            return ""
 
     def run(self):
         self.server.serve_forever()
