@@ -133,7 +133,7 @@ class DroidBotDataProcessor():
                view_tree["text"] is not None and \
                len(view_tree["text"]) and \
                view_tree["visible"]:
-                text_list.append(view_tree["resource_id"])
+                text_list.append(view_tree["resource_id"] + "$" + str(view_tree["enabled"]))
         traverse_view_tree(view_tree, text_call_back)
         text_list.sort()
         # print(text_list)
