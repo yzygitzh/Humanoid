@@ -1,15 +1,15 @@
 root_path=/home/yzy/humanoid/
 humanoid_server=162.105.87.118:60109
 
-out_tester=_humanoid
-# out_tester=_monkey
+# out_tester=_humanoid
+out_tester=_monkey
 
 rm -rf $root_path/out$out_tester/$1
 mkdir -p $root_path/out$out_tester/$1
 
 qemu-img create -f qcow2 $root_path/qemu/droidbot-6.0-r3.qcow2.$2 -o backing_file=$root_path/qemu/droidbot-6.0-r3.qcow2
 
-qemu-system-i386 -hda $root_path/droidbot-6.0-r3.qcow2.$2 -m 2048 -smp cpus=4 -enable-kvm -machine q35 -nographic -net nic,model=e1000 -net user,hostfwd=tcp::$2-:5555 &
+qemu-system-i386 -hda $root_path/qemu/droidbot-6.0-r3.qcow2.$2 -m 2048 -smp cpus=4 -enable-kvm -machine q35 -nographic -net nic,model=e1000 -net user,hostfwd=tcp::$2-:5555 &
 
 sleep 60
 adb connect localhost:$2
@@ -20,7 +20,7 @@ adb connect localhost:$2
 # MONKEY
 package_name=$(aapt dump badging $root_path/apps/$1.apk |grep 'package\: name' | awk -F' ' '{print $2}' | awk -F"'" '{print $2}')
 timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
-timeout 20000s adb -s localhost:$2 monkey -p $package_name --ignore-crashes --ignore-security-exceptions --throttle 500 -v 10000
+timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
 
 tester_pid=$!
 ec_count=1

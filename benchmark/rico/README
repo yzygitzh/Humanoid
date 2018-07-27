@@ -1,7 +1,5 @@
 1. Make sure there is no remaining task
-2. Update DroidBot
-3. Update parallel script
-4. Update & clear QEMU images
-5. Clear droidbot_out
-6. Clear logs
-7. Run
+2. Update DroidBot and Humanoid
+3. Update & clear QEMU images
+4. Check ADB, AAPT
+5. Run
