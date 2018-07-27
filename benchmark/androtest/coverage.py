@@ -21,8 +21,12 @@ if __name__ == "__main__":
         id_package_map = {x[0]: x[1] for x in stat_map_tuples}
         package_cov_map = {}
 
+    result_ids = next(os.walk(result_path))[1]
+
     for app_dir in app_list:
         app_id = app_dir.split(os.path.sep)[0]
+        if app_id not in result_ids:
+            continue
         emma_cmd = "java -cp emma.jar emma report -r html -in %s/coverage.ec -in %s/bin/coverage.em" % \
                    (os.path.join(result_path, app_dir), os.path.join(em_path, app_id))
         p = subprocess.Popen(emma_cmd.split())
@@ -31,6 +35,7 @@ if __name__ == "__main__":
             cov_tuple = f.read().decode("cp1252").split("%")[13].split("<")[0].strip().split("/")
             cov = float(cov_tuple[0][1:]) / float(cov_tuple[1][:-1])
             package_cov_map[id_package_map[app_id]] = cov
+            print(app_id, cov)
 
     with open(out_file, "w") as f:
         f.writelines([str(package_cov_map[x]) + os.linesep for x in package_order])

@@ -1,5 +1,5 @@
 root_path=/mnt/FAST_volume/lab_data/AndroTest/
-humanoid_server=162.105.87.84:47927
+humanoid_server=162.105.87.84:55377
 out_num=1
 
 rm -rf $root_path/out$out_num/$1

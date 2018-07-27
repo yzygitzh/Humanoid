@@ -1,0 +1,7 @@
+1. Make sure there is no remaining task
+2. Update DroidBot
+3. Update parallel script
+4. Update & clear QEMU images
+5. Clear droidbot_out
+6. Clear logs
+7. Run
