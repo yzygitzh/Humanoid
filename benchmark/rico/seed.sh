@@ -1,8 +1,8 @@
 root_path=/home/yzy/humanoid/
 humanoid_server=162.105.87.118:60109
 
-# out_tester=_humanoid
-out_tester=_monkey
+out_tester=_humanoid
+# out_tester=_monkey
 
 rm -rf $root_path/out$out_tester/$1
 mkdir -p $root_path/out$out_tester/$1
@@ -15,12 +15,12 @@ sleep 60
 adb connect localhost:$2
 
 # DROIDBOT
-# timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
 # MONKEY
-package_name=$(aapt dump badging $root_path/apps/$1.apk |grep 'package\: name' | awk -F' ' '{print $2}' | awk -F"'" '{print $2}')
-timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
-timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
+# package_name=$(aapt dump badging $root_path/apps/$1.apk |grep 'package\: name' | awk -F' ' '{print $2}' | awk -F"'" '{print $2}')
+# timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
+# timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
 
 tester_pid=$!
 ec_count=1
@@ -32,5 +32,4 @@ while kill -0 "$tester_pid" > /dev/null 2>&1; do
     let ec_count++
 done
 
-adb -s localhost:$2 pull /sdcard/coverage.ec $root_path/out$out_tester/$1/coverage.ec
 adb -s localhost:$2 shell reboot -p

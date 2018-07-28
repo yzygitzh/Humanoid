@@ -25,7 +25,8 @@ if __name__ == "__main__":
 
     for app_dir in app_list:
         app_id = app_dir.split(os.path.sep)[0]
-        if app_id not in result_ids:
+        if not os.path.exists(os.path.join(result_path, app_dir, "coverage.ec")):
+            package_cov_map[id_package_map[app_id]] = ""
             continue
         emma_cmd = "java -cp emma.jar emma report -r html -in %s/coverage.ec -in %s/bin/coverage.em" % \
                    (os.path.join(result_path, app_dir), os.path.join(em_path, app_id))
