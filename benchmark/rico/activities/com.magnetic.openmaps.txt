@@ -1,0 +1,2 @@
+com.magnetic.openmaps.MainActivity
+com.google.android.gms.ads.AdActivity

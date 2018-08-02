@@ -1,0 +1,16 @@
+com.google.android.gms.ads.AdActivity
+it.medieval.blueftp.AMain
+it.medieval.blueftp.ASend
+it.medieval.blueftp.AAppPicker
+it.medieval.blueftp.AContactPicker2
+it.medieval.blueftp.ALanguage
+it.medieval.blueftp.AAbout
+it.medieval.blueftp.AFaq
+it.medieval.blueftp.ASettings
+it.medieval.blueftp.BugsMessage
+it.medieval.blueftp.bluetooth_servers.opp_server.NotifyMexOPP
+it.medieval.blueftp.bluetooth_servers.ftp_server.NotifyMexFTP
+it.medieval.blueftp.bluetooth_servers.opp_server.OPP_ActivityPrompt
+it.medieval.blueftp.bluetooth_servers.ftp_server.FTP_ActivityPrompt
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

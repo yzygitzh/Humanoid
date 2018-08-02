@@ -1,0 +1,13 @@
+.OpenVPNClient
+.OpenVPNAttachmentReceiver
+.OpenVPNPrefs
+.FileDialog
+.OpenVPNStats
+.OpenVPNLog
+.OpenVPNAbout
+.OpenVPNImportProfile
+.OpenVPNAddProxy
+.OpenVPNAddShortcut
+.OpenVPNProxyCreds
+.OpenVPNHelp
+.OpenVPNDisconnect

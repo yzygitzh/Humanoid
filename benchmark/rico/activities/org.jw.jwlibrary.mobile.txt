@@ -1,0 +1,5 @@
+org.jw.jwlibrary.mobile.MainActivity
+org.jw.jwlibrary.mobile.activity.SiloContainer
+org.jw.jwlibrary.mobile.activity.Settings
+org.jw.jwlibrary.mobile.activity.CoachingTips
+org.jw.jwlibrary.mobile.activity.CoachingTipsFloating

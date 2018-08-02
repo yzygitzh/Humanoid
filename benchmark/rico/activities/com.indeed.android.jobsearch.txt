@@ -1,0 +1,4 @@
+com.indeed.android.jobsearch.MainActivity
+com.facebook.LoginActivity
+com.indeed.android.jobsearch.resume.upload.ResumeUploadActivity
+com.indeed.android.jobsearch.webview.ExternalActivity

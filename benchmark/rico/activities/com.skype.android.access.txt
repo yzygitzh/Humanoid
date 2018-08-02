@@ -1,0 +1,10 @@
+.activity.SkypeAccessActivity
+.activity.LogInActivity
+.activity.MsaCredentialsActivity
+.activity.MsaMergeActivity
+.activity.SkypeTouActivity
+.activity.FaqActivity
+.activity.AboutActivity
+.activity.DashboardActivity
+.activity.ProfileActivity
+.activity.SettingsActivity

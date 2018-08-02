@@ -1,0 +1,16 @@
+.InfoActivity
+CountdownConfiguration
+LazyLoadMainActivity
+ForecastActivity
+ForecastActivityAlter
+AppLauncher
+AppLauncherMins
+DialogSysinfo
+HelloGallery
+FindWeatherLocation
+.Moontoday
+.Mooncalendar
+.MoonPhaseList
+DownloaderTest
+DownloaderActivity
+com.google.android.gms.ads.AdActivity

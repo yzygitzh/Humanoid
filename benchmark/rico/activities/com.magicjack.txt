@@ -1,0 +1,13 @@
+com.magicjack.ui.MainTabActivity
+com.magicjack.ICWActivity
+com.magicjack.ui.GWWActivity
+com.magicjack.ui.UpdateActivity
+com.magicjack.ui.AdvancedActivity
+com.magicjack.ui.WebLoginActivity
+com.magicjack.ui.LowMemoryActivity
+com.facebook.LoginActivity
+com.magicjack.ui.FacebookShareActivity
+com.magicjack.ContactsIntegrationActivity
+com.magicjack.account.AuthenticatorActivity
+com.magicjack.account.AccountSettingsActivity
+com.magicjack.account.ContactIntentFilterActivity

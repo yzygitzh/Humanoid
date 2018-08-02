@@ -1,0 +1,13 @@
+com.aimp.player.views.MainActivity.MainActivity
+com.aimp.player.views.Settings.SettingsActivity
+com.aimp.player.views.AboutActivity
+com.aimp.player.views.FileList.FileListActivity
+com.aimp.player.views.DSPManagerActivity
+com.aimp.player.views.PlaylistSaveDialog
+com.aimp.player.views.SleepTimer.SleepTimerView
+com.aimp.player.views.Queue.QueueDialog
+com.aimp.player.views.Bookmarks.BookmarksDialog
+com.aimp.player.views.FileInfoActivity
+com.aimp.player.widgets.Widget4x1Configurator
+com.aimp.player.widgets.Widget4x2Configurator
+com.aimp.player.widgets.Widget4x4Configurator

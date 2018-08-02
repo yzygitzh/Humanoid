@@ -1,0 +1,5 @@
+com.usefullapps.transparentphone.MenuActivity
+com.startapp.android.publish.list3d.List3DActivity
+com.startapp.android.publish.OverlayActivity
+com.startapp.android.publish.FullScreenActivity
+com.google.android.gms.common.api.GoogleApiActivity

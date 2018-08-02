@@ -1,0 +1,14 @@
+com.motionportrait.ZombieBooth.AppMain
+com.motionportrait.ZombieBooth.CameraAct
+com.motionportrait.ZombieBooth.TwitterWebviewAct
+com.google.ads.AdActivity
+com.socdm.d.adgeneration.ADGClickWebView
+com.socdm.d.adgeneration.ADGVideoView
+com.admob.android.ads.AdMobActivity
+com.tapjoy.TJCOffersWebView
+com.tapjoy.TapjoyFullScreenAdWebView
+com.tapjoy.TapjoyVideoView
+com.tapjoy.TJAdUnitView
+com.tapjoy.mraid.view.ActionHandler
+com.tapjoy.mraid.view.Browser
+com.facebook.LoginActivity

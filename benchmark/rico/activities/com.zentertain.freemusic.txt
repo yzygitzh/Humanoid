@@ -1,0 +1,10 @@
+com.zentertain.freemusic.MainActivity
+com.zentertain.freemusic.main.playlists.PlaylistAddTrackActivity
+com.zentertain.freemusic.AddToPlaylistActivity
+com.zentertain.freemusic.LockScreenPlayingActivity
+com.facebook.FacebookActivity
+com.google.android.gms.ads.AdActivity
+com.facebook.CustomTabMainActivity
+com.facebook.ads.AudienceNetworkActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

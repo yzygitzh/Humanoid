@@ -1,0 +1,2 @@
+com.m2c.studio.game.rm
+com.google.android.gms.ads.AdActivity

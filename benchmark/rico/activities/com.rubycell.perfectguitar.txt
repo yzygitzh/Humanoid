@@ -1,0 +1,5 @@
+com.ziplinegames.moai.MoaiActivity
+com.ziplinegames.moai.MoaiMoviePlayer
+com.google.android.gms.ads.AdActivity
+com.heyzap.sdk.ads.HeyzapInterstitialActivity
+com.heyzap.sdk.ads.HeyzapVideoActivity

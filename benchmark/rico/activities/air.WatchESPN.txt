@@ -1,0 +1,15 @@
+com.espn.watchespn.main.Main
+com.espn.watchespn.main.EventsMain
+com.espn.watchespn.featured.EventCardActivity
+com.espn.watchespn.player.VideoPlayer
+com.espn.watchespn.channels.ChannelMain
+com.espn.watchespn.sports.SportMain
+com.espn.watchespn.adobe.MVPDPickerActivity
+com.espn.watchespn.menu.settings.PressPassActivity
+com.espn.watchespn.featured.LiveEventList
+com.espn.watchespn.menu.settings.Settings
+com.espn.watchespn.search.ESPNSearch
+com.espn.watchespn.menu.settings.caption.CaptionActivity
+com.espn.watchespn.menu.settings.ProviderActivity
+com.espn.watchespn.player.cast.CastControllerActivity
+com.google.android.gms.common.api.GoogleApiActivity

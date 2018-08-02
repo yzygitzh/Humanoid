@@ -1,0 +1,6 @@
+org.torproject.android.OrbotMainActivity
+org.torproject.android.service.util.DummyActivity
+org.torproject.android.vpn.VPNEnableActivity
+org.torproject.android.ui.PromoAppsActivity
+org.torproject.android.settings.SettingsPreferences
+org.torproject.android.ui.AppManager

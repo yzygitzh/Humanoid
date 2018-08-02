@@ -4,12 +4,13 @@ humanoid_server=162.105.87.84:55377
 # out_tester=_humanoid
 # out_tester=_monkey
 # out_tester=_puma
-out_tester=_stoat
+# out_tester=_stoat
+out_tester=_droidmate
 
 # PUMA
 # tested=`cat $root_path/out$out_tester/$1/puma.log | grep 'OK (1 test)'`
-# STOAT
-tested=""
+# OTHERS
+tested=`ls $root_path/out$out_tester/$1/coverage.ec`
 
 if [ -z "$tested" ]; then
     echo "TEST $1"
@@ -46,9 +47,18 @@ if [ -z "$tested" ]; then
     # timeout 3600s ./run.sh emulator-$3 &> $root_path/out$out_tester/$1/puma.log &
 
     # STOAT
-    stoat_root=/mnt/EXT_volume/projects_light/Stoat/Stoat/bin
-    cd $stoat_root
-    timeout 3600s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=emulator-$3 --stoat_port $5 --max_event 600 --event_delay 3000 --model_time 0.3h --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+    # adb -s emulator-$3 shell settings put secure show_ime_with_hard_keyboard 0
+    # stoat_root=/mnt/EXT_volume/projects_light/Stoat/Stoat/bin
+    # cd $stoat_root
+    # timeout 3600s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=emulator-$3 --stoat_port $5 --max_event 600 --event_delay 1000 --model_time 1200s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+
+    # DROIDMATE
+    droidmate_root=/mnt/EXT_volume/projects_light/droidmate/project/pcComponents/API/build/libs
+    cd $droidmate_root
+    rm -rf ./apks_$3
+    mkdir -p ./apks_$3
+    cp $root_path/apps/$1.apk ./apks_$3/
+    timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=2000 --Deploy-uninstallApk=false &> $root_path/out$out_tester/$1/droidmate.log &
 
     tester_pid=$!
     ec_count=1
@@ -59,6 +69,11 @@ if [ -z "$tested" ]; then
         adb -s emulator-$3 pull /sdcard/coverage.ec $root_path/out$out_tester/$1/coverage.ec.$ec_count
         let ec_count++
     done
+
+    # STOAT
+    # pids=`ps a | grep 'Server.jar' | grep $1 | awk '{print $1}'`
+    # echo $pids
+    # for pid in $pids; do kill -9 $pid; done
 
     adb -s emulator-$3 pull /mnt/sdcard/coverage.ec $root_path/out$out_tester/$1/coverage.ec
     adb -s emulator-$3 shell reboot -p

@@ -1,0 +1,6 @@
+com.macropinch.hydra.android.MainWearActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity
+com.millennialmedia.internal.MMActivity
+com.millennialmedia.internal.MMIntentWrapperActivity

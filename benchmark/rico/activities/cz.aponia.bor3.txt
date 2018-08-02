@@ -1,0 +1,6 @@
+com.sygic.aura.activity.NaviNativeActivity
+com.sygic.aura.WebActivity
+com.sygic.aura.activity.DeviceCodeActivity
+com.sygic.aura.downloader.DownloaderActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

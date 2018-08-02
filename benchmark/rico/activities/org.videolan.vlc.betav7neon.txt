@@ -1,0 +1,7 @@
+.gui.MainActivity
+.gui.CompatErrorActivity
+.gui.PreferencesActivity
+.gui.BrowserActivity
+.gui.DebugLogActivity
+.gui.NativeCrashActivity
+.gui.video.VideoPlayerActivity

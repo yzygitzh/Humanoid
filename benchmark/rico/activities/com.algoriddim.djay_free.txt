@@ -1,0 +1,15 @@
+com.apportable.activity.VerdeActivity
+com.flurry.android.FlurryFullscreenTakeoverActivity
+net.hockeyapp.android.UpdateActivity
+com.algoriddim.djay.settings.SettingsPanelActivity
+com.algoriddim.djay.info.InfoPanelActivity
+com.algoriddim.djay.info.WebViewActivity
+com.algoriddim.djay.recording.RecordingPanelActivity
+com.algoriddim.djay.history.HistorySessionPanelActivity
+com.algoriddim.djay.automix.AutomixPanelActivity
+com.algoriddim.djay.sampler.SamplerPresetsPanelActivity
+com.algoriddim.djay.sampler.SampleLoadPanelActivity
+com.algoriddim.djay.fx.FXChooserPanelActivity
+com.algoriddim.djay.web.WebNotificationActivity
+com.algoriddim.djay.browser.controllers.MusicLibraryActivity
+com.algoriddim.djay.browser.controllers.LoginActivity

@@ -1,0 +1,6 @@
+.NotificationActivity
+.tool.crashreport.CrashReportDialog
+.TipActivity
+.CancelNotificationTipActivity
+com.gau.golauncherex.notification.sinaweibo.SinaWeiboLoginActivity
+.monitor.facebook.FacebookHelperLogin

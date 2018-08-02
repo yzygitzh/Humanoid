@@ -1,0 +1,8 @@
+com.andrwq.recorder.RecorderActivity
+com.andrwq.recorder.PlayerActivity
+com.andrwq.recorder.SettingsActivity
+com.andrwq.recorder.LocationPickerActivity
+com.andrwq.recorder.MicAdjustmentActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

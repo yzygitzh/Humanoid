@@ -1,0 +1,14 @@
+com.mobisystems.msdict.viewer.EulaActivity
+com.mobisystems.msdict.viewer.MainActivity
+com.mobisystems.msdict.viewer.UserGuideActivity
+com.mobisystems.msdict.viewer.ArticleActivity
+com.mobisystems.msdict.viewer.FlashcardActivity
+com.mobisystems.msdict.ocr.OcrCaptureActivity
+com.mobisystems.msdict.viewer.SpeechSearchActivity
+com.google.android.gms.ads.AdActivity
+com.facebook.ads.AudienceNetworkActivity
+com.mobisystems.monetization.AdActivityFacebook
+com.mobisystems.monetization.AdActivityAdMob
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity
+com.google.android.gms.auth.api.signin.internal.SignInHubActivity

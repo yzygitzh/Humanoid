@@ -1,0 +1,5 @@
+com.opera.android.FakeBrowserActivity
+com.opera.android.MiniActivity
+com.opera.mini.android.Browser
+com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+com.google.android.gms.common.api.GoogleApiActivity

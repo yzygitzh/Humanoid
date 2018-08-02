@@ -1,0 +1,7 @@
+android.intent.action.MAIN
+com.google.android.radar.SHOW_RADAR
+PREFERENCES
+android.location.GPS_ENABLED_CHANGE
+android.intent.action.VIEW
+android.intent.action.GET_CONTENT
+android.appwidget.action.APPWIDGET_UPDATE

@@ -1,0 +1,9 @@
+tools.bmirechner.ui.main.MainActivity
+tools.bmirechner.SplashActivity
+tools.bmirechner.BackupActivity
+com.google.android.gms.appinvite.PreviewActivity
+com.facebook.ads.AudienceNetworkActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.jakewharton.processphoenix.ProcessPhoenix
+com.google.android.gms.common.api.GoogleApiActivity

@@ -1,0 +1,10 @@
+ae.prototype.shahid.activity.SplashActivity_
+ae.prototype.shahid.activity.MainActivity_
+ae.prototype.shahid.activity.samsung.SamsungMainActivity
+ae.prototype.shahid.activity.samsung.InboxListActivity
+ae.prototype.shahid.activity.samsung.ItemListActivity
+com.samsung.android.sdk.iap.lib.activity.InboxActivity
+com.samsung.android.sdk.iap.lib.activity.PaymentActivity
+com.samsung.android.sdk.iap.lib.activity.ItemActivity
+com.facebook.FacebookActivity
+com.facebook.CustomTabMainActivity

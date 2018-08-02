@@ -1,0 +1,12 @@
+com.jamendoandoutly.mainpakage.MAC
+com.jamendoandoutly.mainpakage.SAC
+com.jamendoandoutly.mainpakage.HAC
+com.jamendoandoutly.mainpakage.AAC
+com.jamendoandoutly.mainpakage.DAc
+com.google.android.gms.ads.AdActivity
+com.mobfox.sdk.interstitialads.InterstitialActivity
+com.flymob.sdk.common.ads.interstitial.activity.FlyMobActivity
+com.flymob.sdk.common.ads.interstitial.activity.FlyMobVideoActivity
+io.presage.activities.PresageActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

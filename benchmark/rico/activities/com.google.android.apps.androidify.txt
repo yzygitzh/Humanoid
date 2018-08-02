@@ -1,0 +1,17 @@
+com.google.android.apps.androidify.Androidify
+com.google.android.apps.androidify.GalleryActivity
+com.google.android.apps.androidify.MenuActivity
+com.google.android.apps.androidify.AboutActivity
+com.google.android.apps.androidify.InfoActivity
+com.google.android.apps.androidify.IntroActivity
+com.google.android.apps.androidify.ShareToWebsiteActivity
+com.google.android.apps.androidify.ShareToWebsiteSubmitFormActivity
+com.google.android.apps.androidify.ShareToWebsiteResolveActivity
+com.google.android.apps.androidify.MotionActivity
+com.google.android.apps.androidify.ShareActivity
+com.google.android.apps.androidify.QRCodeActivity
+com.google.android.apps.androidify.PoseActivity
+com.google.android.apps.androidify.StickerActivity
+com.google.android.apps.androidify.GifActivity
+com.google.android.apps.androidify.SaveToPhotoGalleryActivity
+com.google.android.apps.androidify.wallpaper.LiveWallpaperSettings

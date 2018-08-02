@@ -1,0 +1,16 @@
+org.mozilla.gecko.LauncherActivity
+org.mozilla.gecko.BrowserApp
+org.mozilla.gecko.trackingprotection.TrackingProtectionPrompt
+org.mozilla.gecko.promotion.SimpleHelperUI
+org.mozilla.gecko.promotion.HomeScreenPrompt
+org.mozilla.gecko.tabqueue.TabQueuePrompt
+org.mozilla.gecko.fxa.activities.FxAccountStatusActivity
+org.mozilla.gecko.fxa.activities.FxAccountGetStartedActivityWeb
+org.mozilla.gecko.fxa.activities.FxAccountUpdateCredentialsActivityWeb
+org.mozilla.gecko.fxa.activities.FxAccountFinishMigratingActivityWeb
+org.mozilla.gecko.fxa.activities.FxAccountConfirmAccountActivityWeb
+org.mozilla.search.SearchActivity
+org.mozilla.search.SearchPreferenceActivity
+org.mozilla.gecko.CrashReporter
+org.mozilla.gecko.preferences.GeckoPreferences
+org.mozilla.gecko.overlays.ui.ShareDialog

@@ -1,0 +1,6 @@
+com.dsi.ant.plugins.antplus.utility.db.Activity_PluginMgrDashboard
+com.dsi.ant.plugins.antplus.utility.db.Activity_OpenChannelsList
+com.dsi.ant.plugins.antplus.utility.db.Activity_DeviceScanDefaults
+com.dsi.ant.plugins.antplus.utility.db.Activity_SavedDeviceList
+com.dsi.ant.plugins.antplus.utility.search.Dialog_SearchPreferredDevice
+com.dsi.ant.plugins.antplus.utility.search.Activity_SearchAllDevices

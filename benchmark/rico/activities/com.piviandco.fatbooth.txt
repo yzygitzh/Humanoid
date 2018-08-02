@@ -1,0 +1,13 @@
+com.piviandco.app.activities.mHomeActivity
+com.piviandco.app.activities.mInfosActivity
+com.piviandco.app.activities.mInputChoiceActivity
+com.piviandco.app.activities.mCameraActivity
+com.piviandco.app.activities.mPlaceMarkersActivity
+com.piviandco.app.activities.mComputeActivity
+com.piviandco.app.activities.mResultActivity
+com.piviandco.boothcore.activities.AdsActivity
+com.piviandco.app.activities.mFacebookShareActivity
+com.google.android.gms.ads.AdActivity
+com.facebook.LoginActivity
+com.google.android.gms.common.api.GoogleApiActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

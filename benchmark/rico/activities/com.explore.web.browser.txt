@@ -1,0 +1,15 @@
+www.ijoysoft.browser.activities.MainActivity
+www.ijoysoft.browser.activities.BaseSettingsActivity
+www.ijoysoft.browser.activities.TextSizeActivity
+www.ijoysoft.browser.activities.SearchEngineActivity
+www.ijoysoft.browser.activities.PrivacyActivity
+www.ijoysoft.browser.activities.ChangColorActivity
+www.ijoysoft.browser.activities.BookMarkEditActivity
+www.ijoysoft.browser.activities.HistoryActivity
+www.ijoysoft.browser.activities.CommonHistoryActivity
+www.ijoysoft.browser.activities.DownloadFileActivity
+com.google.android.gms.ads.AdActivity
+com.ijoysoft.appwall.GiftActivity
+com.ijoysoft.appwall.GiftShowActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

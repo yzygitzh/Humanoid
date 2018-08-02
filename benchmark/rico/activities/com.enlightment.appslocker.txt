@@ -1,0 +1,16 @@
+com.enlightment.appslocker.MainActivity
+com.enlightment.appslocker.SetPasswordActivity
+com.enlightment.appslocker.LoginActivity
+com.enlightment.appslocker.NumberLoginActivity
+com.enlightment.appslocker.SetNumberPasswordActivity
+com.enlightment.appslocker.UsageHintActivity
+com.enlightment.appslocker.SetSecurityQuestionActivity
+com.enlightment.appslocker.SecurityQuestionLoginActivity
+com.enlightment.appslocker.SettingsActivity
+com.enlightment.appslocker.OptionsActivity
+com.enlightment.appslocker.SetTimeoutActivity
+com.enlightment.appslocker.CommonDialogActivity
+com.enlightment.common.appwall.AppWallActivity
+com.enlightment.common.skins.SkinsActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

@@ -1,0 +1,16 @@
+net.hockeyapp.android.UpdateActivity
+org.telegram.ui.LaunchActivity
+org.telegram.ui.ShareActivity
+org.telegram.ui.ManageSpaceActivity
+org.telegram.ui.IntroActivity
+org.telegram.messenger.OpenChatReceiver
+org.telegram.ui.PopupNotificationActivity
+org.telegram.messenger.GoogleVoiceClientActivity
+org.telegram.ui.VoIPActivity
+org.telegram.ui.VoIPPermissionActivity
+org.telegram.ui.VoIPFeedbackActivity
+com.google.android.gms.common.api.GoogleApiActivity
+net.hockeyapp.android.FeedbackActivity
+net.hockeyapp.android.PaintActivity
+net.hockeyapp.android.LoginActivity
+net.hockeyapp.android.ExpiryInfoActivity

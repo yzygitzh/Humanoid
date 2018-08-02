@@ -1,0 +1,8 @@
+com.cloudmosa.app.LemonActivity
+net.hockeyapp.android.UpdateActivity
+net.hockeyapp.android.FeedbackActivity
+net.hockeyapp.android.PaintActivity
+net.hockeyapp.android.LoginActivity
+net.hockeyapp.android.ExpiryInfoActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

@@ -1,0 +1,8 @@
+com.google.android.gms.ads.AdActivity
+mp3.cutter.ringtone.maker.trimmer.PageHolder
+mp3.cutter.ringtone.maker.trimmer.AudioEditor
+mp3.cutter.ringtone.maker.trimmer.AudioOptions
+mp3.cutter.ringtone.maker.trimmer.AudioOptionsFromeditor
+mp3.cutter.ringtone.maker.trimmer.MusicPlayer
+mp3.cutter.ringtone.maker.trimmer.PlayListSongs
+mp3.cutter.ringtone.maker.trimmer.player_openwith

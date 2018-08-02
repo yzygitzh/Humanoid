@@ -1,0 +1,8 @@
+com.google.android.gms.ads.AdActivity
+com.desaxedstudios.bassbooster.InterstitialSettingsActivity
+com.desaxedstudios.bassbooster.BassBoosterActivity
+com.desaxedstudios.bassbooster.AboutActivity
+com.desaxedstudios.bassbooster.SettingsActivity
+com.desaxedstudios.bassbooster.AudioSessionActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

@@ -1,0 +1,17 @@
+com.noom.walk.HomeActivity
+com.noom.walk.share.ShareStepRecordActivity
+com.noom.walk.login.SignInActivity
+com.noom.walk.login.IntroActivity
+com.noom.walk.login.EmailSignInActivity
+com.noom.walk.invitations.InviteActivity
+com.noom.walk.invitations.JoinGroupActivity
+com.noom.walk.UserDetailsActivity
+com.noom.walk.invitations.FriendsListActivity
+com.noom.walk.invitations.EmailInviteActivity
+com.noom.walk.settings.SettingsActivity
+com.noom.walk.login.EditProfileActivity
+com.wsl.activitymonitor.keepscreenon.KeepScreenOnActivity
+com.facebook.LoginActivity
+com.noom.walk.history.HistoryActivity
+com.noom.walk.reactnative.ProgramListActivity
+com.noom.walk.ParseDeepLinkActivity

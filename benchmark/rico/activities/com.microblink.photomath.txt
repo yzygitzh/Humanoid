@@ -1,0 +1,8 @@
+com.microblink.photomath.main.MainActivity
+com.microblink.photomath.whatsnew.WhatsNewActivity
+com.microblink.photomath.feedback.FeedbackActivity
+com.microblink.photomath.steps.StepsActivity
+com.microblink.photomath.intro.IntroductionActivity
+com.microblink.photomath.about.AboutActivity
+com.microblink.photomath.photomath_plus.PhotomathPlusActivity
+com.google.android.gms.common.api.GoogleApiActivity

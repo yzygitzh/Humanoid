@@ -1,0 +1,5 @@
+com.ikamasutra.android.activity.KamasutraHomeActivity
+com.ikamasutra.android.activity.KamasutraHomePhoneActivity
+com.ikamasutra.android.activity.KamasutraSlideshowActivity
+com.ikamasutra.android.activity.KamasutraPasswordScreenActivity
+com.ikamasutra.android.activity.KamasutraLoadingScreenActivity

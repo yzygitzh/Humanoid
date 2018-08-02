@@ -1,0 +1,14 @@
+com.clearchannel.iheartradio.controller.activities.NavDrawerActivity
+com.facebook.FacebookActivity
+com.clearchannel.iheartradio.controller.activities.BackNavigationActivity
+com.clearchannel.iheartradio.controller.activities.NoNavigationActivity
+com.clearchannel.iheartradio.controller.activities.SplashActivity
+com.clearchannel.iheartradio.controller.activities.SearchActivity
+com.google.android.gms.ads.AdActivity
+com.facebook.LoginActivity
+helpers.SimpleTestActivity
+helpers.SimpleIHRTestActivity
+com.appboy.ui.AppboyWebViewActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+com.google.android.gms.common.api.GoogleApiActivity

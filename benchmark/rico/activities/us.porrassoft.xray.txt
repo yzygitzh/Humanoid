@@ -1,0 +1,8 @@
+us.porrassoft.xray.MainActivity
+us.porrassoft.xray.MenuActivity
+com.google.android.gms.ads.AdActivity
+com.facebook.ads.InterstitialAdActivity
+com.appnext.ads.interstitial.InterstitialActivity
+com.appnext.ads.fullscreen.FullscreenActivity
+com.appbrain.AppBrainActivity
+us.porrassoft.xray.LiveWallpaperSettings

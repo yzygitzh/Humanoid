@@ -1,0 +1,12 @@
+com.gn.android.common.controller.AppInitActivity
+com.gn.android.marketing.controller.app.DeveloperAppsActivity
+com.gn.android.common.controller.LicenseAgreementActivity
+com.gn.android.common.controller.ChangelogActivity
+com.gn.android.common.controller.webview.AssetFileWebViewActivity
+com.gn.android.marketing.controller.information.InformationActivity
+com.gn.android.marketing.controller.MarketingActivity
+com.gn.android.compass.controller.CircleCompassActivity
+com.gn.android.compass.controller.preference.CompassPreferencesActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

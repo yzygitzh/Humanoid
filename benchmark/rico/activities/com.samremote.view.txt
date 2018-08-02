@@ -1,0 +1,8 @@
+com.samremote.view.SplashScreen
+com.samremote.view.HomeTelec
+com.md.version.VersionApplicationPopup
+com.facebook.LoginActivity
+com.google.android.gms.ads.AdActivity
+com.inmobi.androidsdk.IMBrowserActivity
+com.google.android.gms.common.api.GoogleApiActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

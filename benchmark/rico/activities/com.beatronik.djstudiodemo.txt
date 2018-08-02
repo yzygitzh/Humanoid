@@ -1,0 +1,11 @@
+com.beatronik.djstudiodemo.SplashActivity
+com.beatronik.djstudiodemo.TwinTurnTableActivity
+com.beatronik.djstudiodemo.BrowserActivity
+com.beatronik.djstudiodemo.InstructionsActivity
+com.beatronik.djstudiodemo.ParametersActivity
+com.beatronik.djstudiodemo.CreditsActivity
+com.beatronik.djstudiodemo.SamplesActivity
+com.beatronik.djstudiodemo.SkinActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

@@ -1,0 +1,7 @@
+com.google.android.stardroid.activities.SplashScreenActivity
+com.google.android.stardroid.activities.DynamicStarMapActivity
+com.google.android.stardroid.activities.EditSettingsActivity
+com.google.android.stardroid.activities.ImageGalleryActivity
+com.google.android.stardroid.activities.ImageDisplayActivity
+com.google.android.stardroid.activities.DiagnosticActivity
+com.google.android.stardroid.activities.CompassCalibrationActivity

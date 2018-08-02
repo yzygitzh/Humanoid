@@ -1,0 +1,16 @@
+com.flightradar24free.MainActivity
+com.flightradar24free.SettingsAlertsHistoryActivity
+com.flightradar24free.SplashActivity
+com.flightradar24free.WebViewActivity
+com.flightradar24free.WalkthroughActivity
+net.hockeyapp.android.UpdateActivity
+com.flightradar24free.subscription.SubscriptionActivity
+com.flightradar24free.augmented.AugmentedActivity
+com.facebook.FacebookActivity
+com.flightradar24free.PlaybackActivity
+com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+com.facebook.CustomTabMainActivity
+com.facebook.ads.AudienceNetworkActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

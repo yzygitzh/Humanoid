@@ -1,0 +1,9 @@
+com.modoohut.dialer.DialActivity
+com.modoohut.dialer.ContactsTabActivity
+com.modoohut.dialer.GroupContactsActivity
+com.modoohut.dialer.PickContactActivity
+com.modoohut.dialer.ViewContactActivity
+com.modoohut.dialer.SpeedDialActivity
+com.modoohut.dialer.ThemeSelectActivity
+com.modoohut.dialer.PrefActivity
+com.modoohut.dialer.AboutActivity

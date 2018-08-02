@@ -1,0 +1,9 @@
+com.zgz.videoplayer.activity.H5View
+com.zgz.videoplayer.activity.MainActivity
+com.zgz.videoplayer.activity.VideoPlayerActivity
+com.mbapp.smartsystem.Webview
+com.mbapp.smartsystem.AppGridView
+com.google.android.gms.ads.AdActivity
+io.vov.vitamio.activity.InitActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

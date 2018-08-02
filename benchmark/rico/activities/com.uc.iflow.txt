@@ -1,0 +1,4 @@
+com.uc.iflow.main.InfoFlowActivity
+com.facebook.ads.InterstitialAdActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

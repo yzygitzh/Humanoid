@@ -1,0 +1,13 @@
+com.ijoysoft.ringtonemaker.activity.MainActivity
+com.ijoysoft.ringtonemaker.activity.SearchActivity
+com.ijoysoft.ringtonemaker.activity.FolderActivity
+com.ijoysoft.ringtonemaker.activity.FolderInfoActivity
+com.ijoysoft.ringtonemaker.activity.SkinActivity
+com.ijoysoft.ringtonemaker.activity.MyRingtoneActivity
+com.ijoysoft.ringtonemaker.activity.ScanActivity
+com.ijoysoft.ringtonemaker.activity.ContactActivity
+com.ijoysoft.ringtonemaker.activity.RingdroidEditActivity
+com.ijoysoft.ringtonemaker.activity.RingdroidSelectActivity
+com.ijoysoft.appwall.GiftActivity
+com.ijoysoft.appwall.GiftShowActivity
+com.google.android.gms.ads.AdActivity

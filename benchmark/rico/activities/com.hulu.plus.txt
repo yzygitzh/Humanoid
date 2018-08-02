@@ -1,0 +1,3 @@
+android.intent.action.MAIN
+com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME
+io.fabric.ApiKey

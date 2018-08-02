@@ -1,0 +1,9 @@
+.CaptureActivity
+.PreferencesActivity
+.encode.EncodeActivity
+.book.SearchBookContentsActivity
+.share.ShareActivity
+.history.HistoryActivity
+.share.BookmarkPickerActivity
+.share.AppPickerActivity
+.HelpActivity

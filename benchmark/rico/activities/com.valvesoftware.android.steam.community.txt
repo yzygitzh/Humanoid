@@ -1,0 +1,2 @@
+com.valvesoftware.android.steam.community.activity.MainActivity
+com.valvesoftware.android.steam.community.activity.PaypalUriActivity

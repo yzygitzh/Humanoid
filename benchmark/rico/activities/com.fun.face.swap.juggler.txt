@@ -1,0 +1,13 @@
+.StartScreen
+.MainActivity
+.FaceCropActivity
+.FaceSwapActivity
+.ResultActivity
+.ImageEditorActivity
+.WorkActivity
+.StickerActivity
+.HelpScreen
+com.google.android.gms.ads.AdActivity
+com.homesdk.moreapp.MoreAppScreen
+com.homesdk.interstitial.InterstitialDialog
+com.facebook.ads.InterstitialAdActivity

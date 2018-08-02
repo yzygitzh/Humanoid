@@ -1,0 +1,6 @@
+android.intent.action.MAIN
+launch_login
+android.intent.action.VIEW
+com.capitalone.action.SEAMLESS_NAVIGATION
+com.android.vending.INSTALL_REFERRER
+com.usabilla.eventChanged

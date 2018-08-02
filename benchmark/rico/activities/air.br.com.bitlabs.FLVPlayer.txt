@@ -1,0 +1,12 @@
+br.com.bitlabs.videoplayer.LaunchScreenActivity
+br.com.bitlabs.videoplayer.TabActivity
+com.mopub.mobileads.MoPubActivity
+com.mopub.mobileads.MraidActivity
+com.mopub.common.MoPubBrowser
+com.mopub.mobileads.MraidVideoPlayerActivity
+com.millennialmedia.android.MMActivity
+com.millennialmedia.android.VideoPlayer
+com.google.android.gms.ads.AdActivity
+com.appbrain.AppBrainActivity
+br.com.bitlabs.videoplayer.ui.VideoPlayerActivity
+io.vov.vitamio.activity.InitActivity

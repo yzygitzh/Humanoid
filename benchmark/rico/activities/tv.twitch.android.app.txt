@@ -1,0 +1,7 @@
+tv.twitch.android.app.core.DeepLinkActivity
+tv.twitch.android.app.core.LandingActivity
+tv.twitch.android.app.core.WebViewActivity
+com.google.android.libraries.cast.companionlibrary.cast.player.VideoCastControllerActivity
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity
+com.google.android.gms.common.api.GoogleApiActivity

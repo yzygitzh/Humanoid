@@ -1,0 +1,10 @@
+.activities.MainActivity
+.activities.ShortcutMasterOnActivity
+.activities.ShortcutMasterOffActivity
+.activities.CreateShortcutActivity
+.activities.SettingsActivity
+.activities.ShortcutProfileActivity
+.activities.DownloadListActivity
+.activities.DownloadDetailsActivity
+.activities.WidgetConfigurationActivity
+com.smartandroidapps.cloud.messenger.client.DialogNotificationActivity

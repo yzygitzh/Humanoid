@@ -1,0 +1,11 @@
+com.sec.spp.push.ManagerSpaceActivity
+com.sec.spp.push.ActivitySelect
+com.sec.spp.push.PushClientActivity
+com.sec.spp.push.dlc.util.PushActivity
+com.sec.spp.push.update.ForceUpdateActivity
+com.sec.spp.push.notisvc.NotiSvcActivity
+com.sec.spp.push.AppTrackingActivity
+com.sec.spp.push.notisvc.display.PopupDialogActivity
+com.sec.spp.push.update.PopupMessage
+com.google.android.gms.ads.AdActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

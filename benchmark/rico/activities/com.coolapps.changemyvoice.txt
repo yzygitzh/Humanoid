@@ -1,0 +1,12 @@
+com.coolapps.changemyvoice.MainActivity
+com.scoompa.common.android.RateAppDialogActivity
+com.google.android.gms.ads.AdActivity
+com.scoompa.ads.lib.MoreAppsDialogActivity
+com.scoompa.ads.lib.OfferWallActivity
+com.scoompa.ads.lib.FullScreenOfferActivity
+com.facebook.FacebookActivity
+com.appbrain.AppBrainActivity
+com.facebook.ads.InterstitialAdActivity
+com.amazon.device.ads.AdActivity
+com.scoompa.ads.lib.IncentivizedDownloadActivity
+com.google.android.gms.ads.purchase.InAppPurchaseActivity

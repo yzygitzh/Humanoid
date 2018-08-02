@@ -1,0 +1,7 @@
+.myPiano
+.myAbout
+.myUsage
+.myEffects
+.myInstruments
+.Settings
+com.google.android.gms.ads.AdActivity

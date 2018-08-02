@@ -1,0 +1,8 @@
+android.intent.action.MAIN
+android.intent.action.SEARCH
+android.intent.action.VIEW
+android.intent.action.VIEW
+com.android.vending.INSTALL_REFERRER
+com.inmobi.share.id
+com.google.android.gms.measurement.UPLOAD
+android.intent.action.MAIN

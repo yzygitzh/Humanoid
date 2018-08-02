@@ -1,0 +1,11 @@
+.TaskManager
+.IgnoreList
+.KillOnlyList
+.HomePreferencesActivity
+.PreferencesActivity
+.widget.TmWidgetConfigure
+.widget.TmWidgetSetting
+.animation.ShowKillResultActivity
+.widget.AdShowAcitivity
+.ScreenCheckerActivity
+.PrivacyActivity
