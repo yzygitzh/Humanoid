@@ -4,7 +4,8 @@ humanoid_server=162.105.87.118:60109
 # out_tester=_humanoid
 # out_tester=_monkey
 # out_tester=_puma
-out_tester=_stoat
+# out_tester=_stoat
+out_tester=_droidmate
 
 # PUMA
 # tested=`cat $root_path/out$out_tester/$1/puma.log | grep 'OK (1 test)'`
@@ -48,10 +49,20 @@ if [ -z "$tested" ]; then
     # timeout 20000s ./run.sh localhost:$2 &> $root_path/out$out_tester/$1/puma.log &
 
     # STOAT
-    adb -s localhost:$2 shell settings put secure show_ime_with_hard_keyboard 0
-    stoat_root=/home/yzy/projects/Stoat/Stoat/bin
-    cd $stoat_root
-    timeout 20000s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=localhost:$2 --stoat_port $3 --max_event 2000 --event_delay 1000 --model_time 20000s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+    # adb -s localhost:$2 shell settings put secure show_ime_with_hard_keyboard 0
+    # stoat_root=/home/yzy/projects/Stoat/Stoat/bin
+    # cd $stoat_root
+    # timeout 20000s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=localhost:$2 --stoat_port $3 --max_event 2000 --event_delay 1000 --model_time 20000s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+
+    # DROIDMATE
+    export ANDROID_HOME=/home/yzy/projects/fake-android-sdk/
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+    droidmate_root=/home/yzy/projects/droidmate/project/pcComponents/API/build/libs
+    cd $droidmate_root
+    rm -rf ./apks_$2
+    mkdir -p ./apks_$2
+    cp $root_path/apps/$1.apk ./apks_$2/
+    timeout 20000s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=2000 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=localhost:$2 --Exploration-apksDir=./apks_$2 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=2000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
 
     tester_pid=$!
     ec_count=1
@@ -64,9 +75,9 @@ if [ -z "$tested" ]; then
     done
 
     # STOAT
-    pids=`ps a | grep 'Server.jar' | grep $1 | awk '{print $1}'`
-    echo $pids
-    for pid in $pids; do kill -9 $pid; done
+    # pids=`ps a | grep 'Server.jar' | grep $1 | awk '{print $1}'`
+    # echo $pids
+    # for pid in $pids; do kill -9 $pid; done
 
     adb -s localhost:$2 shell dumpsys activity activities | grep 'Hist #' >> $root_path/out$out_tester/$1/finish_mark
     adb -s localhost:$2 shell reboot -p
