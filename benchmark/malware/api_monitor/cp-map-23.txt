@@ -1,0 +1,79 @@
+com.android.bluetooth.opp.BluetoothOppProvider  content://com.android.bluetooth.opp  <pathPrefix:/btopp>  [RW]  android.permission.ACCESS_BLUETOOTH_SHARE
+com.android.browser.provider.BrowserProvider2  content://browser  <path:/bookmarks/search_suggest_query>  [R]  android.permission.GLOBAL_SEARCH
+com.android.browser.provider.BrowserProvider2  content://browser  [R]  com.android.browser.permission.READ_HISTORY_BOOKMARKS
+com.android.browser.provider.BrowserProvider2  content://browser  [W]  com.android.browser.permission.WRITE_HISTORY_BOOKMARKS
+com.android.browser.provider.BrowserProvider2  content://com.android.browser  <path:/bookmarks/search_suggest_query>  [R]  android.permission.GLOBAL_SEARCH
+com.android.browser.provider.BrowserProvider2  content://com.android.browser  [R]  com.android.browser.permission.READ_HISTORY_BOOKMARKS
+com.android.browser.provider.BrowserProvider2  content://com.android.browser  [W]  com.android.browser.permission.WRITE_HISTORY_BOOKMARKS
+com.android.cellbroadcastreceiver.CellBroadcastContentProvider  content://cellbroadcasts  [R]  android.permission.READ_CELL_BROADCASTS
+com.android.cellbroadcastreceiver.CellBroadcastSearchIndexableProvider  content://com.android.cellbroadcastreceiver  [RW]  android.permission.READ_SEARCH_INDEXABLES
+com.android.cellbroadcastreceiver.CellBroadcastSearchIndexableProvider  content://com.android.cellbroadcastreceiver  [grant-uri-permission]
+com.android.email.com.android.mail.browse.EmailConversationProvider  content://com.android.email.conversation.provider  <pathPattern:.*>  [grant-uri-permission]
+com.android.email.com.android.mail.providers.EmailAccountCacheProvider  content://com.android.email.accountcache  <pathPattern:.*>  [grant-uri-permission]
+com.android.email.provider.AttachmentProvider  content://com.android.email.attachmentprovider  [R]  com.android.email.permission.READ_ATTACHMENT
+com.android.email.provider.AttachmentProvider  content://com.android.email.attachmentprovider  [grant-uri-permission]
+com.android.email.provider.EmailProvider  content://com.android.email.notifier  <pathPrefix:/attachment/cachedFile>  [grant-uri-permission]
+com.android.email.provider.EmailProvider  content://com.android.email.notifier  [RW]  com.android.email.permission.ACCESS_PROVIDER
+com.android.email.provider.EmailProvider  content://com.android.email.provider  <pathPrefix:/attachment/cachedFile>  [grant-uri-permission]
+com.android.email.provider.EmailProvider  content://com.android.email.provider  [RW]  com.android.email.permission.ACCESS_PROVIDER
+com.android.exchange.provider.ExchangeDirectoryProvider  content://com.android.exchange.directory.provider  [R]  android.permission.READ_CONTACTS
+com.android.externalstorage.ExternalStorageProvider  content://com.android.externalstorage.documents  [RW]  android.permission.MANAGE_DOCUMENTS
+com.android.externalstorage.ExternalStorageProvider  content://com.android.externalstorage.documents  [grant-uri-permission]
+com.android.gallery3d.filtershow.provider.SharedImageProvider  content://com.android.gallery3d.filtershow.provider.SharedImageProvider  [R]  com.android.gallery3d.filtershow.permission.READ
+com.android.gallery3d.filtershow.provider.SharedImageProvider  content://com.android.gallery3d.filtershow.provider.SharedImageProvider  [W]  com.android.gallery3d.filtershow.permission.WRITE
+com.android.gallery3d.filtershow.provider.SharedImageProvider  content://com.android.gallery3d.filtershow.provider.SharedImageProvider  [grant-uri-permission]
+com.android.gallery3d.provider.GalleryProvider  content://com.android.gallery3d.provider  [RW]  com.android.gallery3d.permission.GALLERY_PROVIDER
+com.android.gallery3d.provider.GalleryProvider  content://com.android.gallery3d.provider  [grant-uri-permission]
+com.android.launcher2.LauncherProvider  content://com.android.launcher2.settings  [R]  com.android.launcher.permission.READ_SETTINGS
+com.android.launcher2.LauncherProvider  content://com.android.launcher2.settings  [W]  com.android.launcher.permission.WRITE_SETTINGS
+com.android.launcher3.LauncherProvider  content://com.android.launcher3.settings  [R]  com.android.launcher3.permission.READ_SETTINGS
+com.android.launcher3.LauncherProvider  content://com.android.launcher3.settings  [W]  com.android.launcher3.permission.WRITE_SETTINGS
+com.android.mail.browse.UnifiedConversationProvider  content://com.android.mail.conversation.provider  <pathPattern:.*>  [grant-uri-permission]
+com.android.mail.providers.UnifiedAccountCacheProvider  content://com.android.mail.accountcache  <pathPattern:.*>  [grant-uri-permission]
+com.android.mail.providers.protos.mock.MockUiProvider  content://com.android.mail.mockprovider  <pathPattern:.*>  [grant-uri-permission]
+com.android.messaging.datamodel.MediaScratchFileProvider  content://com.android.messaging.datamodel.MediaScratchFileProvider  [grant-uri-permission]
+com.android.messaging.datamodel.MmsFileProvider  content://com.android.messaging.datamodel.MmsFileProvider  [grant-uri-permission]
+com.android.phone.IccProvider  content://icc  [R]  android.permission.READ_CONTACTS
+com.android.phone.IccProvider  content://icc  [W]  android.permission.WRITE_CONTACTS
+com.android.phone.PhoneSearchIndexablesProvider  content://com.android.phone  [RW]  android.permission.READ_SEARCH_INDEXABLES
+com.android.phone.PhoneSearchIndexablesProvider  content://com.android.phone  [grant-uri-permission]
+com.android.providers.calendar.CalendarProvider2  content://com.android.calendar  [R]  android.permission.READ_CALENDAR
+com.android.providers.calendar.CalendarProvider2  content://com.android.calendar  [W]  android.permission.WRITE_CALENDAR
+com.android.providers.contacts.CallLogProvider  content://call_log  [R]  android.permission.READ_CALL_LOG
+com.android.providers.contacts.CallLogProvider  content://call_log  [W]  android.permission.WRITE_CALL_LOG
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  <pathPattern:.*>  [grant-uri-permission]
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  <pathPattern:/contacts/.*/photo>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  <pathPrefix:/search_suggest_query>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  <pathPrefix:/search_suggest_shortcut>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  [R]  android.permission.READ_CONTACTS
+com.android.providers.contacts.ContactsProvider2  content://com.android.contacts  [W]  android.permission.WRITE_CONTACTS
+com.android.providers.contacts.ContactsProvider2  content://contacts  <pathPattern:.*>  [grant-uri-permission]
+com.android.providers.contacts.ContactsProvider2  content://contacts  <pathPattern:/contacts/.*/photo>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://contacts  <pathPrefix:/search_suggest_query>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://contacts  <pathPrefix:/search_suggest_shortcut>  [R]  android.permission.GLOBAL_SEARCH
+com.android.providers.contacts.ContactsProvider2  content://contacts  [R]  android.permission.READ_CONTACTS
+com.android.providers.contacts.ContactsProvider2  content://contacts  [W]  android.permission.WRITE_CONTACTS
+com.android.providers.contacts.VoicemailContentProvider  content://com.android.voicemail  [RW]  com.android.voicemail.permission.ADD_VOICEMAIL
+com.android.providers.downloads.DownloadProvider  content://downloads  <pathPrefix:/all_downloads/>  [grant-uri-permission]
+com.android.providers.downloads.DownloadProvider  content://downloads  <pathPrefix:/all_downloads>  [RW]  android.permission.ACCESS_ALL_DOWNLOADS
+com.android.providers.downloads.DownloadProvider  content://downloads  <pathPrefix:/download>  [RW]  android.permission.INTERNET
+com.android.providers.downloads.DownloadProvider  content://downloads  <pathPrefix:/my_downloads/>  [grant-uri-permission]
+com.android.providers.downloads.DownloadProvider  content://downloads  <pathPrefix:/my_downloads>  [RW]  android.permission.INTERNET
+com.android.providers.downloads.DownloadStorageProvider  content://com.android.providers.downloads.documents  [RW]  android.permission.MANAGE_DOCUMENTS
+com.android.providers.downloads.DownloadStorageProvider  content://com.android.providers.downloads.documents  [grant-uri-permission]
+com.android.providers.media.MediaDocumentsProvider  content://com.android.providers.media.documents  [RW]  android.permission.MANAGE_DOCUMENTS
+com.android.providers.media.MediaDocumentsProvider  content://com.android.providers.media.documents  [grant-uri-permission]
+com.android.providers.media.MediaProvider  content://media  <pathPrefix:/external/>  [R]  android.permission.READ_EXTERNAL_STORAGE
+com.android.providers.media.MediaProvider  content://media  <pathPrefix:/external/>  [W]  android.permission.WRITE_EXTERNAL_STORAGE
+com.android.providers.media.MediaProvider  content://media  <pathPrefix:/external/>  [grant-uri-permission]
+com.android.providers.telephony.HbpcdLookupProvider  content://hbpcd_lookup  [W]  android.permission.MODIFY_PHONE_STATE
+com.android.providers.telephony.MmsProvider  content://mms  <pathPrefix:/drm/>  [grant-uri-permission]
+com.android.providers.telephony.MmsProvider  content://mms  <pathPrefix:/part/>  [grant-uri-permission]
+com.android.providers.telephony.MmsProvider  content://mms  [R]  android.permission.READ_SMS
+com.android.providers.telephony.MmsSmsProvider  content://mms-sms  [R]  android.permission.READ_SMS
+com.android.providers.telephony.SmsProvider  content://sms  [R]  android.permission.READ_SMS
+com.android.providers.tv.TvProvider  content://android.media.tv  <pathPattern:/channel>  [grant-uri-permission]
+com.android.providers.tv.TvProvider  content://android.media.tv  <pathPattern:/program>  [grant-uri-permission]
+com.android.providers.tv.TvProvider  content://android.media.tv  [W]  com.android.providers.tv.permission.WRITE_EPG_DATA
+com.android.settings.search.SettingsSearchIndexablesProvider  content://com.android.settings  [RW]  android.permission.READ_SEARCH_INDEXABLES
+com.android.settings.search.SettingsSearchIndexablesProvider  content://com.android.settings  [grant-uri-permission]
