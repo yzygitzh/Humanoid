@@ -311,39 +311,45 @@ class HumanoidTest():
     def __init__(self):
         pass
 
+    def __assemble_view_tree(self, root_view, views):
+        children = list(enumerate(root_view["children"]))
+        if not len(children):
+            return
+        for i, j in children:
+            import copy
+            root_view["children"][i] = copy.deepcopy(views[j])
+            self.__assemble_view_tree(root_view["children"][i], views)
+
     def test_model(self):
         with open("config.json", "r") as f:
             config_json = json.load(f)
-        frame_num = config_json["frame_num"]
-        predicting_dim = config_json["predicting_dim"]
-        total_interacts = config_json["total_interacts"]
-        model = MultipleScreenModel(config_json, training=False)
 
-        data_path = "/mnt/DATA_volume/lab_data/RICO/training_data/jp.naver.linecard.android.pickle"
-        with open(data_path, "rb") as f:
-            input_data = pickle.load(f)
-        image_num = len(input_data["trace_0"])
-        stacked_images = np.stack([np.zeros_like(input_data["trace_0"][0][0], dtype=np.float32)] * (frame_num - 1) + \
-                                [x[0] for x in input_data["trace_0"]], axis=0)
-        images = [stacked_images[i:i + frame_num].copy() for i in range(image_num)]
-        # clear last heatmaps
-        for image in images:
-            image[frame_num - 1, :, :, -predicting_dim:] = 0.0
-            image -= 0.5
+        data_processor = DroidBotDataProcessor(config_json)
+        with open("/mnt/EXT_volume/lab_data/PERUIM_upgrade/PERUIM_advanced_droidbot_out/dfs_peruim/com.devexpert.weather/states/state_2018-01-07_121552.json", "r") as f:
+            droidbot_state = json.load(f)
+            self.__assemble_view_tree(droidbot_state["views"][0],
+                                      droidbot_state["views"])
+            data_processor.update_origin_dim([768, 1280])
+            stacked_image, _, _ = data_processor.process({
+                "history_view_trees": [droidbot_state["views"][0]],
+                "history_events": [],
+                "possible_events": [],
+                "screen_res": [768, 1280]
+            })
 
-        heatmaps = np.stack([x[0][:,:,-predicting_dim:]
-                            for x in input_data["trace_0"]], axis=0)
-        interacts = np.eye(total_interacts)[[x[1]["interact_type"] for x in input_data["trace_0"]]]
+            import scipy.misc
+            scipy.misc.imsave("/tmp/skeleton.png",
+                              np.transpose(stacked_image[3] + 0.5, (1, 0, 2)))
 
-        saver = tf.train.Saver()
-        with tf.Session() as sess:
-            saver.restore(sess, "/mnt/DATA_volume/lab_data/RICO/training_log/model_11500.ckpt")
-            for i in range(image_num):
-                heatmap = sess.run(model.predict_heatmaps, feed_dict=model.get_feed_dict(images[i], heatmaps[i:i+1], interacts[i:i+1]))
-                interact = sess.run(model.predict_interacts, feed_dict=model.get_feed_dict(images[i], heatmaps[i:i+1], interacts[i:i+1]))
-                visualize_data(images[i][frame_num - 1] + 0.5)
-                visualize_data(heatmap[0])
-                print(interact[0])
+            gestures = [[[58 / 768, 103 / 1280]]]
+            heats, _ = convert_gestures(gestures, data_processor.rico_config_json)
+            print(np.sum(heats[0]))
+            print(heats[0].shape)
+            heats_max = np.max(heats[0])
+            scipy.misc.imsave("/tmp/heat.png",
+                              np.transpose(heats[0][:,:,2] / heats_max, (1, 0)))
+
+
 
 def run(config_path):
     with open(config_path, "r") as config_file:
@@ -369,3 +375,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # HumanoidTest().test_model()
