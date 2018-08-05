@@ -21,12 +21,12 @@ if [ -z "$tested" ]; then
     sleep 60
 
     # DROIDBOT
-    # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 1 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # MONKEY
     # package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
     # timeout 600s adb -s emulator-$3 install $root_path/apps/$1.apk
-    # timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 3000 &> $root_path/out$out_tester/$1/monkey.log &
+    # timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 3000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/mnt/EXT_volume/projects_light/androtest/tools/PUMA
@@ -58,7 +58,7 @@ if [ -z "$tested" ]; then
     rm -rf ./apks_$3
     mkdir -p ./apks_$3
     cp $root_path/apps/$1.apk ./apks_$3/
-    timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=2000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
+    timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=1000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
 
     tester_pid=$!
     ec_count=1
