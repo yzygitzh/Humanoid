@@ -24,12 +24,12 @@ if [ -z "$tested" ]; then
     adb connect localhost:$2
 
     # DROIDBOT
-    # timeout 12000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 1 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # MONKEY
     # package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
     # timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
-    # timeout 12000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
+    # timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/home/yzy/projects/PUMA
@@ -46,13 +46,13 @@ if [ -z "$tested" ]; then
     # echo $app_label >> app.info.localhost:$2
     # timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
     # ./setup-phone.sh localhost:$2
-    # timeout 12000s ./run.sh localhost:$2 &> $root_path/out$out_tester/$1/puma.log &
+    # timeout 20000s ./run.sh localhost:$2 &> $root_path/out$out_tester/$1/puma.log &
 
     # STOAT
     # adb -s localhost:$2 shell settings put secure show_ime_with_hard_keyboard 0
     # stoat_root=/home/yzy/projects/Stoat/Stoat/bin
     # cd $stoat_root
-    # timeout 12000s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=localhost:$2 --stoat_port $3 --max_event 2000 --event_delay 1000 --model_time 12000s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+    # timeout 20000s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=localhost:$2 --stoat_port $3 --max_event 2000 --event_delay 3000 --model_time 20000s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
 
     # DROIDMATE
     export ANDROID_HOME=/home/yzy/projects/fake-android-sdk/
@@ -62,7 +62,7 @@ if [ -z "$tested" ]; then
     rm -rf ./apks_$2
     mkdir -p ./apks_$2
     cp $root_path/apps/$1.apk ./apks_$2/
-    timeout 12000s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=2000 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=localhost:$2 --Exploration-apksDir=./apks_$2 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=2000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
+    timeout 20000s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=2000 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=localhost:$2 --Exploration-apksDir=./apks_$2 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=3000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
 
     tester_pid=$!
     ec_count=1

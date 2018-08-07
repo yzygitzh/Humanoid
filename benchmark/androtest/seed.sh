@@ -21,12 +21,12 @@ if [ -z "$tested" ]; then
     sleep 60
 
     # DROIDBOT
-    # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 1 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 3 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # MONKEY
     # package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
     # timeout 600s adb -s emulator-$3 install $root_path/apps/$1.apk
-    # timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 3000 &> $root_path/out$out_tester/$1/monkey.log &
+    # timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 3000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/mnt/EXT_volume/projects_light/androtest/tools/PUMA
@@ -50,7 +50,7 @@ if [ -z "$tested" ]; then
     # adb -s emulator-$3 shell settings put secure show_ime_with_hard_keyboard 0
     # stoat_root=/mnt/EXT_volume/projects_light/Stoat/Stoat/bin
     # cd $stoat_root
-    # timeout 3600s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=emulator-$3 --stoat_port $5 --max_event 600 --event_delay 1000 --model_time 1200s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
+    # timeout 3600s ruby run_stoat_testing.rb --app_dir $root_path/apps/$1.apk --real_device_serial=emulator-$3 --stoat_port $5 --max_event 600 --event_delay 3000 --model_time 1200s --project_type apk &> $root_path/out$out_tester/$1/stoat.log &
 
     # DROIDMATE
     droidmate_root=/mnt/EXT_volume/projects_light/droidmate/project/pcComponents/API/build/libs
@@ -58,7 +58,7 @@ if [ -z "$tested" ]; then
     rm -rf ./apks_$3
     mkdir -p ./apks_$3
     cp $root_path/apps/$1.apk ./apks_$3/
-    timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=1000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
+    timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=3000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
 
     tester_pid=$!
     ec_count=1
