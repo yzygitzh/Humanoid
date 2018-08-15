@@ -212,7 +212,10 @@ class DroidBotDataProcessor():
 class HumanoidAgent():
     def __init__(self, config_json):
         self.domain = config_json["domain"]
-        self.rpc_port = self.get_random_port()
+        if "port" in config_json:
+            self.rpc_port = config_json["port"]
+        else:
+            self.rpc_port = self.get_random_port()
         print("Serving at %s:%d" % (self.domain, self.rpc_port))
         self.server = SimpleXMLRPCServer((self.domain, self.rpc_port), RPCHandler)
         self.server.register_function(self.predict, "predict")
@@ -230,6 +233,7 @@ class HumanoidAgent():
         self.saver.restore(self.sess, config_json["model_path"])
         self.data_processor = DroidBotDataProcessor(config_json)
         self.text_generator = TextGenerator(config_json)
+        print("=== Humanoid XMLRPC service ready ===")
 
     def get_random_port(self):
         temp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

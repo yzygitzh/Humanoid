@@ -1,6 +1,6 @@
 {
-    "model_path": "/mnt/DATA_volume/lab_data/RICO/training_log/model_495000.ckpt",
-    "embedding_path": "/mnt/DATA_volume/lab_data/RICO/embedding/model_495000.ckpt.embedding",
+    "model_path": "res/model/model_495000.ckpt",
+    "embedding_path": "res/model/model_495000.ckpt.embedding",
 
     "training_dim": 2,
     "predicting_dim": 1,
@@ -16,5 +16,6 @@
         "2560x1440": [180, 2392, 540, 2560]
     },
 
-    "domain": "162.105.87.84"
+    "domain": "localhost",
+    "port": 50405
 }

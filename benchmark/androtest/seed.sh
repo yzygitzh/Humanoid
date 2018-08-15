@@ -1,6 +1,6 @@
 root_path=/mnt/FAST_volume/lab_data/AndroTest/
 # root_path=/home/yzy/androtest/
-humanoid_server=162.105.87.118:51887
+humanoid_server=localhost:51887
 
 # out_tester=_humanoid
 out_tester=_monkey
@@ -19,7 +19,7 @@ if [ -z "$tested" ]; then
     rm -rf $root_path/out$out_tester/$1
     mkdir -p $root_path/out$out_tester/$1
 
-    $ANDROID_HOME/tools/emulator -avd androtest_$2 -ports $3,$4 -wipe-data -http-proxy http://162.105.87.84:8995 -no-window -cores 4 &
+    $ANDROID_HOME/tools/emulator -avd androtest_$2 -ports $3,$4 -wipe-data -http-proxy http://localhost:8995 -no-window -cores 4 &
     emulator_pid=$!
     sleep 60
 
