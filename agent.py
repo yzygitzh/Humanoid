@@ -233,7 +233,7 @@ class HumanoidAgent():
         self.saver.restore(self.sess, config_json["model_path"])
         self.data_processor = DroidBotDataProcessor(config_json)
         self.text_generator = TextGenerator(config_json)
-        print("=== Humanoid XMLRPC service ready ===")
+        print("=== Humanoid XMLRPC service ready at %s:%d ===" % (self.domain, self.rpc_port))
 
     def get_random_port(self):
         temp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
