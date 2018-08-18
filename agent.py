@@ -313,7 +313,19 @@ class HumanoidAgent():
 
 class HumanoidTest():
     def __init__(self):
-        pass
+        with open("config.json", "r") as f:
+            self.config_json = json.load(f)
+
+        train_config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                        "train", "config.json")
+        with open(train_config_path, "r") as train_config_file:
+            self.train_config_json = json.load(train_config_file)
+
+        self.model = MultipleScreenModel(self.train_config_json, training=False)
+        self.saver = tf.train.Saver()
+        self.sess = tf.Session()
+        self.saver.restore(self.sess, self.config_json["model_path"])
+        self.data_processor = DroidBotDataProcessor(self.config_json)
 
     def __assemble_view_tree(self, root_view, views):
         children = list(enumerate(root_view["children"]))
@@ -325,35 +337,35 @@ class HumanoidTest():
             self.__assemble_view_tree(root_view["children"][i], views)
 
     def test_model(self):
-        with open("config.json", "r") as f:
-            config_json = json.load(f)
-
-        data_processor = DroidBotDataProcessor(config_json)
-        with open("/mnt/EXT_volume/lab_data/PERUIM_upgrade/PERUIM_advanced_droidbot_out/dfs_peruim/com.devexpert.weather/states/state_2018-01-07_121552.json", "r") as f:
+        with open("/tmp/tele2/state_2018-08-10_160925.json", "r") as f:
             droidbot_state = json.load(f)
             self.__assemble_view_tree(droidbot_state["views"][0],
                                       droidbot_state["views"])
-            data_processor.update_origin_dim([768, 1280])
-            stacked_image, _, _ = data_processor.process({
+            self.data_processor.update_origin_dim([720, 1280])
+            stacked_image, heat, interact = self.data_processor.process({
                 "history_view_trees": [droidbot_state["views"][0]],
                 "history_events": [],
                 "possible_events": [],
-                "screen_res": [768, 1280]
+                "screen_res": [720, 1280]
             })
+
+            heatmap, interact, pool5_heat_out= self.sess.run(
+                [self.model.predict_heatmaps,
+                self.model.predict_interacts,
+                self.model.pool5_heat_out],
+                feed_dict=self.model.get_feed_dict(stacked_image, heat, interact))
+            print(interact[0])
 
             import scipy.misc
             scipy.misc.imsave("/tmp/skeleton.png",
                               np.transpose(stacked_image[3] + 0.5, (1, 0, 2)))
 
-            gestures = [[[58 / 768, 103 / 1280]]]
-            heats, _ = convert_gestures(gestures, data_processor.rico_config_json)
-            print(np.sum(heats[0]))
-            print(heats[0].shape)
-            heats_max = np.max(heats[0])
-            scipy.misc.imsave("/tmp/heat.png",
-                              np.transpose(heats[0][:,:,2] / heats_max, (1, 0)))
-
-
+            # gestures = [[[58 / 768, 103 / 1280]]]
+            # heats, _ = convert_gestures(gestures, self.data_processor.rico_config_json)
+            # print(np.sum(heats[0]))
+            # print(heats[0].shape)
+            heats_max = np.max(heatmap[0])
+            scipy.misc.imsave("/tmp/heat.png", np.transpose(heatmap[0][:,:,0] / heats_max, (1, 0)))
 
 def run(config_path):
     with open(config_path, "r") as config_file:
