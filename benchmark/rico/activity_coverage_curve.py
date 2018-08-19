@@ -48,7 +48,7 @@ if __name__ == "__main__":
         # calc curve
         cov_list = [0.0]
         last_cov = 0.0
-        for event_num in range(10, 2000, 10):
+        for event_num in range(10, 2010, 10):
             time_id = int(event_num / events_per_sec)
             if time_id in time_id_activities:
                 cov = get_cov(time_id_activities[time_id], total_activities)
@@ -56,7 +56,12 @@ if __name__ == "__main__":
                 cov = last_cov
             cov_list.append(cov)
             last_cov = cov
-        coverage_dict[package_name] = cov_list
+        if sum(cov_list) > 1e-5:
+            while cov_list[1] < 1e-5:
+                cov_list = cov_list[1:] + [cov_list[-1]]
+            coverage_dict[package_name] = cov_list
+        else:
+            coverage_dict[package_name] = []
 
     with open(out_file, "w") as f:
         f.writelines(["\t".join([x] + [str(y) for y in coverage_dict[x]]) + \
