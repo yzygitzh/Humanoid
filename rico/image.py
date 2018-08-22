@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 from matplotlib import pyplot as plt
-from .utils import traverse_view_tree, is_view_hierarchy_valid, compute_view_offset
+from rico.utils import traverse_view_tree, is_view_hierarchy_valid, compute_view_offset
 
 def convert_view_tree_files(view_tree_paths, config_json):
     # image num, x, y, channels (TEXT/IMAGE)
