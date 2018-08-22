@@ -30,10 +30,11 @@ def compute_view_offset(view_tree, config_json):
 
     view_offset = [0, 0]
     # heuristically identify non-full-screen window like permission window
-    if not view_tree["activity"]["root"]["class"].startswith("com.android.internal.policy.PhoneWindow"):
-        return view_offset
-    if not view_tree["activity_name"] == "com.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity":
-        return view_offset
+    # TODO: DroidBot view tree doesn't contain these information yet, causing exception!
+    # if not view_tree["activity"]["root"]["class"].startswith("com.android.internal.policy.PhoneWindow"):
+    #     return view_offset
+    # if not view_tree["activity_name"] == "com.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity":
+    #     return view_offset
 
     if view_root_bounds[2] - view_root_bounds[0] < origin_dim[0] and \
         view_root_bounds[3] - view_root_bounds[1] < origin_dim[1] - status_bar_height - navigation_bar_height:
