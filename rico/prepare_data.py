@@ -52,7 +52,11 @@ def process_trace(trace_path, config_json):
             # print("Interact:", interact_data)
             # print("Path:", view_tree_paths[i])
             # visualize_data(sum_image_data, config_json)
-            filtered_data.append([sum_image_data, interact_data])
+
+            # filtered_data.append([sum_image_data, interact_data])
+            # for validation
+            filtered_data.append([view_tree_paths[i], interact_data,
+                                  np.unravel_index(np.argmax(heatmap_data[:,:,-1]), heatmap_data[:,:,-1].shape)])
 
     return filtered_data
 
