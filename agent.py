@@ -90,10 +90,10 @@ class DroidBotDataProcessor():
             y = (event["view"]["bounds"][0][1] + event["view"]["bounds"][1][1]) / 2
             return [[x / self.origin_dim[0],
                      y / self.origin_dim[1]]]
-        elif event_type == "key" and event["name"] == "back":
+        elif event_type == "key" and event["name"] == "BACK":
             # get back center
             x = (self.navigation_back_bounds[0] + self.navigation_back_bounds[2]) / 2
-            x = (self.navigation_back_bounds[1] + self.navigation_back_bounds[3]) / 2
+            y = (self.navigation_back_bounds[1] + self.navigation_back_bounds[3]) / 2
             return [[x / self.origin_dim[0],
                      y / self.origin_dim[1]]]
         else:
@@ -145,7 +145,7 @@ class DroidBotDataProcessor():
             event_type = event["event_type"]
             event_prob = 0.0
             if event_type in ["touch", "long_touch", "scroll", "set_text", "key"]:
-                if event_type == "key" and event["name"] != "back":
+                if event_type == "key" and event["name"] != "BACK":
                     event_prob = 0.0
 
                 if event_type == "key":
