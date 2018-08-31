@@ -32,7 +32,7 @@ if [ -z "$tested" ]; then
     # MONKEY
     package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
     timeout 600s adb -s emulator-$3 install $root_path/apps/$1.apk
-    timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 3000 &> $root_path/out$out_tester/$1/monkey.log &
+    timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 6000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/mnt/EXT_volume/projects_light/androtest/tools/PUMA
