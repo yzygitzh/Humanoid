@@ -1,12 +1,12 @@
 root_path=/home/yzy/humanoid/
-humanoid_server=localhost:40513
+humanoid_server=162.105.87.118:50405
 
-out_tester=_humanoid
 # out_tester=_monkey
 # out_tester=_puma
 # out_tester=_stoat
 # out_tester=_droidmate
 # out_tester=_droidbot
+out_tester=_humanoid
 
 # PUMA
 # tested=`cat $root_path/out$out_tester/$1/puma.log | grep 'OK (1 test)'`
@@ -34,7 +34,7 @@ if [ -z "$tested" ]; then
     # MONKEY
     # package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
     # timeout 600s adb -s localhost:$2 install $root_path/apps/$1.apk
-    # timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 10000 &> $root_path/out$out_tester/$1/monkey.log &
+    # timeout 20000s adb -s localhost:$2 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 1000 -v 20000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/home/yzy/projects/PUMA
