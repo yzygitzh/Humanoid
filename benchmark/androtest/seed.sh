@@ -25,6 +25,7 @@ if [ -z "$tested" ]; then
 
     # DROIDBOT
     # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 3 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 3 -count 600 -event utg_dynamic -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # HUMANOID
     # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 2 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
