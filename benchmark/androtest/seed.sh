@@ -79,7 +79,7 @@ if [ -z "$tested" ]; then
     done
 
     # Humanoid & DroidBot
-    rm -rf $root_path/out$out_tester/$1/droidbot_out/logcat.txt
+    rm -rf $root_path/out$out_tester/$1/droidbot_out/logcat.*
     rm -rf $root_path/out$out_tester/$1/droidbot_out/temp
 
     # STOAT

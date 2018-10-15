@@ -27,6 +27,8 @@ if [ -z "$tested" ]; then
 
     # DROIDBOT
     # timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -use_method_profiling 1000 -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
+    # timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 3 -count 2000 -event utg_dynamic -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # HUMANOID
     timeout 20000s droidbot -d localhost:$2 -a $root_path/apps/$1.apk -interval 2 -count 2000 -policy dfs_greedy -grant_perm -keep_env -keep_app -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
@@ -80,7 +82,7 @@ if [ -z "$tested" ]; then
     done
 
     # Humanoid & DroidBot
-    rm -rf $root_path/out$out_tester/$1/droidbot_out/logcat.txt
+    rm -rf $root_path/out$out_tester/$1/droidbot_out/logcat.*
     rm -rf $root_path/out$out_tester/$1/droidbot_out/temp
 
     # STOAT
