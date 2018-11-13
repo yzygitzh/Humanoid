@@ -1,13 +1,14 @@
-root_path=/mnt/FAST_volume/lab_data/AndroTest/
+root_path=/mnt/EXT_volume/lab_data/AndroTest_eval/
 # root_path=/home/yzy/androtest/
 humanoid_server=localhost:51887
 
 # out_tester=_humanoid
-out_tester=_monkey
+# out_tester=_monkey
 # out_tester=_puma
 # out_tester=_stoat
 # out_tester=_droidmate
 # out_tester=_droidbot
+out_tester=_sapienz
 
 # PUMA
 # tested=`cat $root_path/out$out_tester/$1/puma.log | grep 'OK (1 test)'`
@@ -19,7 +20,8 @@ if [ -z "$tested" ]; then
     rm -rf $root_path/out$out_tester/$1
     mkdir -p $root_path/out$out_tester/$1
 
-    $ANDROID_HOME/tools/emulator -avd androtest_$2 -ports $3,$4 -wipe-data -http-proxy http://localhost:8995 -no-window -cores 4 &
+    # $ANDROID_HOME/tools/emulator -avd androtest_$2 -ports $3,$4 -wipe-data -http-proxy http://localhost:8995 -no-window -writable-system -cores 4 &
+    $ANDROID_HOME/tools/emulator -avd androtest_$2 -ports $3,$4 -wipe-data -http-proxy http://localhost:8995 -writable-system -cores 4 &
     emulator_pid=$!
     sleep 60
 
@@ -31,9 +33,9 @@ if [ -z "$tested" ]; then
     # timeout 3600s droidbot -d emulator-$3 -a $root_path/apps/$1.apk -interval 2 -count 600 -policy dfs_greedy -grant_perm -keep_env -random -is_emulator -humanoid $humanoid_server -o $root_path/out$out_tester/$1/droidbot_out &> $root_path/out$out_tester/$1/droidbot.log &
 
     # MONKEY
-    package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
-    timeout 600s adb -s emulator-$3 install $root_path/apps/$1.apk
-    timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 6000 &> $root_path/out$out_tester/$1/monkey.log &
+    # package_name=$(aapt dump badging $root_path/apps/$1.apk | grep 'package\: name' | awk -F"'" '{print $2}')
+    # timeout 600s adb -s emulator-$3 install $root_path/apps/$1.apk
+    # timeout 3600s adb -s emulator-$3 shell monkey -p $package_name --ignore-crashes --ignore-security-exceptions --ignore-timeouts --throttle 3000 -v 6000 &> $root_path/out$out_tester/$1/monkey.log &
 
     # PUMA
     # puma_root=/mnt/EXT_volume/projects_light/androtest/tools/PUMA
@@ -67,6 +69,11 @@ if [ -z "$tested" ]; then
     # mkdir -p ./apks_$3
     # cp $root_path/apps/$1.apk ./apks_$3/
     # timeout 3600s java -jar shadow-1.0-RC4-all.jar -config defaultConfig.properties --Selectors-actionLimit=600 --Exploration-deviceIndex=$2 --Exploration-deviceSerialNumber=emulator-$3 --Exploration-apksDir=./apks_$3 --Strategies-fitnessProportionate=true --DeviceCommunication-deviceOperationDelay=3000 --Deploy-uninstallApk=false --UiAutomatorServer-basePort=20000 --ApiMonitorServer-basePort=30000 &> $root_path/out$out_tester/$1/droidmate.log &
+
+    # Sapienz
+    sapienz_root=/mnt/EXT_volume/projects_light/sapienz/sapienz
+    cd $sapienz_root
+    timeout 3600s python main.py $root_path/apps/$1.apk emulator-$3 &> $root_path/out$out_tester/$1/sapienz.log &
 
     tester_pid=$!
     ec_count=1
