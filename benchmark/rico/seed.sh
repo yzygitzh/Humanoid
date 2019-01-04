@@ -19,7 +19,7 @@ if [ -z "$tested" ]; then
 
     qemu-img create -f qcow2 $root_path/qemu/droidbot-6.0-r3.qcow2.$2 -o backing_file=$root_path/qemu/droidbot-6.0-r3.qcow2
 
-    qemu-system-i386 -hda $root_path/qemu/droidbot-6.0-r3.qcow2.$2 -m 2048 -smp cpus=4 -enable-kvm -machine q35 -nographic -net nic,model=e1000 -net user,hostfwd=tcp::$2-:5555 &
+    qemu-system-i386 -drive file=$root_path/qemu/droidbot-6.0-r3.qcow2.$2,if=virtio -m 2048 -smp cpus=4 -enable-kvm -machine q35 -nographic -net nic,model=e1000 -net user,hostfwd=tcp::$2-:5555 &
     qemu_pid=$!
 
     sleep 60
