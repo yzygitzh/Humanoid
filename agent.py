@@ -15,7 +15,6 @@ tf_config = tf.ConfigProto()
 tf_config.gpu_options.allow_growth = True
 from matplotlib import pyplot as plt
 
-import rico
 from rico.image import convert_view_trees
 from rico.touch_input import convert_gestures
 from rico.utils import traverse_view_tree
