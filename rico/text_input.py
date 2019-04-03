@@ -6,8 +6,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.stats import multivariate_normal
 
-import touch_input
-from utils import traverse_view_tree, get_text_view_signature, is_text_view, \
+from . import touch_input
+from .utils import traverse_view_tree, get_text_view_signature, is_text_view, \
                   is_view_hierarchy_valid, compute_view_offset
 
 def add_text_inputs(view_tree_paths, image_array,

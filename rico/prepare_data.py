@@ -7,11 +7,11 @@ import os
 
 import numpy as np
 
-import image
-import touch_input
-import text_input
+from . import image
+from . import touch_input
+from . import text_input
 
-from utils import visualize_data, is_valid_data
+from .utils import visualize_data, is_valid_data
 
 def process_trace(trace_path, config_json):
     gestures_path = os.path.join(trace_path, "gestures.json")
@@ -32,7 +32,8 @@ def process_trace(trace_path, config_json):
 
     # convert view tree to color rects
     view_tree_paths = [os.path.join(view_trees_dir, "%d.json" % x) for x in view_tree_tags]
-    image_array = image.convert_view_tree_files(view_tree_paths, config_json)
+    image_array = [image.convert_view_tree_file(x, config_json)
+                   for x in view_tree_paths]
 
     # find tap inputs
     heatmap_array, interact_array = touch_input.convert_gestures(gestures, config_json)
@@ -51,7 +52,7 @@ def process_trace(trace_path, config_json):
         if is_valid_data(sum_image_data, interact_data, config_json):
             # print("Interact:", interact_data)
             # print("Path:", view_tree_paths[i])
-            # visualize_data(sum_image_data, config_json)
+            visualize_data(sum_image_data, config_json)
 
             # filtered_data.append([sum_image_data, interact_data])
             # for validation
