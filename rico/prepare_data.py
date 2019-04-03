@@ -52,7 +52,7 @@ def process_trace(trace_path, config_json):
         if is_valid_data(sum_image_data, interact_data, config_json):
             # print("Interact:", interact_data)
             # print("Path:", view_tree_paths[i])
-            visualize_data(sum_image_data, config_json)
+            # visualize_data(sum_image_data, config_json)
 
             # filtered_data.append([sum_image_data, interact_data])
             # for validation
