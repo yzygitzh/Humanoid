@@ -4,24 +4,31 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 
-def traverse_view_tree(view_tree, call_back):
-    if view_tree is None or not is_view_valid(view_tree):
+def traverse_view_tree(view_tree, call_back, semantic_ui=False):
+    if view_tree is None or not semantic_ui and not is_view_valid(view_tree):
         return
     call_back(view_tree)
     if "children" in view_tree:
         for child in view_tree["children"]:
-            traverse_view_tree(child, call_back)
+            traverse_view_tree(child, call_back, semantic_ui)
 
-def is_view_hierarchy_valid(view_tree, config_json):
+def is_view_hierarchy_valid(view_tree, config_json, semantic_ui=False):
     origin_dim = config_json["origin_dim"]
-    view_root_bounds = view_tree["activity"]["root"]["bounds"]
+    if semantic_ui:
+        view_root_bounds = view_tree["bounds"]
+    else:
+        view_root_bounds = view_tree["activity"]["root"]["bounds"]
     # skip full-screen horizon ones
     if view_root_bounds[2] > view_root_bounds[3] and view_root_bounds[2] > origin_dim[0]:
         return False
     return True
 
-def compute_view_offset(view_tree, config_json):
-    view_root_bounds = view_tree["activity"]["root"]["bounds"]
+def compute_view_offset(view_tree, config_json, semantic_ui=False):
+    if semantic_ui:
+        view_root_bounds = view_tree["bounds"]
+    else:
+        view_root_bounds = view_tree["activity"]["root"]["bounds"]
+
     downscale_dim = config_json["downscale_dim"]
     origin_dim = config_json["origin_dim"]
     status_bar_height = config_json["status_bar_height"]
@@ -29,8 +36,13 @@ def compute_view_offset(view_tree, config_json):
     downscale_ratio = downscale_dim[0] / origin_dim[0]
 
     view_offset = [0, 0]
+    if semantic_ui:
+        root_view = view_tree
+    else:
+        root_view = view_tree["activity"]["root"]
+
     # heuristically identify non-full-screen window like permission window
-    if not view_tree["activity"]["root"]["class"].startswith("com.android.internal.policy.PhoneWindow"):
+    if not root_view["class"].startswith("com.android.internal.policy.PhoneWindow"):
         return view_offset
 
     # view_tree from DroidBot may not contain activity_name

@@ -1,10 +1,40 @@
 {
-    "filtered_traces_path": "/mnt/EXT_volume/yangzy/lab_data/RICO/filtered_traces",
+    "filtered_traces_path": "/mnt/DATA_volume/lab_data/RICO/filtered_traces",
+    "ui_details_path": "/mnt/DATA_volume/lab_data/RICO/ui_details.csv",
+    "semantic_annotations_path": "/mnt/DATA_volume/lab_data/RICO/semantic_annotations",
 
     "text_dim": 0,
     "image_dim": 1,
     "interact_dim": 2,
     "total_dims": 3,
+
+    "semantic_labels": [
+        "Advertisement",
+        "Background Image",
+        "Bottom Navigation",
+        "Button Bar",
+        "Card",
+        "Checkbox",
+        "Date Picker",
+        "Drawer",
+        "Icon",
+        "Image",
+        "Input",
+        "List Item",
+        "Map View",
+        "Modal",
+        "Multi-Tab",
+        "Number Stepper",
+        "On/Off Switch",
+        "Pager Indicator",
+        "Radio Button",
+        "Slider",
+        "Text",
+        "Text Button",
+        "Toolbar",
+        "Video",
+        "Web View"
+    ],
 
     "interact_touch": 0,
     "interact_long_touch": 1,
@@ -27,5 +57,5 @@
     "swipe_threshold": 10,
     "data_augmentation_threshold": 1,
 
-    "output_dir": "/mnt/EXT_volume/yangzy/lab_data/RICO/training_data"
+    "output_dir": "/mnt/DATA_volume/lab_data/RICO/annotation_training_data"
 }
