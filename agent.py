@@ -15,7 +15,7 @@ tf_config = tf.ConfigProto()
 tf_config.gpu_options.allow_growth = True
 from matplotlib import pyplot as plt
 
-from rico.image import convert_view_trees
+from rico.image import convert_view_tree
 from rico.touch_input import convert_gestures
 from rico.utils import traverse_view_tree
 from train.model import MultipleScreenModel
@@ -116,9 +116,9 @@ class DroidBotDataProcessor():
 
     def view_tree_to_image(self, view_tree):
         self.__clean_view_tree(view_tree)
-        image = convert_view_trees([{
+        image = convert_view_tree([{
             "activity": {"root": view_tree}
-        }], self.rico_config_json)[0]
+        }], self.rico_config_json)
         # visualize_data(image)
         return image
 
@@ -187,7 +187,7 @@ class DroidBotDataProcessor():
         # padding
         view_trees = [None] * (self.frame_num - len(view_trees)) + view_trees
         # assemble images by view tree
-        images = convert_view_trees(view_trees, self.rico_config_json)
+        images = [convert_view_tree(x, self.rico_config_json) for x in view_trees]
 
         # assemble touch heatmaps
         history_events = query_json["history_events"]
