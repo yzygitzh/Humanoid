@@ -6,6 +6,7 @@ import os
 import pickle
 import random
 import socket
+import traceback
 from xmlrpc.server import SimpleXMLRPCServer, SimpleXMLRPCRequestHandler
 
 import numpy as np
@@ -26,7 +27,6 @@ class RPCHandler(SimpleXMLRPCRequestHandler):
         try:
             return self.server.funcs[method](*params)
         except:
-            import traceback
             traceback.print_exc()
             raise
 
@@ -116,9 +116,9 @@ class DroidBotDataProcessor():
 
     def view_tree_to_image(self, view_tree):
         self.__clean_view_tree(view_tree)
-        image = convert_view_tree([{
+        image = convert_view_tree({
             "activity": {"root": view_tree}
-        }], self.rico_config_json)
+        }, self.rico_config_json)
         # visualize_data(image)
         return image
 
@@ -253,10 +253,10 @@ class HumanoidAgent():
                 self.model.pool5_heat_out],
                 feed_dict=self.model.get_feed_dict(image, heat, interact))
             """
-            visualize_data(stacked_image[0] + 0.5)
-            visualize_data(stacked_image[1] + 0.5)
-            visualize_data(stacked_image[2] + 0.5)
-            visualize_data(stacked_image[3] + 0.5)
+            visualize_data(image[0] + 0.5)
+            visualize_data(image[1] + 0.5)
+            visualize_data(image[2] + 0.5)
+            visualize_data(image[3] + 0.5)
             visualize_data(heatmap[0])
             print(interact[0])
             """
@@ -271,7 +271,7 @@ class HumanoidAgent():
                 "text": text
             })
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             event_indices = list(range(len(query_json["possible_events"])))
             random.shuffle(event_indices)
             return json.dumps({
@@ -291,7 +291,7 @@ class HumanoidAgent():
                 "texts": texts
             })
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             return ""
 
     def render_content_free_view_tree(self, query_json_str):
@@ -304,7 +304,7 @@ class HumanoidAgent():
                 "image": image.astype(int).flatten().tolist()
             })
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             return ""
 
     def run(self):
