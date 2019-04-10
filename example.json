@@ -1,0 +1,1997 @@
+{
+  "tag": "2019-04-10_104123",
+  "state_str": "d71be4061ea647271ede848bb66c485f",
+  "state_str_content_free": "79f13ba434cc74a30bdc1eb0b2b8af89",
+  "foreground_activity": "com.devexpert.weather/.view.HomeActivity",
+  "activity_stack": [
+    "com.devexpert.weather/.view.HomeActivity"
+  ],
+  "background_services": [
+    "com.android.bluetooth/.hid.HidService",
+    "com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService",
+    "com.github.shadowsocks/.bg.VpnService",
+    "com.android.systemui/.keyguard.KeyguardService",
+    "com.google.android.gms/.measurement.service.MeasurementBrokerService",
+    "com.android.systemui/.ImageWallpaper",
+    "com.google.android.gms/.auth.setup.devicesignals.LockScreenService",
+    "com.google.android.gms/.gcm.GcmService",
+    "com.google.android.gms/.auth.proximity.firstparty.SystemMemoryCacheService",
+    "org.android_x86.analytics/.AnalyticsService",
+    "com.google.android.gms/.chimera.PersistentApiService",
+    "com.google.android.gms/.analytics.service.AnalyticsService",
+    "com.google.android.gms/.chimera.PersistentBoundBrokerService",
+    "com.google.android.gms/.usagereporting.service.UsageReportingService",
+    "io.github.ylimit.droidbotapp/.DroidBotIME",
+    "com.android.bluetooth/.pbap.BluetoothPbapService",
+    "com.android.bluetooth/.a2dp.A2dpService",
+    "com.google.android.gms/.ads.AdRequestBrokerService",
+    "io.github.ylimit.droidbotapp/io.github.privacystreams.accessibility.PSAccessibilityService",
+    "com.google.android.gms/.thunderbird.EmergencyPersistentService",
+    "com.android.systemui/.SystemUIService",
+    "android/.hardware.location.GeofenceHardwareService",
+    "com.google.android.gms/.chimera.GmsIntentOperationService",
+    "com.google.android.gms/.chimera.PersistentDirectBootAwareApiService",
+    "com.google.android.gms/com.google.android.location.reporting.service.ReportingAndroidService",
+    "com.android.server.telecom/.components.BluetoothPhoneService",
+    "com.lexa.fakegps/.FakeGPSService",
+    "com.google.android.gms/com.google.android.location.internal.server.GoogleLocationService",
+    "com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService",
+    "com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService",
+    "com.google.android.gms/.ads.cache.CacheBrokerService",
+    "com.devexpert.weather/.controller.AWListenerService",
+    "com.android.server.telecom/.components.TelecomService",
+    "com.google.android.gms/.lockbox.service.LockboxBrokerService",
+    "com.android.location.fused/.FusedLocationService",
+    "com.google.android.gms/.common.stats.GmsCoreStatsService",
+    "com.android.bluetooth/.map.BluetoothMapService",
+    "com.android.phone/.TelephonyDebugService",
+    "com.android.bluetooth/.pan.PanService",
+    "com.google.android.gms/.backup.BackupTransportService"
+  ],
+  "views": [
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.FrameLayout",
+      "children": [
+        1,
+        50,
+        51
+      ],
+      "child_count": 3,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          0
+        ],
+        [
+          720,
+          1280
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": -1,
+      "temp_id": 0,
+      "size": "720*1280",
+      "signature": "[class]android.widget.FrameLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "df33a29d9d74057c27cba1ef1a0037ae"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        2
+      ],
+      "child_count": 1,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          0
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 0,
+      "temp_id": 1,
+      "size": "720*1184",
+      "signature": "[class]android.widget.LinearLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "0e1f04786730c48593e53220e409ee8f"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.FrameLayout",
+      "children": [
+        3
+      ],
+      "child_count": 1,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          48
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 1,
+      "temp_id": 2,
+      "size": "720*1136",
+      "signature": "[class]android.widget.FrameLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "2907bea43e1b87b12a56bb989f3586cb"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/action_bar_root",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        4
+      ],
+      "child_count": 1,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          48
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 2,
+      "temp_id": 3,
+      "size": "720*1136",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/action_bar_root[text]None[enabled,,]",
+      "view_str": "dfca930e6d12da61a1ae0b8b00a19326"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "android:id/content",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.FrameLayout",
+      "children": [
+        5
+      ],
+      "child_count": 1,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          48
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 3,
+      "temp_id": 4,
+      "size": "720*1136",
+      "signature": "[class]android.widget.FrameLayout[resource_id]android:id/content[text]None[enabled,,]",
+      "view_str": "6bf666a9586409804a98325a0724a8be"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/TopView",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        6,
+        9
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          48
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 4,
+      "temp_id": 5,
+      "size": "720*1136",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/TopView[text]None[enabled,,]",
+      "view_str": "207a4c940be3bc107a36143123b8d326"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/tool_bar",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.ViewGroup",
+      "children": [
+        7,
+        8
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          48
+        ],
+        [
+          720,
+          160
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 5,
+      "temp_id": 6,
+      "size": "720*112",
+      "signature": "[class]android.view.ViewGroup[resource_id]com.devexpert.weather:id/tool_bar[text]None[enabled,,]",
+      "view_str": "5c28396b24d6462f939d44ce9e3ab834"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "Weather & Clock Widget",
+      "bounds": [
+        [
+          32,
+          77
+        ],
+        [
+          461,
+          131
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 6,
+      "temp_id": 7,
+      "size": "429*54",
+      "signature": "[class]android.widget.TextView[resource_id]None[text]Weather & Clock Widget[enabled,,]",
+      "view_str": "7cd2211d74284364aab11096c1d4da6e"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": false,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.support.v7.widget.ao",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          720,
+          48
+        ],
+        [
+          720,
+          160
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 6,
+      "temp_id": 8,
+      "size": "0*112",
+      "signature": "[class]android.support.v7.widget.ao[resource_id]None[text]None[enabled,,]",
+      "view_str": "cc5c03f61e79b94388278afe88a25e54"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.FrameLayout",
+      "children": [
+        10,
+        49
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          160
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 5,
+      "temp_id": 9,
+      "size": "720*1024",
+      "signature": "[class]android.widget.FrameLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "51e977758b03a0dfc56c7ab4a3222d6e"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        11,
+        45
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          160
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 9,
+      "temp_id": 10,
+      "size": "720*1024",
+      "signature": "[class]android.widget.LinearLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "e13b9023c7452611e4dbdeae9aaf3570"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TableLayout",
+      "children": [
+        12,
+        23,
+        34
+      ],
+      "child_count": 3,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          6,
+          166
+        ],
+        [
+          714,
+          1074
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 10,
+      "temp_id": 11,
+      "size": "708*908",
+      "signature": "[class]android.widget.TableLayout[resource_id]None[text]None[enabled,,]",
+      "view_str": "75a0b5d984e69d5df375e1f0e9d22ddf"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TableRow",
+      "children": [
+        13,
+        18
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          16,
+          176
+        ],
+        [
+          704,
+          472
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 11,
+      "temp_id": 12,
+      "size": "688*296",
+      "signature": "[class]android.widget.TableRow[resource_id]None[text]None[enabled,,]",
+      "view_str": "6deaab1d37f74aeccdd2785193ba461b"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_weather",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          178
+        ],
+        [
+          358,
+          470
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 12,
+      "temp_id": 13,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_weather[text]None[enabled,,]",
+      "view_str": "a33eeab52cbbfbb4d2d95e7ddec4e434"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          178
+        ],
+        [
+          358,
+          222
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 13,
+      "temp_id": 14,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "c93b99c6a069b1f1cd1bc14e89076032"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image1",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          222
+        ],
+        [
+          358,
+          369
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 13,
+      "temp_id": 15,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image1[text]None[enabled,,]",
+      "view_str": "6fbe569e4ec63299f2d637d0ebc05ad4"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          369
+        ],
+        [
+          358,
+          414
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 13,
+      "temp_id": 16,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "c93b99c6a069b1f1cd1bc14e89076032"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_weather_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "Weather",
+      "bounds": [
+        [
+          18,
+          414
+        ],
+        [
+          358,
+          460
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 13,
+      "temp_id": 17,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_weather_home[text]Weather[enabled,,]",
+      "view_str": "8a96153ed6fbd84b5c84f0d9bb879247"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_mylocation",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          178
+        ],
+        [
+          702,
+          470
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 12,
+      "temp_id": 18,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_mylocation[text]None[enabled,,]",
+      "view_str": "a88a7d3197985773d92da1f90485b967"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          178
+        ],
+        [
+          702,
+          222
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 18,
+      "temp_id": 19,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "d3532be230bf06c813ba7c464ba6999e"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image2",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          222
+        ],
+        [
+          702,
+          369
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 18,
+      "temp_id": 20,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image2[text]None[enabled,,]",
+      "view_str": "b4964326d595572c9f6c33f437384c35"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          369
+        ],
+        [
+          702,
+          414
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 18,
+      "temp_id": 21,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "d3532be230bf06c813ba7c464ba6999e"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_mylocation_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "My Location",
+      "bounds": [
+        [
+          362,
+          414
+        ],
+        [
+          702,
+          460
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 18,
+      "temp_id": 22,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_mylocation_home[text]My Location[enabled,,]",
+      "view_str": "148991966659bdd273b4f5247c3866a3"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TableRow",
+      "children": [
+        24,
+        29
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          16,
+          472
+        ],
+        [
+          704,
+          768
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 11,
+      "temp_id": 23,
+      "size": "688*296",
+      "signature": "[class]android.widget.TableRow[resource_id]None[text]None[enabled,,]",
+      "view_str": "2e06bcdef9d0eb9d1c6eefe362c07ad6"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_cities",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          474
+        ],
+        [
+          358,
+          766
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 23,
+      "temp_id": 24,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_cities[text]None[enabled,,]",
+      "view_str": "c253d5953b929a49cc8a2733eb8fa6e9"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          474
+        ],
+        [
+          358,
+          518
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 24,
+      "temp_id": 25,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "c29debda9a322e9d977f66ef637988d6"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image3",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          518
+        ],
+        [
+          358,
+          665
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 24,
+      "temp_id": 26,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image3[text]None[enabled,,]",
+      "view_str": "71df51a6e4dbbb7487d4d935401a7d7b"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          665
+        ],
+        [
+          358,
+          710
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 24,
+      "temp_id": 27,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "c29debda9a322e9d977f66ef637988d6"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_cities_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "My Cities",
+      "bounds": [
+        [
+          18,
+          710
+        ],
+        [
+          358,
+          756
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 24,
+      "temp_id": 28,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_cities_home[text]My Cities[enabled,,]",
+      "view_str": "157d5fcf70b1ce023af223783e963c0c"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_map",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          474
+        ],
+        [
+          702,
+          766
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 23,
+      "temp_id": 29,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_map[text]None[enabled,,]",
+      "view_str": "b2dc5d7866d531e5dec65431aa9f4b52"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          474
+        ],
+        [
+          702,
+          518
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 29,
+      "temp_id": 30,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "30589c90775dbdec6a8c442c293f9564"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image4",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          518
+        ],
+        [
+          702,
+          665
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 29,
+      "temp_id": 31,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image4[text]None[enabled,,]",
+      "view_str": "7864d863da0ba0053924340953c992b1"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          665
+        ],
+        [
+          702,
+          710
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 29,
+      "temp_id": 32,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "30589c90775dbdec6a8c442c293f9564"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_map_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "Map",
+      "bounds": [
+        [
+          362,
+          710
+        ],
+        [
+          702,
+          756
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 29,
+      "temp_id": 33,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_map_home[text]Map[enabled,,]",
+      "view_str": "82562a60b951875410056eb738ab04af"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TableRow",
+      "children": [
+        35,
+        40
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          16,
+          768
+        ],
+        [
+          704,
+          1064
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 11,
+      "temp_id": 34,
+      "size": "688*296",
+      "signature": "[class]android.widget.TableRow[resource_id]None[text]None[enabled,,]",
+      "view_str": "a22cc5093b830b2bcce239c2782df051"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_about",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        36,
+        37,
+        38,
+        39
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          770
+        ],
+        [
+          358,
+          1062
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 34,
+      "temp_id": 35,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_about[text]None[enabled,,]",
+      "view_str": "fa44db92340f00c9072e3f733fb4d559"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          770
+        ],
+        [
+          358,
+          814
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 35,
+      "temp_id": 36,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "a845447183aa168b0fec370b6cd5f395"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image5",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          814
+        ],
+        [
+          358,
+          961
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 35,
+      "temp_id": 37,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image5[text]None[enabled,,]",
+      "view_str": "c5b92ab9451b70c38b21661c71c23ed0"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          18,
+          961
+        ],
+        [
+          358,
+          1006
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 35,
+      "temp_id": 38,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "a845447183aa168b0fec370b6cd5f395"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_about_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "About",
+      "bounds": [
+        [
+          18,
+          1006
+        ],
+        [
+          358,
+          1052
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 35,
+      "temp_id": 39,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_about_home[text]About[enabled,,]",
+      "view_str": "7b9fa080f3f82b3176bfb3b8fd5c7f60"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/frm_settings",
+      "visible": true,
+      "enabled": true,
+      "clickable": true,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "child_count": 4,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          770
+        ],
+        [
+          702,
+          1062
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 34,
+      "temp_id": 40,
+      "size": "340*292",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/frm_settings[text]None[enabled,,]",
+      "view_str": "d78d8a14b2ca539650b78dede0f2262a"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          770
+        ],
+        [
+          702,
+          814
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 40,
+      "temp_id": 41,
+      "size": "340*44",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "3e9f3cf83a1dd84500417fede9a9a6a8"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/image6",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          814
+        ],
+        [
+          702,
+          961
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 40,
+      "temp_id": 42,
+      "size": "340*147",
+      "signature": "[class]android.widget.ImageView[resource_id]com.devexpert.weather:id/image6[text]None[enabled,,]",
+      "view_str": "941793fa841cb6cc336466c81fb57c4b"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          362,
+          961
+        ],
+        [
+          702,
+          1006
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 40,
+      "temp_id": 43,
+      "size": "340*45",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "3e9f3cf83a1dd84500417fede9a9a6a8"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/text_settings_home",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.TextView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": "Settings",
+      "bounds": [
+        [
+          362,
+          1006
+        ],
+        [
+          702,
+          1052
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 40,
+      "temp_id": 44,
+      "size": "340*46",
+      "signature": "[class]android.widget.TextView[resource_id]com.devexpert.weather:id/text_settings_home[text]Settings[enabled,,]",
+      "view_str": "d34acb25274e5a14b60e4fc3325e8013"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/banner_place",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.FrameLayout",
+      "children": [
+        46,
+        48
+      ],
+      "child_count": 2,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          1080
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 10,
+      "temp_id": 45,
+      "size": "720*104",
+      "signature": "[class]android.widget.FrameLayout[resource_id]com.devexpert.weather:id/banner_place[text]None[enabled,,]",
+      "view_str": "1eb579ff7cd159326d3af70e8d32815c"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "com.devexpert.weather:id/adMobView",
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.widget.LinearLayout",
+      "children": [
+        47
+      ],
+      "child_count": 1,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          1080
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 45,
+      "temp_id": 46,
+      "size": "720*104",
+      "signature": "[class]android.widget.LinearLayout[resource_id]com.devexpert.weather:id/adMobView[text]None[enabled,,]",
+      "view_str": "52b3c5d56623c1d745f019b553e409ae"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.ViewGroup",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          1084
+        ],
+        [
+          720,
+          1184
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 46,
+      "temp_id": 47,
+      "size": "720*100",
+      "signature": "[class]android.view.ViewGroup[resource_id]None[text]None[enabled,,]",
+      "view_str": "450d8fd8458472b2fbd5156371d5cfc1"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": "Weather & Clock Widget",
+      "focused": false,
+      "class": "android.widget.ImageView",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          1080
+        ],
+        [
+          720,
+          1084
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 45,
+      "temp_id": 48,
+      "size": "720*4",
+      "signature": "[class]android.widget.ImageView[resource_id]None[text]None[enabled,,]",
+      "view_str": "2f382b84a18f796b6215a22ecdc663fa"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": null,
+      "visible": true,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          160
+        ],
+        [
+          720,
+          168
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 9,
+      "temp_id": 49,
+      "size": "720*8",
+      "signature": "[class]android.view.View[resource_id]None[text]None[enabled,,]",
+      "view_str": "41a7096d2278be4af9edfece636b0284"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "android:id/statusBarBackground",
+      "visible": false,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          0
+        ],
+        [
+          720,
+          48
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 0,
+      "temp_id": 50,
+      "size": "720*48",
+      "signature": "[class]android.view.View[resource_id]android:id/statusBarBackground[text]None[enabled,,]",
+      "view_str": "91ad108a5c80504b56bac305b94cb171"
+    },
+    {
+      "checkable": false,
+      "selected": false,
+      "scrollable": false,
+      "long_clickable": false,
+      "resource_id": "android:id/navigationBarBackground",
+      "visible": false,
+      "enabled": true,
+      "clickable": false,
+      "checked": false,
+      "is_password": false,
+      "content_description": null,
+      "focused": false,
+      "class": "android.view.View",
+      "children": [],
+      "child_count": 0,
+      "package": "com.devexpert.weather",
+      "text": null,
+      "bounds": [
+        [
+          0,
+          1184
+        ],
+        [
+          720,
+          1280
+        ]
+      ],
+      "editable": false,
+      "focusable": false,
+      "parent": 0,
+      "temp_id": 51,
+      "size": "720*96",
+      "signature": "[class]android.view.View[resource_id]android:id/navigationBarBackground[text]None[enabled,,]",
+      "view_str": "ed40b51a5f47933b18c08f4e85ddde8b"
+    }
+  ]
+}

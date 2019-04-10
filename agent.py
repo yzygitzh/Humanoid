@@ -336,7 +336,7 @@ class HumanoidTest():
             self.__assemble_view_tree(root_view["children"][i], views)
 
     def test_model(self):
-        with open("/tmp/tele2/state_2018-08-10_160925.json", "r") as f:
+        with open("example.json", "r") as f:
             droidbot_state = json.load(f)
             self.__assemble_view_tree(droidbot_state["views"][0],
                                       droidbot_state["views"])
@@ -356,7 +356,7 @@ class HumanoidTest():
             print(interact[0])
 
             import scipy.misc
-            scipy.misc.imsave("/tmp/skeleton.png",
+            scipy.misc.imsave("./test_output/skeleton.png",
                               np.transpose(stacked_image[3] + 0.5, (1, 0, 2)))
 
             # gestures = [[[58 / 768, 103 / 1280]]]
@@ -364,7 +364,7 @@ class HumanoidTest():
             # print(np.sum(heats[0]))
             # print(heats[0].shape)
             heats_max = np.max(heatmap[0])
-            scipy.misc.imsave("/tmp/heat.png", np.transpose(heatmap[0][:,:,0] / heats_max, (1, 0)))
+            scipy.misc.imsave("./test_output/heat.png", np.transpose(heatmap[0][:,:,0] / heats_max, (1, 0)))
 
 def run(config_path):
     with open(config_path, "r") as config_file:
