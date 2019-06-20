@@ -167,7 +167,7 @@ class DroidBotDataProcessor():
                 elif event_type == "set_text":
                     event_prob = self.__compute_prob(x_min, x_max, y_min, y_max, "interact_input_text", heatmap, interact)
             event_probs.append(event_prob)
-        return event_probs
+        return ((np.array(event_probs) + 1e-12) / sum(event_probs)).tolist()
 
     def process(self, query_json):
         self.downscale_ratio = self.rico_config_json["downscale_dim"][0] / query_json["screen_res"][0]
@@ -243,9 +243,9 @@ class HumanoidAgent():
 
     def predict(self, query_json_str):
         query_json = json.loads(query_json_str)
+        possible_events = query_json["possible_events"]
         try:
             self.data_processor.update_origin_dim(query_json["screen_res"])
-            possible_events = query_json["possible_events"]
             image, heat, interact = self.data_processor.process(query_json)
             heatmap, interact, pool5_heat_out= self.sess.run(
                 [self.model.predict_heatmaps,
@@ -263,19 +263,16 @@ class HumanoidAgent():
             # print(event_probs)
             # print(prob_idx)
             event_probs = self.data_processor.events_to_probs(possible_events, heatmap[0,:,:,0], interact[0])
-            prob_idx = sorted(range(len(event_probs)), key=lambda k: event_probs[k], reverse=True)
             text = self.text_generator.get_text(pool5_heat_out.reshape([1, -1]))
             # print(prob_idx, text)
             return json.dumps({
-                "indices": prob_idx,
+                "event_probs": event_probs,
                 "text": text
             })
         except Exception as e:
             traceback.print_exc()
-            event_indices = list(range(len(query_json["possible_events"])))
-            random.shuffle(event_indices)
             return json.dumps({
-                "indices": event_indices,
+                "event_probs": [1. / len(possible_events) for _ in len(possible_events)],
                 "text": "Humanoid"
             })
 
